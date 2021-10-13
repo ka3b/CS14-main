@@ -2,3 +2,4 @@
 
 ## Authors
 Connor McFadden
+Li-Jen, Chen
