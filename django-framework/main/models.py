@@ -9,18 +9,18 @@ class DataAnalyst(models.Model):
 
 
 class Journey(models.Model):
-    class Meta:
-        unique_together = ((date, driver), )
-
     date = models.DateField(auto_now=False, auto_now_add=False)
-    driver = models.CharField(max_legth=128, unique=False, primary_key=True)
+    driver = models.CharField(max_length=128, unique=False)
     destination = models.CharField(max_length=128, unique=False)
     purpose = models.CharField(max_length=50, unique=False)
     no_of_pass = models.IntegerField()
     start_time = models.TimeField(auto_now=False, auto_now_add=False)
     end_time = models.TimeField(auto_now=False, auto_now_add=False)
     speedo_start = models.IntegerField()
-    speedo_finish = model.IntegerField()
+    speedo_finish = models.IntegerField()
+
+    #class Meta:
+    #    unique_together = ((date_of_journey, driver), )
 
     def speedo_reading(self):
         return self.speedo_finish - self.speedo_start
