@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class DataAnalyst(models.Model):
     name = models.CharField(max_length=128, unique=False)
@@ -27,3 +28,7 @@ class Journey(models.Model):
 
     def __str__(self):
         return self.driver, self.destination
+
+
+#class Admin(models.Model):
+    
