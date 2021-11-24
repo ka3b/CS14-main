@@ -14,7 +14,7 @@ def populate():
     #need unique identifier for journeys
     journeys = [
         {
-            'date' : datetime.date.today,
+            'date' : datetime.date(2020, 8, 11),
             'driver' : "Chris",
             'destination' : "Vet School",
             'purpose' : "Supplies",
@@ -79,7 +79,7 @@ def populate():
         add_analyst(p["username"], p["name"])
 
     for p in journeys:
-        add_journey(p["driver"])
+        add_journey(p["driver"], p["date"], p["destination"], p["purpose"], p["no_of_pass"], p["start_time"], p["end_time"], p["speedo_start"], p["speedo_finish"])
 
 
 def add_analyst(username, name):
@@ -87,8 +87,8 @@ def add_analyst(username, name):
     analyst.save()
     return analyst
 
-def add_journey(driver):
-    journey = Journey.objects.get_or_create(driver=driver)[0]
+def add_journey(driver, date, destination, purpose, no_of_pass, start_time, end_time, speedo_start, speedo_finish):
+    journey = Journey.objects.get_or_create(driver=driver, date=date, destination=destination, purpose=purpose, no_of_pass=no_of_pass, start_time=start_time, end_time=end_time, speedo_start=speedo_start, speedo_finish=speedo_finish)[0]
     journey.save()
     return journey
 
@@ -96,3 +96,4 @@ def add_journey(driver):
 if __name__ == '__main__':
     print("Starting population script...")
     populate()
+    print("Finished populating")
