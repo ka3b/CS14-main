@@ -1,5 +1,7 @@
 .idea/
 **/__pycache__
 *.pyc
-./django-framework/data
+
 ./django-framework/transport_services_server/__pycache__
+*.pyc
+./django-framework/db.sqlite3
