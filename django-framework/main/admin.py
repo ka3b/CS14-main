@@ -1,5 +1,5 @@
 from django.contrib import admin
-from main.models import DataAnalyst, Journey
+from .models import DataAnalyst, Journey
 
 class DataAnalystAdmin(admin.ModelAdmin):
     list_display = ('name', 'username')
