@@ -1,0 +1,50 @@
+{% extends "main/base.html" %}
+{% block title %}
+    Journey Report
+{% endblock %}
+
+{% block contend %}
+
+    <div>
+        <h1>Journey Details</h1>
+    </div>
+    <div>
+        <h3>Date & Time</h3>
+        <div>
+            <form>
+              <label>Start-End Date (date and time):</label>
+                <br>
+                Start <input type="datetime-local" id="Journeytime" name="Journeytime">
+                End <input type="datetime-local" id="Journeytime" name="Journeytime">
+            </form>
+        </div>
+    </div>
+    <div>
+        <h3>Vehicle Information</h3>
+        <button type="button" class="btn btn-primary">Scan License Plate</button>
+        <h3>OR</h3>
+        <input type="text1" class="form-control" id="license_plate_manual" placeholder="Type in Manually">
+    </div>
+    <input>
+        <h3>Journey Information</h3>
+
+        <input type="text1" class="form-control" id="driver_name" placeholder="Name">
+
+        <select class="form-select" aria-label="Default select example">
+            <option selected>Journey Purpose</option>
+            <option value="1">Something</option>
+            <option value="2">Morething</option>
+            <option value="3">EvenMoreSomething</option>
+        </select>
+
+        <input type="text1" class="form-control" id="distance_travelled" placeholder="Distance Traveled">
+        <button type="button" class="btn btn-primary">Use My Current Location</button>
+        <h3>OR</h3>
+        <input type="text1" class="form-control" id="location_manual" placeholder="Type in Manually">
+    </div>
+
+    <button type="button" class="btn btn-primary">Submit Your Journey</button>
+{% endblock %}
+{% block extra_js %}{% endblock %}
+
+
