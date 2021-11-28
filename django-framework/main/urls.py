@@ -7,5 +7,7 @@ app_name = 'main'
 urlpatterns = [
     path('', views.index, name='index'),
     path('report-journey/',views.report_journey,name='report_journey'),
-    path('journey-details/',views.journey_details,name='journey_details')
+    path('journey-details/',views.journey_details,name='journey_details'),
+    path('admin-login/',views.admin_login,name='admin_login'),
+    path('analytics/',views.analytics,name='analytics')
 ]

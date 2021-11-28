@@ -10,3 +10,9 @@ def report_journey(request):
 
 def journey_details(request):
     return render(request,"main/journey-details.html")
+
+def admin_login(request):
+    return render(request,"main/admin-login.html")
+
+def analytics(request):
+    return render(request,"main/analytics.html")
