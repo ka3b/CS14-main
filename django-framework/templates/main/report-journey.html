@@ -1,11 +1,40 @@
 {% extends "main/base.html" %}
+{% load static %}
 {% block title %}
     Report Journey
 {% endblock %}
 
 
 {% block contend %}
-    <button type="button" class ="btn btn-primary">Report Your Journey</button>
+    <style>
+        #linkButton {
+            background-image: linear-gradient(to right, #07BB00, #D0FF00);
+            border: none;
+            position: fixed;
+            text-align: center;
+            top: 50%;
+            left: 40%;
+        }
+        #bgA{
+            height: 50%;
+            width: 50%;
+
+        }
+        #bgB{
+            height: 50%;
+            width: 50%;
+
+        }
+
+    </style>
+    <div>
+        <img id="bgA" src="{% static "images/bgA.png" %}" alt="My bg"/>
+        <img id="bgB" src="{% static "images/bgB.png" %}" alt="My bg"/>
+    </div>
+    <button type="button" class="btn btn-primary" id="linkButton"
+            onclick="window.location.href='{% url "main:journey_details" %}'">
+        Report Your Journey
+    </button>
 {% endblock %}
 {% block extra_js %}
 {% endblock %}
