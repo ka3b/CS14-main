@@ -28,8 +28,8 @@
 
     </style>
     <div>
-        <img id="bgA" src="{% static "images/bgA.png" %}" alt="My bg"/>
-        <img id="bgB" src="{% static "images/bgB.png" %}" alt="My bg"/>
+        <img class="background" id="background" src="{% static "images/report_journey/background.png" %}"/>
+        <img id="bgB" src="{% static "images/bgB.png" %}"/>
     </div>
     <button type="button" class="btn btn-primary" id="linkButton"
             onclick="window.location.href='{% url "main:journey_details" %}'">
