@@ -19,10 +19,9 @@
         <h3>Date & Time</h3>
         <div>
             <form>
-              <label>Start-End Date (date and time):</label>
-                <br>
-                Start <input type="datetime-local" id="Journeytime" name="Journeytime">
-                End <input type="datetime-local" id="Journeytime" name="Journeytime">
+              <!-- <label>Start-End Date (date and time):</label> -->
+                <p>Start</p><input type="datetime-local" class="formTextField" name="Journeytime">
+                <p>End</p> <input type="datetime-local" class="formTextField" name="Journeytime">
             </form>
         </div>
     </div>
@@ -37,7 +36,7 @@
 
         <input type="text1" class="form-control formTextField" id="driver_name" placeholder="Name">
 
-        <select class="form-select" aria-label="Default select example">
+        <select class="form-select formTextField" aria-label="Default select example">
             <option selected>Journey Purpose</option>
             <option value="1">Transport of goods</option>
             <option value="2">Picking up of goods</option>
@@ -49,9 +48,9 @@
         <button type="button" class="btn formButton">Use My Current Location</button>
         <h3 style="text-align: center;">or</h3>
         <input type="text1" class="form-control formTextField" id="location_manual" placeholder="Type in Manually">
+        <button type="button" class="btn" id="submitButton">Submit Your Journey</button>
     </div>
 
-    <button type="button" class="btn" id="submitButton">Submit Your Journey</button>
 </div>
 {% endblock %}
 {% block extra_js %}{% endblock %}

@@ -10,16 +10,18 @@ body {
 }
 h1 {
     font-weight: 700;
-    font-size: 2em;
+    font-size: 35pt;
     color: #3400A9;
 }
 h3 {
     font-weight: 600;
-    font-size: 1.6em;
+    font-size: 25pt;
+    margin-bottom: 1rem;
 }
+
 #content{
     position: relative;
-    margin: 15px;
+    margin: 40px;
     height: 100%;
     /* border-style: solid; */
 }
@@ -30,45 +32,83 @@ h3 {
     text-align: center;
     font-size: 1.4em;
     color: white;
-    height: 60px;
-    width: 80%;
-    margin-top: 1em;
-    margin-bottom: 1em;
-    margin-left: 10%;
-    margin-right: 10%;
-    border-radius: 1.3em;
+    height: 4rem;
+    width: 100%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 1.5rem;
     font-weight: 600;
 }
+
+#submitButton:hover
+{
+    background-color: #3333ca;
+}
+
 .formButton {
     background-color: #0DA73A;
     border: none;
     box-shadow: 0 5px 25px #0c0b4b4f;
     text-align: center;
-    font-size: 1.4em;
+    font-size: 1.4rem;
     color: white;
-    height: 3em;
+    height: 4rem;
     width: 100%;
-    margin-top: 1em;
-    margin-bottom: 1em;
-    border-radius: 1em;
+    margin-bottom: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 1.5rem;
     font-weight: 600;
 
 }
+
+.formButton:hover {
+    background-color: #126e2e;
+    border: none;
+    box-shadow: 0 5px 35px #0c0b4b4f;
+    color: white;
+    
+}
+
 .formTextField {
-    height: 4em;
+    height: 4rem;
+    width: 30rem;
+    border-radius: 1.5rem;
+    border: none;
+    background-color: #D9D9E6;
+    color: #00017B;
+    font-weight: 600;
+    font-size: 15pt;
+    margin-bottom: 20px;
+    padding-right: 1rem;
+    padding-left: 20pt;
+
+}
+.formTextField:hover{
+    background-color: #e6e6f5;
+
+}
+.formTextField::placeholder {
+    color: #00017B;
+    font-size: 15pt;
+    font-weight: 600;
+
+}
+.formTextField:focus::placeholder {
+    color: transparent;
+}
+
+.dropdown {
+    /* height: 50pt; */
     border-radius: 1em;
     border: none;
     background-color: #D9D9E6;
     color: #00017B;
     font-weight: 600;
-
+    margin-top: 20px;
+    font-size: 15pt;
+    padding-left: 20pt;
 }
-.formTextField::placeholder {
-    color: #00017B;
-    font-size: 1.3em;
-    font-weight: 600;
 
-}
 .formItem {
     padding-top: 2em;
 }
