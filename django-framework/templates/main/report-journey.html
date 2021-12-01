@@ -29,6 +29,7 @@
             width: 40%;
         }
         #linkButton {
+            background-color: #07BB00;
             background-image: linear-gradient(to right, #07BB00 70%, #D0FF00);
             border: none;
             box-shadow: 0 5px 25px #00ff0480;
@@ -41,11 +42,16 @@
             margin-right: 10%;
             border-radius: 1.3em;
         }
+        #linkButton:hover {
+            background-image: none;
+            background-color: #15a110;
+            box-shadow: 0 8px 45px #00ff0480;
+        }
 
     </style>
     <div id="content">
         <img id="logo" src="{% static "images/report_journey/logo.png" %}"/>
-        <button type="button" class="btn btn-primary" id="linkButton"
+        <button type="button" class="btn" id="linkButton"
                 onclick="window.location.href='{% url "main:journey_details" %}'">
             Report Your Journey
         </button>
