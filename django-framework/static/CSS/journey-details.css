@@ -46,7 +46,7 @@ h3 {
     text-align: center;
     font-size: 1.4em;
     color: white;
-    height: 2.5em;
+    height: 3em;
     width: 100%;
     margin-top: 1em;
     margin-bottom: 1em;
@@ -55,7 +55,7 @@ h3 {
 
 }
 .formTextField {
-    height: 3em;
+    height: 4em;
     border-radius: 1em;
     border: none;
     background-color: #D9D9E6;
