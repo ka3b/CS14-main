@@ -10,13 +10,13 @@ class UrlMappingTest(TestCase):
             '/main/report-journey/',
             '/main/report-journey/journey-details/',
             '/main/admin-login/analysis/',
-            '/main/admin-login/dashboard/',
-            '/main/admin-login/pending-data/',
-            '/main/admin-login/analytics/',
-            '/main/admin-login/data-table/',
-            '/main/admin-login/export-data/',
-            '/main/admin-login/account-manager/',
-            '/main/admin-login/logout/',
+            '/main/admin-login/analysis/dashboard/',
+            '/main/admin-login/analysis/pending-data/',
+            '/main/admin-login/analysis/analytics/',
+            '/main/admin-login/analysis/data-table/',
+            '/main/admin-login/analysis/export-data/',
+            '/main/admin-login/analysis/account-manager/',
+            '/main/admin-login/analysis/logout/',
             '/main/admin-login/'
         ]
         test_resolvers = [
@@ -33,7 +33,7 @@ class UrlMappingTest(TestCase):
             'admin_login'
             ]
         for url in test_urls:
-                self.assertEqual()
+
                 response = self.client.get(url)
-                self.assertEqual(response.status_code, 200)
+                self.assertEqual(response.status_code, 200, msg=url)
             
