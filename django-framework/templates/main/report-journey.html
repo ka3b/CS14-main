@@ -7,34 +7,43 @@
 
 {% block contend %}
     <style>
+        body {
+            background-image: url('{% static "images/report_journey/background.png" %}');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 130%;
+            background-position-y: 30%;
+            position: absolute;
+        }
+        #content{
+            display:flex;
+            flex-direction: column;
+        }
+        #logo{
+            position:relative;
+            margin-top: 200px;
+            margin-left: 25%;
+            width: 60%;
+        }
         #linkButton {
-            background-image: linear-gradient(to right, #07BB00, #D0FF00);
+            background-image: linear-gradient(to right, #07BB00 70%, #D0FF00);
             border: none;
-            position: fixed;
+            filter: drop-shadow(0, 50px, 20px, #00FF04);
             text-align: center;
-            top: 50%;
-            left: 40%;
-        }
-        #bgA{
-            height: 50%;
-            width: 50%;
-
-        }
-        #bgB{
-            height: 50%;
-            width: 50%;
-
+            height: 50px;
+            margin-top: 50px;
+            margin-left: 25%;
+            border-radius: 15px;
         }
 
     </style>
-    <div>
-        <img class="background" id="background" src="{% static "images/report_journey/background.png" %}"/>
-        <img id="bgB" src="{% static "images/bgB.png" %}"/>
+    <div id="content">
+        <img id="logo" src="{% static "images/report_journey/logo.png" %}"/>
+        <button type="button" class="btn btn-primary" id="linkButton"
+                onclick="window.location.href='{% url "main:journey_details" %}'">
+            Report Your Journey
+        </button>
     </div>
-    <button type="button" class="btn btn-primary" id="linkButton"
-            onclick="window.location.href='{% url "main:journey_details" %}'">
-        Report Your Journey
-    </button>
 {% endblock %}
 {% block extra_js %}
 {% endblock %}
