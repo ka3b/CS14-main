@@ -1,50 +1,56 @@
 {% extends "main/base.html" %}
+{% load static %}
+
 {% block title %}
+
     Journey Report
+
 {% endblock %}
 
 {% block contend %}
+<link rel="stylesheet" href='{% static 'CSS/journey-details.css' %}'/>
 
-    <div>
+    <div id=content>
+
+        <div>
         <h1>Journey Details</h1>
     </div>
-    <div>
+    <div class="formItem">
         <h3>Date & Time</h3>
         <div>
             <form>
-              <label>Start-End Date (date and time):</label>
-                <br>
-                Start <input type="datetime-local" id="Journeytime" name="Journeytime">
-                End <input type="datetime-local" id="Journeytime" name="Journeytime">
+              <!-- <label>Start-End Date (date and time):</label> -->
+                <p>Start</p><input type="datetime-local" class="formTextField" name="Journeytime">
+                <p>End</p> <input type="datetime-local" class="formTextField" name="Journeytime">
             </form>
         </div>
     </div>
-    <div>
+    <div class="formItem">
         <h3>Vehicle Information</h3>
-        <button type="button" class="btn btn-primary">Scan License Plate</button>
-        <h3>OR</h3>
-        <input type="text1" class="form-control" id="license_plate_manual" placeholder="Type in Manually">
+        <button type="button" class="btn formButton">Scan License Plate</button>
+        <h3 style="text-align: center;">or</h3>
+        <input type="text1" class="form-control formTextField" placeholder="Type in Manually">
     </div>
-    <input>
+    <div class="formItem">
         <h3>Journey Information</h3>
 
-        <input type="text1" class="form-control" id="driver_name" placeholder="Name">
+        <input type="text1" class="form-control formTextField" id="driver_name" placeholder="Name">
 
-        <select class="form-select" aria-label="Default select example">
+        <select class="form-select formTextField" aria-label="Default select example">
             <option selected>Journey Purpose</option>
-            <option value="1">Something</option>
-            <option value="2">Morething</option>
-            <option value="3">EvenMoreSomething</option>
+            <option value="1">Transport of goods</option>
+            <option value="2">Picking up of goods</option>
+            <option value="3">Transport of people</option>
+            <option value="4">Fieldwork</option>
         </select>
 
-        <input type="text1" class="form-control" id="distance_travelled" placeholder="Distance Traveled">
-        <button type="button" class="btn btn-primary">Use My Current Location</button>
-        <h3>OR</h3>
-        <input type="text1" class="form-control" id="location_manual" placeholder="Type in Manually">
+        <input type="text1" class="form-control formTextField" id="distance_travelled" placeholder="Distance Traveled">
+        <button type="button" class="btn formButton">Use My Current Location</button>
+        <h3 style="text-align: center;">or</h3>
+        <input type="text1" class="form-control formTextField" id="location_manual" placeholder="Type in Manually">
+        <button type="button" class="btn" id="submitButton">Submit Your Journey</button>
     </div>
 
-    <button type="button" class="btn btn-primary">Submit Your Journey</button>
+</div>
 {% endblock %}
 {% block extra_js %}{% endblock %}
-
-

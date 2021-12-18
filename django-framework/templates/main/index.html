@@ -1,6 +1,8 @@
 {% extends "main/base.html" %}
+{% load static %}
 {% block title %}Home{% endblock %}
 {% block contend %}
+<link rel="stylesheet" href='{% static 'CSS/index.css' %}'>
     Hello, this is the home page with bootstrap attached.<br>
     <a href="{% url 'main:journey_details' %}">Visit journey-details!</a><br>
     <a href="{% url 'main:report_journey' %}">Visit report-journey!</a>
