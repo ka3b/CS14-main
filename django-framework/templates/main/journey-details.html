@@ -33,7 +33,7 @@
     </div>
     <div class="formItem">
         <h3>Journey Information</h3>
-        <!--Done
+
         <input type="text1" class="form-control formTextField" id="driver_name" placeholder="Name">
 
 
@@ -44,7 +44,7 @@
             <option value="3">Transport of people</option>
             <option value="4">Fieldwork</option>
         </select>
-        -->
+
         <input type="text1" class="form-control formTextField" id="distance_travelled" placeholder="Distance Traveled">
         <button type="button" class="btn formButton">Use My Current Location</button>
         <h3 style="text-align: center;">or</h3>
@@ -53,5 +53,11 @@
     </div>
 
 </div>
+    <hr>
+    <form action="/your-name/" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Submit">
+    </form>
 {% endblock %}
 {% block extra_js %}{% endblock %}
