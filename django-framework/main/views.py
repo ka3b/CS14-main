@@ -50,4 +50,5 @@ def pending_data(request):
     return render(request,"main/pending-data.html")
 
 def logout(request):
-    return render(request,"main/admin-login.html")
+    return render(request,"main/logout.html")
+    
