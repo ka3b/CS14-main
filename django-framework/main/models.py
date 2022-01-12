@@ -23,7 +23,7 @@ class Journey(models.Model):
     #class Meta:
     #    unique_together = ((date_of_journey, driver), )
 
-    def speedo_reading(self):
+    def miles(self):
         return self.speedo_finish - self.speedo_start
 
     def __str__(self):
