@@ -17,9 +17,10 @@ class Vehicle(models.Model):
 
 
 class Journey(models.Model):
-    date = models.DateField(auto_now=False, auto_now_add=False)
+    start_date = models.DateField(auto_now=False, auto_now_add=False, default=None)
+    end_date = models.DateField(auto_now=False, auto_now_add=False, default=None, null=True)
     driver = models.CharField(max_length=128, unique=False)
-    plate_number = models.CharField(max_length=20, unique=True)
+    plate_number = models.CharField(max_length=20, unique=False, default=None)
     destinations = models.CharField(max_length=256, null=True, blank=True)
     purpose = models.CharField(max_length=50, unique=False)
     no_of_pass = models.IntegerField()
