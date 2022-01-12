@@ -54,10 +54,10 @@
 
 </div>
     <hr>
-    <form action="/your-name/" method="post">
+    <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Submit">
+        {{ form.as_p|linebreaks }}
+        <input type="submit" value="Submit" >
     </form>
 {% endblock %}
 {% block extra_js %}{% endblock %}

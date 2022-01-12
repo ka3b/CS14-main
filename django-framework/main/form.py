@@ -1,9 +1,13 @@
 from django import forms
+from django.utils.safestring import mark_safe
+
 
 class JourneyForm(forms.Form):
-    start_time = forms.TimeField(widget=forms.TextInput(attrs={
+
+    start_time = forms.TimeField(
+        label='Start', widget=forms.TextInput(attrs={
         'type':"datetime-local" , 'class' : "formTextField"}))
-    end_time = forms.TimeField(widget=forms.TextInput(attrs={
+    end_time = forms.TimeField(label='End',widget=forms.TextInput(attrs={
         'type':"datetime-local" , 'class' : "formTextField"}))
 
 
@@ -19,6 +23,3 @@ class JourneyForm(forms.Form):
                               attrs={'class':"form-select formTextField", "aria-label":'Default select example'}))
 
     no_of_pass = forms.IntegerField()
-
-    speedo_start = forms.IntegerField()
-    speedo_finish = forms.IntegerField()
