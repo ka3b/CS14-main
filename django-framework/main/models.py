@@ -8,15 +8,11 @@ class DataAnalyst(models.Model):
     def __str__(self):
         return self.name
 
-class Destinations(models.Model):
-    start_destination = models.CharField(max_length=256)
-    other_destinations = models.ManyToManyField('self')
-
 
 class Journey(models.Model):
     date = models.DateField(auto_now=False, auto_now_add=False)
     driver = models.CharField(max_length=128, unique=False)
-    destinations = models.ManyToManyField(Destinations)
+    destinations = models.CharField(max_length=256, null=True, blank=True)
     purpose = models.CharField(max_length=50, unique=False)
     no_of_pass = models.IntegerField()
     start_time = models.TimeField(auto_now=False, auto_now_add=False)
@@ -36,7 +32,8 @@ class Journey(models.Model):
         return self.driver, self.destination
 
     def get_destinations(self):
-        return "\n".join([d.destination for d in self.destinations.all()])
+        return destinations.split(" | ")
+
 
 
 #class Admin(models.Model):
