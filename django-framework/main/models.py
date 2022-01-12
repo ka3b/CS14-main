@@ -8,17 +8,23 @@ class DataAnalyst(models.Model):
     def __str__(self):
         return self.name
 
+class Destinations(models.Model):
+    name = models.CharField(max_length=256)
+    other_names = models.ManyToManyField('self')
+
 
 class Journey(models.Model):
     date = models.DateField(auto_now=False, auto_now_add=False)
     driver = models.CharField(max_length=128, unique=False)
-    destination = models.CharField(max_length=128, unique=False)
+    destinations = models.ManyToManyField(Destinations)
     purpose = models.CharField(max_length=50, unique=False)
     no_of_pass = models.IntegerField()
     start_time = models.TimeField(auto_now=False, auto_now_add=False)
     end_time = models.TimeField(auto_now=False, auto_now_add=False)
     speedo_start = models.IntegerField()
     speedo_finish = models.IntegerField()
+    approved = models.BooleanField()
+    round_trip = models.BooleanField()
 
     #class Meta:
     #    unique_together = ((date_of_journey, driver), )
@@ -28,6 +34,9 @@ class Journey(models.Model):
 
     def __str__(self):
         return self.driver, self.destination
+
+    def get_destinations(self):
+        return "\n".join([d.destination for d in self.destinations.all()])
 
 
 #class Admin(models.Model):

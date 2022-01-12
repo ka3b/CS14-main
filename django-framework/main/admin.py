@@ -8,7 +8,7 @@ class DataAnalystAdmin(admin.ModelAdmin):
 admin.site.register(DataAnalyst, DataAnalystAdmin)
 
 class JourneyAdmin(admin.ModelAdmin):
-    list_display = ('date', 'driver', 'destination', 'purpose', 'no_of_pass', 'start_time', 'end_time', 'speedo_start', 'speedo_finish')
+    list_display = ('date', 'driver', 'get_destinations', 'purpose', 'no_of_pass', 'start_time', 'end_time', 'speedo_start', 'speedo_finish')
     list_filter = ('driver', 'start_time', 'end_time')
-    exclude = ('destination', 'purpose', 'no_of_pass', 'speedo_start', 'speedo_finish')
+    exclude = ('get_destinations', 'purpose', 'no_of_pass', 'speedo_start', 'speedo_finish')
 admin.site.register(Journey, JourneyAdmin)
