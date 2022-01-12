@@ -1,3 +1,5 @@
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Fieldset, Field, Div
 from django import forms
 from django.utils.safestring import mark_safe
 
@@ -25,3 +27,12 @@ class JourneyForm(forms.Form):
                               attrs={'class':"form-select formTextField", "aria-label":'Default select example'}))
 
     no_of_pass = forms.IntegerField()
+
+    def __init__(self, *args, **kwargs):
+        super(JourneyForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Fieldset('Date&Time', 'start_time', 'end_time'),
+            Fieldset('Vehicle Information','Licenese_No'),
+            Fieldset('Journey Information', 'driver', 'purpose', 'no_of_pass')
+        )
