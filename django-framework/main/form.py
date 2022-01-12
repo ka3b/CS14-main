@@ -10,7 +10,9 @@ class JourneyForm(forms.Form):
     end_time = forms.TimeField(label='End',widget=forms.TextInput(attrs={
         'type':"datetime-local" , 'class' : "formTextField"}))
 
-
+    Licenese_No=forms.CharField(max_length=128, widget=forms.TextInput(attrs={
+        'type':'text1', 'class':"form-control formTextField", 'placeholder':'Type in Manually'
+    }))
     destination = forms.CharField(max_length=128)
 
     driver = forms.CharField(
