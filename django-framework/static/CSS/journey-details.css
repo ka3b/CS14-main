@@ -18,6 +18,11 @@ h3 {
     font-size: 25pt;
     margin-bottom: 1rem;
 }
+#div_id_is_round_trip{
+    font-weight: 600;
+    font-size: 25pt;
+    margin-bottom: 1rem;
+}
 
 #content{
     position: relative;
