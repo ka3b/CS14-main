@@ -34,12 +34,12 @@ class JourneyForm(forms.Form):
 
     destinations=forms.CharField(max_length=256, widget=forms.TextInput(attrs={'class':"formTextField",
                                                                               'label': 'Destination of The Trip'}))
-    speedo_start=forms.IntegerField(min_value=0, widget=forms.NumberInput(attrs={'class':"formTextField",
+    mileage_start=forms.IntegerField(min_value=0, widget=forms.NumberInput(attrs={'class':"formTextField",
                                                                               'label': 'Speedo Start Number',
-                                                                            'placeholder':'Please type integer'}))
-    speedo_finish = forms.IntegerField(min_value=0, widget=forms.NumberInput(attrs={'class': "formTextField",
+                                                                            'placeholder':'Enter start value'}))
+    mileage_finish = forms.IntegerField(min_value=0, widget=forms.NumberInput(attrs={'class': "formTextField",
                                                                       'label': 'Speedo End Number',
-                                                                        'placeholder':'Please type integer',
+                                                                        'placeholder':'Enter end value',
                                                                         }))
     is_round_trip=forms.BooleanField(required=False,
                                      widget=forms.CheckboxInput(
@@ -56,12 +56,9 @@ class JourneyForm(forms.Form):
         self.helper.label_class = "col-md-2"
         self.helper.layout = Layout(
 
-            Fieldset('Date&Time', 'date','start_time', 'end_time'),
-            #HTML("""
-                    #<p><strong>Hello, this is a fucking test</strong></p>
-                #"""),
-            Fieldset('Vehicle Information','Licenese_No', 'speedo_start', 'speedo_end'),
-            Fieldset('Journey Information', 'driver', 'purpose', 'no_of_pass', 'destination',
+            Fieldset('Date&Time', 'start_date', 'end_date', 'start_time', 'end_time'),
+            Fieldset('Vehicle Information','plate_number', 'mileage_start', 'mileage_finish'),
+            Fieldset('Journey Information', 'driver', 'purpose', 'no_of_pass', 'destinations',
                      Field('is_round_trip',css_id='tickbox')),
             Field('approved_status')
         )
