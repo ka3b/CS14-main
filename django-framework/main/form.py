@@ -35,18 +35,18 @@ class JourneyForm(forms.Form):
     destinations=forms.CharField(max_length=256, widget=forms.TextInput(attrs={'class':"formTextField",
                                                                               'label': 'Destination of The Trip'}))
     mileage_start=forms.IntegerField(min_value=0, widget=forms.NumberInput(attrs={'class':"formTextField",
-                                                                              'label': 'Speedo Start Number',
+                                                                              'label': 'Mileage Start Number',
                                                                             'placeholder':'Enter start value'}))
     mileage_finish = forms.IntegerField(min_value=0, widget=forms.NumberInput(attrs={'class': "formTextField",
-                                                                      'label': 'Speedo End Number',
+                                                                      'label': 'Mileage End Number',
                                                                         'placeholder':'Enter end value',
                                                                         }))
     is_round_trip=forms.BooleanField(required=False,
                                      widget=forms.CheckboxInput(
                                          attrs={'label':'Is round Trip',
                                                 'placeholder':'Is yes, please tick it'}))
-    fuel_liter=forms.FloatField(widget=forms.NumberInput(attrs={'label':'Fuel Liter',
-                                                                "placeholder": 'Please type in float number'}))
+    #fuel_liter=forms.FloatField(widget=forms.NumberInput(attrs={'label':'Fuel Liter',
+                                                                #"placeholder": 'Please type in float number'}))
     approved_status=forms.BooleanField(required=False, initial=False, widget=forms.HiddenInput())
 
     def __init__(self, *args, **kwargs):
