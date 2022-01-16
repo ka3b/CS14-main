@@ -1,11 +1,9 @@
-{% extends "main/base.html" %}
+{% extends "main/analytics/base.html" %}
 {% load static %}
 {% block title %}
 {% endblock %}
-
-
 {% block contend %}
-<link rel="stylesheet" href='{% static 'CSS/analytics.css' %}'>
+<link rel="stylesheet" href='{% static 'CSS/dashboard.css' %}'>
 <div>
     <h1>
         Transport Services
@@ -27,37 +25,6 @@
         <button type="button" class ="btn btn-primary">Logout</button>
     </h3>
 </div>
-<div>
-    <h2>
-        Travel Frequency
-    </h2>
-</div>
-<div>
-    <h2>
-        Travel Heatmap
-    </h2>
-</div>
-<div>
-    <h2>
-        Destination
-    </h2>
-</div>
-<div>
-    <h2>
-        Vehicle Types
-    </h2>
-</div>
-<div>
-    <h2>
-        Average Fuel Usage
-    </h2>
-</div>
-<div>
-    <h2>
-        Average Miles Traveled
-    </h2>
-</div>
-    
 {% endblock %}
 {% block extra_js %}
 {% endblock %}
