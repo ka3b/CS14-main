@@ -17,17 +17,17 @@ class Vehicle(models.Model):
 
 
 class Journey(models.Model):
-    start_date = models.DateField(auto_now=False, auto_now_add=False, default=None)
-    end_date = models.DateField(auto_now=False, auto_now_add=False, default=None, null=True)
-    driver = models.CharField(max_length=128, unique=False)
-    plate_number = models.CharField(max_length=20, unique=False, default=None)
-    destinations = models.CharField(max_length=256, null=True, blank=True)
-    purpose = models.CharField(max_length=50, unique=False)
-    no_of_pass = models.IntegerField()
-    start_time = models.TimeField(auto_now=False, auto_now_add=False)
-    end_time = models.TimeField(auto_now=False, auto_now_add=False)
-    speedo_start = models.IntegerField()
-    speedo_finish = models.IntegerField()
+    start_date = models.DateField(auto_now=False, auto_now_add=False, default=None, blank=False)
+    end_date = models.DateField(auto_now=False, auto_now_add=False, default=None, blank=False)
+    driver = models.CharField(max_length=128, unique=False, blank=False)
+    plate_number = models.CharField(max_length=20, unique=False, blank=False)
+    destinations = models.CharField(max_length=256, null=True, blank=False)
+    purpose = models.CharField(max_length=50, unique=False, blank=False)
+    no_of_pass = models.IntegerField(blank=False)
+    start_time = models.TimeField(auto_now=False, auto_now_add=False, blank=False)
+    end_time = models.TimeField(auto_now=False, auto_now_add=False, blank=False)
+    mileage_start = models.IntegerField(blank=False)
+    mileage_finish = models.IntegerField(blank=False)
     approved = models.BooleanField(default=False)
     round_trip = models.BooleanField(default=False)
 
@@ -35,7 +35,7 @@ class Journey(models.Model):
     #    unique_together = ((date_of_journey, driver), )
 
     def miles(self):
-        return self.speedo_finish - self.speedo_start
+        return self.mileage_finish - self.mileage_start
 
     def __str__(self):
         return self.driver, self.destination
