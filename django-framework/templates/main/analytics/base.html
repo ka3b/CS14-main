@@ -28,19 +28,19 @@
         </h1>
     </div>
     
-    <div>
+    <div class="side-menu">
         <h2>
             Side Menu
         </h2>
         <h3>
-            <button type="button" class ="btn btn-primary">Dashboard</button>
-            <button type="button" class ="btn btn-primary">Pending Data</button>
-            <button type="button" class ="btn btn-primary">Analytics</button>
-            <button type="button" class ="btn btn-primary">Data Table</button>
-            <button type="button" class ="btn btn-primary">Export Data</button>
-            <button type="button" class ="btn btn-primary">Account Manager</button>
-            <button type="button" class ="btn btn-primary">Profile Name</button>
-            <button type="button" class ="btn btn-primary">Logout</button>
+            <button type="button" class ="btn" id = "dashboard-btn" onclick="window.location.href='{% url "main:dashboard" %}'">Dashboard</button>
+            <button type="button" class ="btn" id = "pending-btn" onclick="window.location.href='{% url "main:pending_data" %}'">Pending Data</button>
+            <button type="button" class ="btn" id = "analytics-btn" onclick="window.location.href='{% url "main:analytics" %}'">Analytics</button>
+            <button type="button" class ="btn" id = "data-btn" onclick="window.location.href='{% url "main:data_table" %}'">Data Table</button>
+            <button type="button" class ="btn" id = "export-btn" onclick="window.location.href='{% url "main:export_data" %}'">Export Data</button>
+            <button type="button" class ="btn" id = "account-btn" onclick="window.location.href='{% url "main:account_manager" %}'">Account Manager</button>
+            <button type="button" class ="btn" id = "profile-btn" >Profile Name</button> 
+            <button type="button" class ="btn" id = "logout-btn" onclick="window.location.href='{% url "main:logout" %}'">Logout</button>
         </h3>
     </div>
     {% block contend %}
