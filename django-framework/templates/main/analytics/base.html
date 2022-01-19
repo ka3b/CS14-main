@@ -37,61 +37,51 @@
                 <h2>
                     Side Menu
                 </h2>
-                <h3>
-
-                    <div onclick="window.location.href='{% url "main:dashboard" %}'">
-                        <span class="material-icons-outlined col-3">dashboard</span>
-                        <h5 class="col menu">
-                            Dashboard
-                        </h5>
-                        <span class="material-icons-outlined col">menu</span>
-                    </div>
-                    <div onclick="window.location.href='{% url "main:pending_data" %}'">
-                        <span class="material-icons-outlined col">pending_actions</span>
-                        <h5 class="col">
-                            Pending Data
-                        </h5>
-                        <span class="material-icons-outlined col">menu</span>
-                    </div>
-                    <div onclick="window.location.href='{% url "main:analytics" %}'">
-                        <span class="material-icons-outlined col">pie_chart</span>
-                        <h5 class="col">
-                            Analytics
-                        </h5>
-                        <span class="material-icons-outlined col">menu</span>
-                    </div>
-                    <div onclick="window.location.href='{% url "main:data_table" %}'">
-                        <span class="material-icons-outlined col">grid_view</span>
-                        <h5 class="col">
-                            Data Table
-                        </h5>
-                        <span class="material-icons-outlined col">menu</span>
-                    </div>
-                    <div onclick="window.location.href='{% url "main:export_data" %}'">
-                        <span class="material-icons-outlined col">import_export</span>
-                        <h5 class="col">
-                            Export Data
-                        </h5>
-                        <span class="material-icons-outlined col">menu</span>
-                    </div>
-                    <div onclick="window.location.href='{% url "main:account_manager" %}'">
-                        <span class="material-icons-outlined col">manage_accounts</span>
-                        <h5 class="col">
-                            Account Manager
-                        </h5>
-                        <span class="material-icons-outlined col">menu</span>
-                    </div>
-                    <div>
-                        Profile Name
-                    </button> 
-                    <div onclick="window.location.href='{% url "main:logout" %}'">
-                        <span class="material-icons-outlined col">logout</span>
-                        <h5 class="col">
-                            Logout
-                        </h5>
-                        <span class="material-icons-outlined col">menu</span>
-                    </button>
-                </h3>
+                <div onclick="window.location.href='{% url "main:dashboard" %}'">
+                    <span class="material-icons-outlined col">dashboard</span>
+                    <h5 class="col">
+                        Dashboard
+                    </h5>
+                </div>
+                <div onclick="window.location.href='{% url "main:pending_data" %}'">
+                    <span class="material-icons-outlined col">pending_actions</span>
+                    <h5 class="col">
+                        Pending Data
+                    </h5>
+                </div>
+                <div onclick="window.location.href='{% url "main:analytics" %}'">
+                    <span class="material-icons-outlined col">pie_chart</span>
+                    <h5 class="col">
+                        Analytics
+                    </h5>
+                </div>
+                <div onclick="window.location.href='{% url "main:data_table" %}'">
+                    <span class="material-icons-outlined col">grid_view</span>
+                    <h5 class="col">
+                        Data Table
+                    </h5>
+                </div>
+                <div onclick="window.location.href='{% url "main:export_data" %}'">
+                    <span class="material-icons-outlined col">import_export</span>
+                    <h5 class="col">
+                        Export Data
+                    </h5>
+                </div>
+                <div onclick="window.location.href='{% url "main:account_manager" %}'">
+                    <span class="material-icons-outlined col">manage_accounts</span>
+                    <h5 class="col">
+                        Account Manager
+                    </h5>
+                </div>
+                <div>
+                    Profile Name
+                </div> 
+                <div onclick="window.location.href='{% url "main:logout" %}'">
+                    <span class="material-icons-outlined col">logout</span>
+                    <h5 class="col">
+                        Logout
+                    </h5>
+                </div>
             </div>
             <div class="col">
                 {% block contend %}

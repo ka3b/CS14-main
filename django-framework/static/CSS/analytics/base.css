@@ -16,8 +16,11 @@ div {
 h5 {
     font-size: large;
     display: inline;
+    vertical-align: middle;
 }
 
+.menu-item
+
 .menu {
-    margin-right: 0;
+    justify-content: flex-end;
 }
