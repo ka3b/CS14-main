@@ -20,33 +20,86 @@
     <!-- Jquery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Google Icons Font -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
 </head>
 <body>
-    <div>
-        <h1>
-            Transport Services
-        </h1>
-    </div>
+    <nav class="navbar navbar-light">
+        <a class="navbar-brand" href="#">
+          <img src="{% static "images/analytics/base/logo.svg" %}" width="30" height="30" class="align-middle align-top" alt="">
+          Transport Services
+        </a>
+    </nav>
     
-    <div class="side-menu">
-        <h2>
-            Side Menu
-        </h2>
-        <h3>
-            <button type="button" class ="btn" id = "dashboard-btn" onclick="window.location.href='{% url "main:dashboard" %}'">Dashboard</button>
-            <button type="button" class ="btn" id = "pending-btn" onclick="window.location.href='{% url "main:pending_data" %}'">Pending Data</button>
-            <button type="button" class ="btn" id = "analytics-btn" onclick="window.location.href='{% url "main:analytics" %}'">Analytics</button>
-            <button type="button" class ="btn" id = "data-btn" onclick="window.location.href='{% url "main:data_table" %}'">Data Table</button>
-            <button type="button" class ="btn" id = "export-btn" onclick="window.location.href='{% url "main:export_data" %}'">Export Data</button>
-            <button type="button" class ="btn" id = "account-btn" onclick="window.location.href='{% url "main:account_manager" %}'">Account Manager</button>
-            <button type="button" class ="btn" id = "profile-btn" >Profile Name</button> 
-            <button type="button" class ="btn" id = "logout-btn" onclick="window.location.href='{% url "main:logout" %}'">Logout</button>
-        </h3>
+    <div class="container">
+        <div class="row">
+            <div class="side-menu col-4">
+                <h2>
+                    Side Menu
+                </h2>
+                <h3>
+
+                    <div onclick="window.location.href='{% url "main:dashboard" %}'">
+                        <span class="material-icons-outlined col-3">dashboard</span>
+                        <h5 class="col menu">
+                            Dashboard
+                        </h5>
+                        <span class="material-icons-outlined col">menu</span>
+                    </div>
+                    <div onclick="window.location.href='{% url "main:pending_data" %}'">
+                        <span class="material-icons-outlined col">pending_actions</span>
+                        <h5 class="col">
+                            Pending Data
+                        </h5>
+                        <span class="material-icons-outlined col">menu</span>
+                    </div>
+                    <div onclick="window.location.href='{% url "main:analytics" %}'">
+                        <span class="material-icons-outlined col">pie_chart</span>
+                        <h5 class="col">
+                            Analytics
+                        </h5>
+                        <span class="material-icons-outlined col">menu</span>
+                    </div>
+                    <div onclick="window.location.href='{% url "main:data_table" %}'">
+                        <span class="material-icons-outlined col">grid_view</span>
+                        <h5 class="col">
+                            Data Table
+                        </h5>
+                        <span class="material-icons-outlined col">menu</span>
+                    </div>
+                    <div onclick="window.location.href='{% url "main:export_data" %}'">
+                        <span class="material-icons-outlined col">import_export</span>
+                        <h5 class="col">
+                            Export Data
+                        </h5>
+                        <span class="material-icons-outlined col">menu</span>
+                    </div>
+                    <div onclick="window.location.href='{% url "main:account_manager" %}'">
+                        <span class="material-icons-outlined col">manage_accounts</span>
+                        <h5 class="col">
+                            Account Manager
+                        </h5>
+                        <span class="material-icons-outlined col">menu</span>
+                    </div>
+                    <div>
+                        Profile Name
+                    </button> 
+                    <div onclick="window.location.href='{% url "main:logout" %}'">
+                        <span class="material-icons-outlined col">logout</span>
+                        <h5 class="col">
+                            Logout
+                        </h5>
+                        <span class="material-icons-outlined col">menu</span>
+                    </button>
+                </h3>
+            </div>
+            <div class="col">
+                {% block contend %}
+                {% endblock %}
+            </div>
+        </div>
     </div>
-    {% block contend %}
+    {% block extra_js %}
     {% endblock %}
-    {% block extra_js %}{% endblock %}
 </body>
 </html>

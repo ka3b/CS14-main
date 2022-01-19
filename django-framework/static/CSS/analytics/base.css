@@ -1,8 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600;700&display=swap');
+
 * {
     font-family: 'Open Sans', serif;
-    }
-h2{
-
+    font-weight: 800;
 }
 
+
+/* Debug Mode */
+div {
+    border-style: solid !important;
+    border-color: red !important;
+    border-width: 1px;
+}
+
+h5 {
+    font-size: large;
+    display: inline;
+}
+
+.menu {
+    margin-right: 0;
+}
