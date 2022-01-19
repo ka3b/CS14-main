@@ -94,4 +94,4 @@ def pending_data(request):
 @login_required
 def logout(request):
     auth_logout(request)
-    return render(request,"main/analytics/logout.html")
+    return render(request,"main/analytics/admin-login.html")
