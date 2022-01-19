@@ -69,8 +69,6 @@ class JourneyForm(forms.Form):
     is_round_trip=forms.BooleanField(required=True, label="",
                                      widget=forms.RadioSelect(
                                          choices=Trip_CHOICES))
-    #fuel_liter=forms.FloatField(widget=forms.NumberInput(attrs={'label':'Fuel Liter',
-                                                                #"placeholder": 'Please type in float number'}))
 
     approved_status=forms.BooleanField(required=False, initial=False, widget=forms.HiddenInput())
 

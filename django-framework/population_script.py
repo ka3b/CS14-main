@@ -42,7 +42,7 @@ def populate():
             'end_time' : datetime.time(hour=11, minute=00),
             'mileage_start': 12004,
             'mileage_finish' : 12010,
-            'approved' : True,
+            'approved' : False,
             'round_trip' : True
         },
         {           
@@ -109,15 +109,15 @@ def populate():
      #   add_analyst(p["username"], p["name"])
 
     for p in journeys:
-        add_journey(p["driver"], p["start_date"], p["end_date"], p["destinations"], p["purpose"], p["plate_number"], p["no_of_pass"], p["start_time"], p["end_time"], p["mileage_start"], p["mileage_finish"])
+        add_journey(p["driver"], p["start_date"], p["end_date"], p["destinations"], p["purpose"], p["plate_number"], p["no_of_pass"], p["start_time"], p["end_time"], p["mileage_start"], p["mileage_finish"],p["approved"],p["round_trip"])
 
 def add_analyst(username, name):
     analyst = DataAnalyst.objects.get_or_create(username=username, name=name)[0]
     analyst.save()
     return analyst
 
-def add_journey(driver, start_date, end_date, destinations, purpose, plate_number, no_of_pass, start_time, end_time, mileage_start, mileage_finish):
-    journey = Journey.objects.get_or_create(driver=driver, start_date=start_date, end_date=end_date, destinations=destinations, purpose=purpose, plate_number=plate_number, no_of_pass=no_of_pass, start_time=start_time, end_time=end_time, mileage_start=mileage_start, mileage_finish=mileage_finish)[0]
+def add_journey(driver, start_date, end_date, destinations, purpose, plate_number, no_of_pass, start_time, end_time, mileage_start, mileage_finish, approved, round_trip):
+    journey = Journey.objects.get_or_create(driver=driver, start_date=start_date, end_date=end_date, destinations=destinations, purpose=purpose, plate_number=plate_number, no_of_pass=no_of_pass, start_time=start_time, end_time=end_time, mileage_start=mileage_start, mileage_finish=mileage_finish, approved=approved, round_trip=round_trip)[0]
     journey.save()
     return journey
 
