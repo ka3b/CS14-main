@@ -12,9 +12,19 @@
     </h1>
 </div>
 
-    <input type="text1" class="form-control" id="username" placeholder="Username">
-    <input type="text1" class="form-control" id="password" placeholder="Password">
-    <button type="button" class ="btn btn-primary">Login</button>
+{% if user.is_authenticated %}
+    <strong> You are already logged in as {{request.user.username}}. </strong>
+    <p><a href="{% url 'main:logout' %}">Sign Out</a></p>
+{% else %}
+    <form id="login" method="post" action="{% url 'main:admin_login' %}">
+    {% csrf_token %}
+    <input type="text" class="form-control" name="username" value="" size="50" placeholder="Username"/>
+    <br />
+    Password: <input type="password" class="form-control" name="password" value="" size="50" placeholder="Password"/>
+    <br /> 
+    <input type="submit" value="Login" />
+{% endif %}  
+
 {% endblock %}
 {% block extra_js %}
 {% endblock %}
