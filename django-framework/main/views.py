@@ -1,10 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from .form import *
 from .models import DataAnalyst, Journey
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 
 
 # Create your views here.
@@ -43,6 +44,9 @@ def journey_details(request):
 
     return render(request,"main/journey/journey-details.html", {'form': form})
 
+def dashboard(request):
+    return render(request,"main/analytics/dashboard.html")
+
 def admin_login(request):
     if request.method == 'POST':       
         username = request.POST.get('username')
@@ -55,7 +59,7 @@ def admin_login(request):
             if user.is_active:   
                 #Signs the user in with the details supllied once they create an account             
                 auth_login(request, user)
-                return render(request,'main/analytics/dashboard.html')
+                return redirect(reverse("main:dashboard"))
             else:             
                 return HttpResponse("Your account is disabled.")
 
@@ -74,9 +78,6 @@ def analytics(request):
 def account_manager(request):
     return render(request,"main/analytics/account-manager.html")
 
-def dashboard(request):
-    return render(request,"main/analytics/dashboard.html")
-
 def data_table(request):
     return render(request,"main/analytics/data-table.html")
 
@@ -86,5 +87,7 @@ def export_data(request):
 def pending_data(request):
     return render(request,"main/analytics/pending-data.html")
 
+@login_required
 def logout(request):
+    auth_logout(request)
     return render(request,"main/analytics/logout.html")
