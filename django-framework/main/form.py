@@ -45,8 +45,7 @@ class JourneyForm(forms.Form):
                                      widget=forms.CheckboxInput(
                                          attrs={'label':'Is round Trip',
                                                 'placeholder':'Is yes, please tick it'}))
-    #fuel_liter=forms.FloatField(widget=forms.NumberInput(attrs={'label':'Fuel Liter',
-                                                                #"placeholder": 'Please type in float number'}))
+    
     approved_status=forms.BooleanField(required=False, initial=False, widget=forms.HiddenInput())
 
     def __init__(self, *args, **kwargs):
