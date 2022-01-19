@@ -85,7 +85,11 @@ def export_data(request):
     return render(request,"main/analytics/export-data.html")
 
 def pending_data(request):
-    return render(request,"main/analytics/pending-data.html")
+    order_by = request.GET.get('order_by', 'start_date')
+    journeys = Journey.objects.filter(approved=False).order_by(order_by) 
+    context_dict = {}
+    context_dict['journeys'] = journeys
+    return render(request,"main/analytics/pending-data.html", context=context_dict)
 
 @login_required
 def logout(request):
