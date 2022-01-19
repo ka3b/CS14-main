@@ -1,26 +1,43 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600;700&display=swap');
 
 * {
-    font-family: 'Open Sans', serif;
-    font-weight: 800;
-}
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
 
-
-/* Debug Mode */
-div {
-    border-style: solid !important;
+    /* border-style: solid !important;
     border-color: red !important;
-    border-width: 1px;
+    border-width: 1px; */
 }
 
-h5 {
-    font-size: large;
+#bootstrap-overrides span {
+    padding: 0;
+}
+
+#bootstrap-overrides hr {
+    margin-top: 3pt;
+    margin-bottom: 5pt;
+    border-color: #d3d3d3;
+}
+
+#bootstrap-overrides.card h5 {
+    font-size: 10pt;
+    font-weight: 600;
     display: inline;
-    vertical-align: middle;
 }
 
-.menu-item
+#bootstrap-overrides.card h2 {
+    font-size: 15pt;
+    font-weight: 700;
+    color: #585858;
+}
 
-.menu {
-    justify-content: flex-end;
+.menu-item {
+    padding: 10px 10px 10px 10px;
+    color: #838383;
+}
+
+#bootstrap-overrides.card {
+    padding: 15px 20px 20px 20px;
+    border-style: solid;
+    border-color: #d3d3d3;
+    border-radius: 18px;
 }
