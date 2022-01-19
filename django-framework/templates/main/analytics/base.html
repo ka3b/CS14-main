@@ -20,33 +20,82 @@
     <!-- Jquery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Google Icons Font -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
 </head>
 <body>
-    <div>
-        <h1>
-            Transport Services
-        </h1>
-    </div>
+    <nav class="navbar navbar-light">
+        <a class="navbar-brand col" href="#">
+            <div class="row justify-content-center">
+                <img src="{% static "images/analytics/base/logo.png" %}" style="width: auto; height:30px" class="align-middle align-top" alt=""/>
+            </div>
+        </a>
+    </nav>
     
-    <div>
-        <h2>
-            Side Menu
-        </h2>
-        <h3>
-            <button type="button" class ="btn btn-primary">Dashboard</button>
-            <button type="button" class ="btn btn-primary">Pending Data</button>
-            <button type="button" class ="btn btn-primary">Analytics</button>
-            <button type="button" class ="btn btn-primary">Data Table</button>
-            <button type="button" class ="btn btn-primary">Export Data</button>
-            <button type="button" class ="btn btn-primary">Account Manager</button>
-            <button type="button" class ="btn btn-primary">Profile Name</button>
-            <button type="button" class ="btn btn-primary">Logout</button>
-        </h3>
+    <div class="container-full px-5">
+        <div class="row">
+            <div class="col-2 card" id="bootstrap-overrides">
+                <h2 id="bootstrap-overrides">
+                    Side Menu
+                </h2>
+                <hr class="solid" id="bootstrap-overrides">
+                <div class="menu-item row align-items-center" onclick="window.location.href='{% url "main:dashboard" %}'">
+                    <span class="material-icons-outlined col-2" id="bootstrap-overrides">space_dashboard</span>
+                    <div class="col">
+                        <h5 id="bootstrap-overrides">Dashboard</h5>
+                    </div>
+                </div>
+                <div class="menu-item row align-items-center" onclick="window.location.href='{% url "main:pending_data" %}'">
+                    <span class="material-icons-outlined col-2">pending_actions</span>
+                    <div class="col">
+                        <h5 id="bootstrap-overrides">Pending Data</h5>
+                    </div>
+                </div>
+                <div class="menu-item row align-items-center" onclick="window.location.href='{% url "main:analytics" %}'">
+                    <span class="material-icons-outlined col-2">pie_chart</span>
+                    <div class="col">
+                        <h5 id="bootstrap-overrides">Analytics</h5>
+                    </div>
+                </div>
+                <div class="menu-item row align-items-center" onclick="window.location.href='{% url "main:data_table" %}'">
+                    <span class="material-icons-outlined col-2">grid_view</span>
+                    <div class="col">
+                        <h5 id="bootstrap-overrides">Data Table</h5>
+                    </div>
+                </div>
+                <div class="menu-item row align-items-center" onclick="window.location.href='{% url "main:export_data" %}'">
+                    <span class="material-icons-outlined col-2">import_export</span>
+                    <div class="col">
+                        <h5 id="bootstrap-overrides">Export Data</h5>
+                    </div>
+                </div>
+                <div class="menu-item row align-items-center" onclick="window.location.href='{% url "main:account_manager" %}'">
+                    <span class="material-icons-outlined col-2">manage_accounts</span>
+                    <div class="col">
+                        <h5 id="bootstrap-overrides">Admin</h5>
+                    </div>
+                </div>
+                <div>
+                    Profile Name
+                </div> 
+                <div class="menu-item row align-items-center" onclick="window.location.href='{% url "main:logout" %}'">
+                    <span class="material-icons-outlined col-2">logout</span>
+                    <div class="col">
+                        <h5 id="bootstrap-overrides">Logout</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                {% block contend %}
+                {% endblock %}
+            </div>
+            <div class="col-2"></div>
+        </div>
     </div>
-    {% block contend %}
+    {% block extra_js %}
     {% endblock %}
-    {% block extra_js %}{% endblock %}
 </body>
 </html>
