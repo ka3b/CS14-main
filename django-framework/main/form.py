@@ -86,7 +86,7 @@ class JourneyForm(forms.Form):
             Div(HTML('<h3>Date and Time</h3>'), 'start_date', 'end_date', 'start_time', 'end_time'),
             Div(HTML('<h3>Vehicle Information</h3>'),'plate_number', 'mileage_start', 'mileage_finish'),
             Div(HTML('<h3>Journey Information</h3>'),Field('is_round_trip',css_id='tickbox'), 'start_location',
-                  'destinations1', 'destinations2', 'destinations3','no_of_pass','purpose',
+                  'destinations1', 'destinations2', HTML('<br/>'),'destinations3','no_of_pass','purpose',
                 HTML('''<br/><button onclick='myFunction()' class="btn btn-secondary" >Add Destination(Max is 2)</button>''')),
             Field('approved_status')
         )
