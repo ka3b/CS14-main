@@ -7,19 +7,19 @@ from django import forms
 
 class JourneyForm(forms.Form):
     start_date = forms.DateField(
-        label='select start date',
+        label='Start date',
         widget=forms.widgets.DateInput(attrs={'type': 'date', 'class' : "formTextField",
                                               }))
 
     end_date = forms.DateField(
-        label='select end date',
+        label='End date',
         widget=forms.widgets.DateInput(attrs={'type': 'date', 'class' : "formTextField"}))
 
     start_time = forms.TimeField(
-        label='Select start time', widget=forms.TimeInput(attrs={'type':"time",
+        label='Start time', widget=forms.TimeInput(attrs={'type':"time",
                                                       'class' : "formTextField"}))
     end_time = forms.TimeField(
-        label='Select end time', widget=forms.TimeInput(attrs={'type':"time",
+        label='End time', widget=forms.TimeInput(attrs={'type':"time",
                                                       'class' : "formTextField"}))
 
     plate_number=forms.CharField(label='',max_length=128, widget=forms.TextInput(attrs={
@@ -32,8 +32,9 @@ class JourneyForm(forms.Form):
             attrs={'placeholder':"Drive Name", 'class':"form-control formTextField", 'type':'text1',
                    "id":'driver_name'}))
 
-    CHOICES=(('1', 'Transport of goods'),('2','Picking up of goods'), ('3','Transport of people'),
-            ('4','Fieldwork'))
+    CHOICES=(('Transport of goods', 'Transport of goods'),('Picking up of goods','Picking up of goods'),
+             ('Transport of people','Transport of people'),
+            ('Fieldwork','Fieldwork'), ('Canceled', 'Canceled'))
     purpose = forms.CharField(label='',widget=forms.Select(choices=CHOICES,
                               attrs={'class':"form-select formTextField", "aria-label":'Default select example'
                                      ,'placeholder':'Journey Purpose'}))
@@ -41,8 +42,19 @@ class JourneyForm(forms.Form):
     no_of_pass = forms.IntegerField(label='',min_value=1,max_value=8,widget=forms.NumberInput(attrs={
         'class':"formTextField", 'placeholder':'Number of Passengers'}))
 
-    destinations=forms.CharField(label='',max_length=256, widget=forms.TextInput(attrs={'class':"formTextField",
-                                                                              'placeholder': 'Destination of The Trip'}))
+    start_location=forms.CharField(label='', widget=forms.TextInput(attrs={'class':'formTextField',
+                                                                           'placeholder':'Starting Location'}))
+
+
+    destinations1=forms.CharField(required=True,label='',max_length=256,
+                                  widget=forms.TextInput(attrs={'class':"formTextField",
+                                                'placeholder': 'Destination'}))
+    destinations2 = forms.CharField(required=False,label='', max_length=256,
+                                    widget=forms.TextInput(attrs={'class': "formTextField",'type':'hidden',
+                                                'placeholder': 'Destination(Optional)', 'id':'dest2'}))
+    destinations3 = forms.CharField(required=False, label='', max_length=256,
+                                    widget=forms.TextInput(attrs={'class': "formTextField",'type':'hidden','id':'dest3',
+                                                'placeholder': 'Destination(Optional)'}))
     mileage_start=forms.IntegerField(label='',min_value=0, widget=forms.NumberInput(attrs={'class':"formTextField",
                                                                               'label': 'Mileage Start Number',
                                                                             'placeholder':'mileage start reading'}))
@@ -69,10 +81,13 @@ class JourneyForm(forms.Form):
         self.helper.label_class = "col-md-2"
         self.helper.layout = Layout(
 
-            Div(HTML('<h3>Date&Time</h3>'), 'start_date', 'end_date', 'start_time', 'end_time'),
+
+            Div(HTML('<h3>Driver Information</h3>'), 'driver'),
+            Div(HTML('<h3>Date and Time</h3>'), 'start_date', 'end_date', 'start_time', 'end_time'),
             Div(HTML('<h3>Vehicle Information</h3>'),'plate_number', 'mileage_start', 'mileage_finish'),
-            Div(HTML('<h3>Journey Information</h3>'), 'driver', 'purpose', 'no_of_pass', 'destinations',
-                     Field('is_round_trip',css_id='tickbox')),
+            Div(HTML('<h3>Journey Information</h3>'),Field('is_round_trip',css_id='tickbox'), 'start_location',
+                  'destinations1', 'destinations2', 'destinations3','no_of_pass','purpose',
+                HTML('''<br/><button onclick='myFunction()' class="btn btn-secondary" >Add Destination(Max is 2)</button>''')),
             Field('approved_status')
         )
         self.helper.add_input(Submit('submit', 'Submit', css_id='submitButton'))

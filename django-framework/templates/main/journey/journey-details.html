@@ -20,5 +20,12 @@
     </form>
 {% endblock %}
 {% block extra_js %}
-
+    <script>
+    var count =2
+        function myFunction() {
+            var x = document.getElementById("dest"+count.toString());
+            x.type = 'text';
+            count=count+1;
+        }
+    </script>
 {% endblock %}
