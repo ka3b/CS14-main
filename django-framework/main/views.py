@@ -2,6 +2,11 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from .form import *
 from .models import DataAnalyst, Journey
+from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+
+
 # Create your views here.
 def index(request):
     return render(request, "main/index.html")
@@ -39,7 +44,26 @@ def journey_details(request):
     return render(request,"main/journey/journey-details.html", {'form': form})
 
 def admin_login(request):
-    return render(request,"main/analytics/admin-login.html")
+    if request.method == 'POST':       
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(username=username, password=password)
+
+        if user:          
+
+            if user.is_active:   
+                #Signs the user in with the details supllied once they create an account             
+                auth_login(request, user)
+                return render(request,'main/analytics/dashboard.html')
+            else:             
+                return HttpResponse("Your account is disabled.")
+
+        else:          
+            return HttpResponse("Incorrect username or password.")
+        
+    else:
+        return render(request, 'main/analytics/admin-login.html')
 
 def analysis(request):
     return render(request,"main/analytics/analysis.html")

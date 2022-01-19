@@ -2,11 +2,12 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class DataAnalyst(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
     name = models.CharField(max_length=128, unique=False)
-    username = models.CharField(max_length=50, primary_key=True)
+    username = models.CharField(max_length=50, unique=True, blank=False)
 
     def __str__(self):
-        return self.name
+        return self.username
 
 class Vehicle(models.Model):
     vehicle_type = models.CharField(max_length=20, unique=False)

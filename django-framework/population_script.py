@@ -76,7 +76,7 @@ def populate():
             'round_trip' : False
         }
     ]
-
+    """
     data_analysts = [
         {
             'name' : "John Smith",
@@ -91,10 +91,22 @@ def populate():
             'username' : "CoolMan123"
         }
     ]
+    """
+    if not User.objects.filter(username='Viola').exists():
+        user=User.objects.create_user('Viola', password='JohnCena420')
+        user.is_superuser=True
+        user.is_staff=True
+        user.save()
+
+    if not User.objects.filter(username='Grantt').exists():
+        user=User.objects.create_user('Grantt', password='Grantt')
+        user.is_superuser=True
+        user.is_staff=True
+        user.save()
 
 
-    for p in data_analysts:
-        add_analyst(p["username"], p["name"])
+    #for p in data_analysts:
+     #   add_analyst(p["username"], p["name"])
 
     for p in journeys:
         add_journey(p["driver"], p["start_date"], p["end_date"], p["destinations"], p["purpose"], p["plate_number"], p["no_of_pass"], p["start_time"], p["end_time"], p["mileage_start"], p["mileage_finish"])

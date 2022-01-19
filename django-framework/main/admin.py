@@ -2,9 +2,9 @@ from django.contrib import admin
 from .models import DataAnalyst, Journey
 
 class DataAnalystAdmin(admin.ModelAdmin):
-    list_display = ('name', 'username')
+    list_display = ('user','name', 'username')
     list_filter = ('username',)
-    exclude = ('name',)
+    exclude = ('name', 'user')
 admin.site.register(DataAnalyst, DataAnalystAdmin)
 
 class JourneyAdmin(admin.ModelAdmin):
