@@ -39,7 +39,7 @@ class Journey(models.Model):
         return self.mileage_finish - self.mileage_start
 
     def __str__(self):
-        return self.driver, self.destination
+        return self.driver, self.destinations
 
     def get_destinations(self):
         return destinations.split(" | ")
