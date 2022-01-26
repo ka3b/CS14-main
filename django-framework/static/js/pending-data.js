@@ -17,4 +17,21 @@ $(document).ready( function(){
     });
   });
 
+  $('.reject').click(function(){
+    var journey_id = $(this).attr('id');
+    $.ajax({
+      type: "POST",
+      url : "reject/",
+      data:{
+        'id': journey_id,
+        'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+      },
+      datatype: 'json',
+      success: function(data){
+        if (data['success'])
+          location.reload()
+      }
+    });
+  });
+
 });
