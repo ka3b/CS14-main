@@ -61,13 +61,13 @@ def admin_login(request):
                 auth_login(request, user)
                 return redirect(reverse("main:dashboard"))
             else:             
-                return HttpResponse("Your account is disabled.")
+                return HttpResponse("Your account has been disabled.")
 
         else:          
             return HttpResponse("Incorrect username or password.")
         
     else:
-        return render(request, 'main/analytics/admin-login.html')
+        return render(request, 'main/admin/admin-login.html')
 
 def analysis(request):
     return render(request,"main/analytics/analysis.html")
@@ -94,4 +94,4 @@ def pending_data(request):
 @login_required
 def logout(request):
     auth_logout(request)
-    return render(request,"main/analytics/admin-login.html")
+    return render(request,"main/admin/admin-login.html")
