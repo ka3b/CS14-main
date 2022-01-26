@@ -128,5 +128,7 @@ html,body
     overflow-x: hidden;
 }
 
+label{width: 400px !important;}
+
 
 

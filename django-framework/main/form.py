@@ -91,7 +91,7 @@ class JourneyForm(forms.Form):
             Div(HTML('''<span class="material-icons-outlined">explore</span>
             <h3 style="display: inline">Journey Information</h3>'''),
                 Field('is_round_trip',css_id='tickbox'), 'start_location',
-                  'destinations1', 'destinations2', HTML('<br/>'),'destinations3','no_of_pass','purpose'),
+                  'destinations1', 'destinations2', 'destinations3','no_of_pass','purpose'),
             Field('approved_status')
         )
         self.helper.add_input(Submit('submit', 'Submit', css_id='submitButton'))

@@ -11,10 +11,10 @@
 {% endblock %}
 
 {% block contend %}
-    <div class="container-full px-5">
+    <div class="container-full px-5 my_fullscreen_div">
 
         <div class='row justify-content-center'>
-            <div class="col-5">
+            <div class="col-md-auto">
             <span class="material-icons-outlined">fact_check</span><h1 style="display: inline">Journey Detail</h1>
             </div>
         </div>
@@ -23,7 +23,7 @@
 
     <link rel="stylesheet"  href='{% static 'CSS/journey/journey-details.css' %}'/>
     <div class='row justify-content-center'>
-            <div class="col-5">
+            <div class="col-md-auto">
     <form method="post">
         {% csrf_token %}
         {% crispy form %}
