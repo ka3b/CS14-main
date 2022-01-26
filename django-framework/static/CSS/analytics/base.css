@@ -1,43 +1,51 @@
-
 * {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 600;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
 
-    /* border-style: solid !important;
+  /* border-style: solid !important;
     border-color: red !important;
     border-width: 1px; */
 }
 
 #bootstrap-overrides span {
-    padding: 0;
+  padding: 0;
+  font-size: 32px;
 }
 
 #bootstrap-overrides hr {
-    margin-top: 3pt;
-    margin-bottom: 5pt;
-    border-color: #d3d3d3;
+  margin-top: 3px;
+  margin-bottom: 5px;
+  border-color: #d3d3d3;
 }
 
 #bootstrap-overrides.card h5 {
-    font-size: 10pt;
-    font-weight: 600;
-    display: inline;
+  font-size: 20px;
+  font-weight: 600;
+  display: inline;
 }
 
 #bootstrap-overrides.card h2 {
-    font-size: 15pt;
-    font-weight: 700;
-    color: #585858;
+  font-size: 28px;
+  font-weight: 700;
+  color: #585858;
 }
 
 .menu-item {
-    padding: 10px 10px 10px 10px;
-    color: #838383;
+  padding: 15px;
+  color: #838383;
+  transition: 100ms ease-out;
+}
+
+.menu-item:hover {
+  color: #525252;
+  border-radius: 100px;
+  background-color: #eeeeee;
+  transition: 100ms ease-out;
 }
 
 #bootstrap-overrides.card {
-    padding: 15px 20px 20px 20px;
-    border-style: solid;
-    border-color: #d3d3d3;
-    border-radius: 18px;
+  padding: 15px 20px 20px 20px;
+  border-style: solid;
+  border-color: #d3d3d3;
+  border-radius: 18px;
 }
