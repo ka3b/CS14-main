@@ -16,6 +16,6 @@ urlpatterns = [
     path('admin-login/analysis/data-table/',views.data_table,name='data_table'),
     path('admin-login/analysis/export-data/',views.export_data,name='export_data'),
     path('admin-login/analysis/account-manager/',views.account_manager,name='account_manager'),
-    path('admin-login/analysis/logout/',views.logout,name='logout'),
+    path('admin-login/',views.logout,name='logout'),
 
 ]
