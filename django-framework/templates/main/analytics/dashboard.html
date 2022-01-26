@@ -9,24 +9,29 @@
         Dashboard
     </h1>
     <h3>
+        There are {{ pending }} journey(s) awaiting approval
+    </h3>
+    <h3>
         Weekly Data Summary
     </h3>
+    <p>{{ week_ago}} - {{ cur_date }}</p>
     <div>
         <h3>
-            Journeys Reported
+            {{ reported_journeys }} journeys reported
         </h3>
     </div>
     <div>
         <h3>
-            Miles Travelled On Average
+            {{ average_miles }} miles travelled on average
         </h3>
     </div>
     <div>
         <h3>
-            The Most Common Purpose Of A Journey Is "Fueling"
+            The most common purpose of a journey is "{{ common_purpose }}"
         </h3>
     </div>
 </div>
+
 
 {% endblock %}
 {% block extra_js %}

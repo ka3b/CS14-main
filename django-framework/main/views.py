@@ -7,6 +7,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.http import JsonResponse
+import datetime
+from django.db.models import Count
 
 
 # Create your views here.
@@ -46,7 +48,29 @@ def journey_details(request):
     return render(request,"main/journey/journey-details.html", {'form': form})
 
 def dashboard(request):
-    return render(request,"main/analytics/dashboard.html")
+    pending = Journey.objects.filter(approved=False).count() 
+    current_date = datetime.date.today()
+    week_ago_date = current_date - datetime.timedelta(days=7)
+    cur_date = current_date.strftime("%b %d")
+    week_ago = week_ago_date.strftime("%b %d")
+    weeks_journeys = Journey.objects.filter(start_date__range=[week_ago_date, current_date], approved=True)
+    reported_journeys = weeks_journeys.count()
+    average_miles=0
+    common_purpose = "not recorded until a journey for this week is reported"
+    for journey in weeks_journeys:
+        average_miles += journey.miles()
+    if (reported_journeys > 0):
+        average_miles = round(average_miles / reported_journeys)
+        common_purpose = Journey.objects.values_list('purpose').annotate(journey_count=Count('purpose')).order_by('-journey_count')[0][0]
+
+    context_dict = {}
+    context_dict['pending'] = pending
+    context_dict['cur_date'] = cur_date
+    context_dict['week_ago'] = week_ago
+    context_dict['reported_journeys'] = reported_journeys
+    context_dict['average_miles'] = average_miles
+    context_dict['common_purpose'] = common_purpose
+    return render(request,"main/analytics/dashboard.html", context=context_dict)
 
 def admin_login(request):
     if request.method == 'POST':
