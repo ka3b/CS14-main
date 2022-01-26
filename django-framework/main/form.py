@@ -8,67 +8,69 @@ from django import forms
 class JourneyForm(forms.Form):
     start_date = forms.DateField(
         label='Start date',
-        widget=forms.widgets.DateInput(attrs={'type': 'date', 'class' : "formTextField",
+        widget=forms.widgets.DateInput(attrs={'type': 'date', 'class' : "formTextField formButton",
                                               }))
 
     end_date = forms.DateField(
         label='End date',
-        widget=forms.widgets.DateInput(attrs={'type': 'date', 'class' : "formTextField"}))
+        widget=forms.widgets.DateInput(attrs={'type': 'date', 'class' : "formTextField formButton"}))
 
     start_time = forms.TimeField(
         label='Start time', widget=forms.TimeInput(attrs={'type':"time",
-                                                      'class' : "formTextField"}))
+                                                      'class' : "formTextField formButton"}))
     end_time = forms.TimeField(
         label='End time', widget=forms.TimeInput(attrs={'type':"time",
-                                                      'class' : "formTextField"}))
+                                                      'class' : "formTextField formButton"}))
 
     plate_number=forms.CharField(label='',max_length=128, widget=forms.TextInput(attrs={
-        'type':'text1', 'class':"form-control formTextField", 'placeholder':'License Plate'
+        'type':'text1', 'class':"form-control formTextField formButton", 'placeholder':'License Plate'
     }))
 
     driver = forms.CharField(
         label="",
         max_length=128,  widget=forms.TextInput(
-            attrs={'placeholder':"Driver Name", 'class':"form-control formTextField", 'type':'text1',
+            attrs={'placeholder':"Driver Name", 'class':"form-control formTextField formButton", 'type':'text1',
                    "id":'driver_name'}))
 
     CHOICES=(('Transport of goods', 'Transport of goods'),('Picking up of goods','Picking up of goods'),
              ('Transport of people','Transport of people'),
             ('Fieldwork','Fieldwork'), ('Canceled', 'Canceled'))
     purpose = forms.CharField(label='',widget=forms.Select(choices=CHOICES,
-                              attrs={'class':"form-select formTextField", "aria-label":'Default select example'
+                              attrs={'class':"form-select formTextField dropdown formButton", "aria-label":'Default select example'
                                      ,'placeholder':'Journey Purpose'}))
 
     no_of_pass = forms.IntegerField(label='',min_value=1,max_value=8,widget=forms.NumberInput(attrs={
-        'class':"formTextField", 'placeholder':'Number of Passengers'}))
+        'class':"formTextField formButton", 'placeholder':'Number of Passengers'}))
 
-    start_location=forms.CharField(label='', widget=forms.TextInput(attrs={'class':'formTextField',
+    start_location=forms.CharField(label='', widget=forms.TextInput(attrs={'class':'formTextField formButton',
                                                                            'placeholder':'Starting Location'}))
 
 
     destinations1 = forms.CharField(required=True,label='',max_length=256,
-                                  widget=forms.TextInput(attrs={'class':"formTextField",
+                                  widget=forms.TextInput(attrs={'class':"formTextField formButton",
                                                 'placeholder': 'Destination'}))
     destinations2 = forms.CharField(required=False,label='', max_length=256,
-                                    widget=forms.TextInput(attrs={'class': "formTextField",
+                                    widget=forms.TextInput(attrs={'class': "formTextField formButton",
                                                 'placeholder': 'Second Destination (Optional)', 'id':'dest2'}))
     destinations3 = forms.CharField(required=False, label='', max_length=256,
-                                    widget=forms.TextInput(attrs={'class': "formTextField",'id':'dest3',
+                                    widget=forms.TextInput(attrs={'class': "formTextField formButton",'id':'dest3',
                                                 'placeholder': 'Third Destination (Optional)'}))
-    mileage_start=forms.IntegerField(label='',min_value=0, widget=forms.NumberInput(attrs={'class':"formTextField",
-                                                                              'label': 'Mileage Start Number',
-                                                                            'placeholder':'mileage start reading'}))
-    mileage_finish = forms.IntegerField(label='',min_value=0, widget=forms.NumberInput(attrs={'class': "formTextField",
-                                                                      'label': 'Mileage End Number',
-                                                                        'placeholder':'mileage end reading',
-                                                                        }))
+    mileage_start=forms.IntegerField(label='',min_value=0, widget=forms.NumberInput(
+                                    attrs={'class':"formTextField formButton",
+                                                    'label': 'Mileage Start Number',
+                                                    'placeholder':'mileage start reading'}))
+    mileage_finish = forms.IntegerField(label='',min_value=0, widget=forms.NumberInput(
+                                    attrs={'class': "formTextField formButton",
+                                                    'label': 'Mileage End Number',
+                                                    'placeholder':'mileage end reading',
+                                                    }))
 
 
     Trip_CHOICES = ((True, 'Round Trip'), (False, 'One-way Trip'))
 
     is_round_trip = forms.BooleanField(required=False, label="",
                                      widget=forms.RadioSelect(
-                                         choices=Trip_CHOICES))
+                                         choices=Trip_CHOICES, attrs={'id':'div_id_is_round_trip'}))
 
     approved_status=forms.BooleanField(required=False, initial=False, widget=forms.HiddenInput())
 

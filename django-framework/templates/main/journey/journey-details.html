@@ -11,16 +11,24 @@
 {% endblock %}
 
 {% block contend %}
+    <div class="container-full px-5">
 
-    <span class="material-icons-outlined">fact_check</span><h1 style="display: inline">Journey Detail</h1>
+        <div class='row justify-content-center'>
+            <div class="col-5">
+            <span class="material-icons-outlined">fact_check</span><h1 style="display: inline">Journey Detail</h1>
+            </div>
+        </div>
 
     <hr>
 
     <link rel="stylesheet"  href='{% static 'CSS/journey/journey-details.css' %}'/>
-
+    <div class='row justify-content-center'>
+            <div class="col-5">
     <form method="post">
         {% csrf_token %}
         {% crispy form %}
     </form>
-
+            </div>
+    </div>
+    </div>
 {% endblock %}

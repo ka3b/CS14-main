@@ -118,9 +118,7 @@ h3 {
     padding-top: 2em;
 }
 
-label {
-    width: 800px;
-}
+
 html,body
 {
     width: 100%;
@@ -130,4 +128,5 @@ html,body
     overflow-x: hidden;
 }
 
-hr {width: 100%;}
+
+
