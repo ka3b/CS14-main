@@ -4,8 +4,8 @@
 {% endblock %}
 {% block contend %}
 
-<script src=”https://code.jquery.com/jquery-3.6.0.min.js” integrity=”sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=” crossorigin=”anonymous”;></script> #added to test
-<script src="{% static 'js/pending-data.js' %}"></script> #added to test
+<script src=”https://code.jquery.com/jquery-3.6.0.min.js” integrity=”sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=” crossorigin=”anonymous”;></script>
+<script src="{% static 'js/pending-data.js' %}"></script>
 <link rel="stylesheet" href='{% static 'CSS/analytics/pending-data.css' %}'>
 
 <div>
@@ -20,7 +20,10 @@
               <td>{{ journey.end_date }}</td>
               <td>{{ journey.driver }}</td>
               <td>{{ journey.plate_number }}</td>
-              <td>{{ journey.destinations }}</td>
+              <td>{{ journey.start_location }}</td>
+              <td>{{ journey.destinations1 }}</td>
+              <td>{{ journey.destinations2 }}</td>
+              <td>{{ journey.destinations3 }}</td>
               <td>{{ journey.purpose }}</td>
               <td>{{ journey.no_of_pass }}</td>
               <td>{{ journey.start_time }}</td>
@@ -35,7 +38,7 @@
         {% endfor %}
 
     {% else %}
-        <p>No journeys are in the databse. </p>
+        <p>There are no pending journeys. </p>
     {% endif %}
 </div>
 

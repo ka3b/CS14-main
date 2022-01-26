@@ -31,8 +31,10 @@ def journey_details(request):
             cleaned_form = form.cleaned_data
 
             journey = Journey.objects.get_or_create(driver=cleaned_form['driver'], start_date=cleaned_form['start_date'],
-            end_date=cleaned_form['end_date'],destinations=cleaned_form['destinations'],
+            end_date=cleaned_form['end_date'],
             purpose=cleaned_form['purpose'], plate_number=cleaned_form['plate_number'],
+            start_location=cleaned_form['start_location'], destinations1=cleaned_form['destinations1'],
+            destinations2=cleaned_form['destinations2'], destinations3=cleaned_form['destinations3'],
             no_of_pass=cleaned_form['no_of_pass'],start_time=cleaned_form['start_time'],
             end_time=cleaned_form['end_time'], mileage_start=cleaned_form['mileage_start'],
             mileage_finish=cleaned_form['mileage_finish'], round_trip=cleaned_form['is_round_trip'])[0]

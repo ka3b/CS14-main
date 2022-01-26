@@ -29,7 +29,7 @@ class JourneyForm(forms.Form):
     driver = forms.CharField(
         label="",
         max_length=128,  widget=forms.TextInput(
-            attrs={'placeholder':"Drive Name", 'class':"form-control formTextField", 'type':'text1',
+            attrs={'placeholder':"Driver Name", 'class':"form-control formTextField", 'type':'text1',
                    "id":'driver_name'}))
 
     CHOICES=(('Transport of goods', 'Transport of goods'),('Picking up of goods','Picking up of goods'),
@@ -46,15 +46,15 @@ class JourneyForm(forms.Form):
                                                                            'placeholder':'Starting Location'}))
 
 
-    destinations1=forms.CharField(required=True,label='',max_length=256,
+    destinations1 = forms.CharField(required=True,label='',max_length=256,
                                   widget=forms.TextInput(attrs={'class':"formTextField",
                                                 'placeholder': 'Destination'}))
     destinations2 = forms.CharField(required=False,label='', max_length=256,
-                                    widget=forms.TextInput(attrs={'class': "formTextField",'type':'hidden',
-                                                'placeholder': 'Destination(Optional)', 'id':'dest2'}))
+                                    widget=forms.TextInput(attrs={'class': "formTextField",
+                                                'placeholder': 'Second Destination (Optional)', 'id':'dest2'}))
     destinations3 = forms.CharField(required=False, label='', max_length=256,
-                                    widget=forms.TextInput(attrs={'class': "formTextField",'type':'hidden','id':'dest3',
-                                                'placeholder': 'Destination(Optional)'}))
+                                    widget=forms.TextInput(attrs={'class': "formTextField",'id':'dest3',
+                                                'placeholder': 'Third Destination (Optional)'}))
     mileage_start=forms.IntegerField(label='',min_value=0, widget=forms.NumberInput(attrs={'class':"formTextField",
                                                                               'label': 'Mileage Start Number',
                                                                             'placeholder':'mileage start reading'}))
@@ -66,7 +66,7 @@ class JourneyForm(forms.Form):
 
     Trip_CHOICES = ((True, 'Round Trip'), (False, 'One-way Trip'))
 
-    is_round_trip=forms.BooleanField(required=True, label="",
+    is_round_trip = forms.BooleanField(required=False, label="",
                                      widget=forms.RadioSelect(
                                          choices=Trip_CHOICES))
 
@@ -89,8 +89,7 @@ class JourneyForm(forms.Form):
             Div(HTML('''<span class="material-icons-outlined">explore</span>
             <h3 style="display: inline">Journey Information</h3>'''),
                 Field('is_round_trip',css_id='tickbox'), 'start_location',
-                  'destinations1', 'destinations2', HTML('<br/>'),'destinations3','no_of_pass','purpose',
-                HTML('''<br/><button onclick='myFunction()' class="btn btn-secondary" >Add Destination(Max is 2)</button>''')),
+                  'destinations1', 'destinations2', HTML('<br/>'),'destinations3','no_of_pass','purpose'),
             Field('approved_status')
         )
         self.helper.add_input(Submit('submit', 'Submit', css_id='submitButton'))
