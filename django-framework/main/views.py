@@ -61,7 +61,7 @@ def admin_login(request):
                 #Signs the user in with the details supllied once they create an account
                 auth_login(request, user)
                 return redirect(reverse("main:dashboard"))
-            else:             
+            else:
                 return HttpResponse("Your account has been disabled.")
 
         else:
@@ -99,8 +99,18 @@ def approve_journey(request):
         journey = Journey.objects.get(id=id)
         journey.approved = True
         journey.save()
+        data = {'success': True}
 
-    return JsonResponse({'success':True})
+    return JsonResponse(data)
+
+def reject_journey(request):
+    data = {'success': False}
+    if request.method=='POST':
+        id = request.POST.get('id')
+        Journey.objects.filter(id=id).delete()
+        data = {'success': True}
+
+    return JsonResponse(data)
 
 
 @login_required
