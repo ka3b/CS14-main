@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate, login as auth_login, logout as aut
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
+from django.http import JsonResponse
 
 
 # Create your views here.
@@ -48,24 +49,24 @@ def dashboard(request):
     return render(request,"main/analytics/dashboard.html")
 
 def admin_login(request):
-    if request.method == 'POST':       
+    if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
 
         user = authenticate(username=username, password=password)
 
-        if user:          
+        if user:
 
-            if user.is_active:   
-                #Signs the user in with the details supllied once they create an account             
+            if user.is_active:
+                #Signs the user in with the details supllied once they create an account
                 auth_login(request, user)
                 return redirect(reverse("main:dashboard"))
-            else:             
+            else:
                 return HttpResponse("Your account is disabled.")
 
-        else:          
+        else:
             return HttpResponse("Incorrect username or password.")
-        
+
     else:
         return render(request, 'main/analytics/admin-login.html')
 
@@ -86,10 +87,21 @@ def export_data(request):
 
 def pending_data(request):
     order_by = request.GET.get('order_by', 'start_date')
-    journeys = Journey.objects.filter(approved=False).order_by(order_by) 
+    journeys = Journey.objects.filter(approved=False).order_by(order_by)
     context_dict = {}
     context_dict['journeys'] = journeys
     return render(request,"main/analytics/pending-data.html", context=context_dict)
+
+def approve_journey(request):
+    data = {'success': False}
+    if request.method=='POST':
+        id = request.POST.get('id')
+        journey = Journey.objects.get(id=id)
+        journey.approved = True
+        journey.save()
+
+    return JsonResponse({'success':True})
+
 
 @login_required
 def logout(request):
