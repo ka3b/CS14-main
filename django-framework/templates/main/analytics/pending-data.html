@@ -3,14 +3,19 @@
 {% block title %}
 {% endblock %}
 {% block contend %}
+
+<script src=”https://code.jquery.com/jquery-3.6.0.min.js” integrity=”sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=” crossorigin=”anonymous”;></script> #added to test
+<script src="{% static 'js/pending-data.js' %}"></script> #added to test
 <link rel="stylesheet" href='{% static 'CSS/analytics/pending-data.css' %}'>
+
 <div>
     <h1>
         Pending Data
     </h1>
+    {% csrf_token %}
     {% if journeys %}
-        {% for journey in journeys %} 
-            <tr>         
+        {% for journey in journeys %}
+            <tr>
               <td>{{ journey.start_date }}</td>
               <td>{{ journey.end_date }}</td>
               <td>{{ journey.driver }}</td>
@@ -23,16 +28,17 @@
               <td>{{ journey.mileage_start }}</td>
               <td>{{ journey.mileage_finish }}</td>
               <td>{{ journey.round_trip }}</td>
-              <td><button type="button" class ="btn btn-primary">Approve</button></td>
-              <td><button type="button" class ="btn btn-primary">Reject</button>  </td>
+              <td><button type="button" id={{ journey.id }} class ="btn btn-primary approve">Approve</button></td>
+              <td><button type="button" id={{ journey.id  }} class ="btn btn-primary reject">Reject</button>  </td>
             </tr>
-            </br>
+            <br>
         {% endfor %}
 
     {% else %}
         <p>No journeys are in the databse. </p>
     {% endif %}
 </div>
+
 
 {% endblock %}
 {% block extra_js %}
