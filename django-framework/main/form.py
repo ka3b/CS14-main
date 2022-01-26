@@ -80,10 +80,15 @@ class JourneyForm(forms.Form):
         self.helper.layout = Layout(
 
 
-            Div(HTML('<h3>Driver Information</h3>'), 'driver'),
-            Div(HTML('<h3>Date and Time</h3>'), 'start_date', 'end_date', 'start_time', 'end_time'),
-            Div(HTML('<h3>Vehicle Information</h3>'),'plate_number', 'mileage_start', 'mileage_finish'),
-            Div(HTML('<h3>Journey Information</h3>'),Field('is_round_trip',css_id='tickbox'), 'start_location',
+            Div(HTML('''<span class="material-icons-outlined">badge</span>
+                        <h3 style="display: inline">Driver Information</h3>'''), 'driver'),
+            Div(HTML('''<span class="material-icons-outlined">today</span>
+                <h3 style="display: inline">Date and Time</h3>'''), 'start_date', 'end_date', 'start_time', 'end_time'),
+            Div(HTML('''<span class="material-icons-outlined">directions_car</span>
+            <h3 style="display: inline">Vehicle Information</h3>'''),'plate_number', 'mileage_start', 'mileage_finish'),
+            Div(HTML('''<span class="material-icons-outlined">explore</span>
+            <h3 style="display: inline">Journey Information</h3>'''),
+                Field('is_round_trip',css_id='tickbox'), 'start_location',
                   'destinations1', 'destinations2', HTML('<br/>'),'destinations3','no_of_pass','purpose',
                 HTML('''<br/><button onclick='myFunction()' class="btn btn-secondary" >Add Destination(Max is 2)</button>''')),
             Field('approved_status')
