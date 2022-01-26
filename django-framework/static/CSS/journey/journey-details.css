@@ -117,3 +117,7 @@ h3 {
 .formItem {
     padding-top: 2em;
 }
+
+label {
+    width: 800px;
+}
