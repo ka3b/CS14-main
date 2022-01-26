@@ -19,7 +19,10 @@ def populate():
             'start_date' : datetime.date(2020, 8, 11),
             'end_date' : datetime.date(2020, 8, 11),
             'driver' : "Chris",
-            'destinations' : "Vet School | Shops",
+            'start_location' : "Vet School",
+            'destinations1' : "Somewhere",
+            'destinations2' : None,
+            'destinations3' : None,
             'purpose' : "Supplies",
             'plate_number' : "AB70DHD",
             'no_of_pass' : "2",
@@ -34,7 +37,10 @@ def populate():
             'start_date' : datetime.date(2021, 2, 10),
             'end_date' : datetime.date(2021, 2, 11),
             'driver' : "Joe",
-            'destinations' : "Tesco",
+            'start_location' : "Uni",
+            'destinations1' : "Shops",
+            'destinations2' : "City centre",
+            'destinations3' : None,
             'purpose' : "Travel People",
             'plate_number' : "AB70DHD",
             'no_of_pass' : "0",
@@ -49,7 +55,10 @@ def populate():
             'start_date' : datetime.date(2019, 12, 12),
             'end_date' : datetime.date(2019, 12, 12),
             'driver' : "Danny",
-            'destinations' : "A | B | C | D",
+            'start_location' : "Vet School",
+            'destinations1' : "Somewhere",
+            'destinations2' : "Here",
+            'destinations3' : "There",
             'purpose' : "Supplies",
             'plate_number' : "AB70DHD",
             'no_of_pass' : "1",
@@ -64,7 +73,10 @@ def populate():
             'start_date' : datetime.date(2022, 1, 24),
             'end_date' : datetime.date(2022, 1, 25),
             'driver' : "Jason",
-            'destinations' : "Shops | Tesco",
+            'start_location' : "Tesco",
+            'destinations1' : "Shops",
+            'destinations2' : None,
+            'destinations3' : None,
             'purpose' : "Supplies",
             'plate_number' : "AB70DHD",
             'no_of_pass' : "4",
@@ -79,7 +91,10 @@ def populate():
             'start_date' : datetime.date(2022, 1, 23),
             'end_date' : datetime.date(2022, 1, 24),
             'driver' : "Bobby",
-            'destinations' : "Shops | Tesco",
+            'start_location' : "Vet School",
+            'destinations1' : "Somewhere",
+            'destinations2' : None,
+            'destinations3' : None,
             'purpose' : "Supplies",
             'plate_number' : "AB70DHD",
             'no_of_pass' : "4",
@@ -94,7 +109,10 @@ def populate():
             'start_date' : datetime.date(2022, 1, 23),
             'end_date' : datetime.date(2022, 1, 25),
             'driver' : "Orange",
-            'destinations' : "Shops | Tesco",
+            'start_location' : "Vet School",
+            'destinations1' : "Somewhere",
+            'destinations2' : None,
+            'destinations3' : None,
             'purpose' : "Supplies",
             'plate_number' : "AB70DHD",
             'no_of_pass' : "4",
@@ -139,15 +157,15 @@ def populate():
      #   add_analyst(p["username"], p["name"])
 
     for p in journeys:
-        add_journey(p["driver"], p["start_date"], p["end_date"], p["destinations"], p["purpose"], p["plate_number"], p["no_of_pass"], p["start_time"], p["end_time"], p["mileage_start"], p["mileage_finish"],p["approved"],p["round_trip"])
+        add_journey(p["driver"], p["start_date"], p["end_date"], p["start_location"], p["destinations1"], p["destinations2"], p["destinations3"], p["purpose"], p["plate_number"], p["no_of_pass"], p["start_time"], p["end_time"], p["mileage_start"], p["mileage_finish"],p["approved"],p["round_trip"])
 
 def add_analyst(username, name):
     analyst = DataAnalyst.objects.get_or_create(username=username, name=name)[0]
     analyst.save()
     return analyst
 
-def add_journey(driver, start_date, end_date, destinations, purpose, plate_number, no_of_pass, start_time, end_time, mileage_start, mileage_finish, approved, round_trip):
-    journey = Journey.objects.get_or_create(driver=driver, start_date=start_date, end_date=end_date, destinations=destinations, purpose=purpose, plate_number=plate_number, no_of_pass=no_of_pass, start_time=start_time, end_time=end_time, mileage_start=mileage_start, mileage_finish=mileage_finish, approved=approved, round_trip=round_trip)[0]
+def add_journey(driver, start_date, end_date, start_location, destinations1, destinations2, destinations3, purpose, plate_number, no_of_pass, start_time, end_time, mileage_start, mileage_finish, approved, round_trip):
+    journey = Journey.objects.get_or_create(driver=driver, start_date=start_date, end_date=end_date, start_location=start_location, destinations1=destinations1, destinations2=destinations2, destinations3=destinations3, purpose=purpose, plate_number=plate_number, no_of_pass=no_of_pass, start_time=start_time, end_time=end_time, mileage_start=mileage_start, mileage_finish=mileage_finish, approved=approved, round_trip=round_trip)[0]
     journey.save()
     return journey
 
