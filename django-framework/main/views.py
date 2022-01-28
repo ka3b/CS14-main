@@ -9,6 +9,7 @@ from django.urls import reverse
 from django.http import JsonResponse
 import datetime
 from django.db.models import Count
+import csv
 
 
 # Create your views here.
@@ -110,6 +111,24 @@ def data_table(request):
 
 def export_data(request):
     return render(request,"main/analytics/export-data.html")
+
+def export_data_file(request):
+    response = HttpResponse(
+        content_type='text/csv',
+        headers={'Content-Disposition': 'attachment; filename="TransportServices.csv"'},
+    )
+
+    writer = csv.writer(response)
+    writer.writerow(['Start Date', 'End Date', 'Driver', 'Plate Number', 'Start Location', 'First Destination', 'Second Destination',
+        'Third Destination', 'Purpose', 'Number of Passengers', 'Start Time', 'End Time', 'Starting Mileage', 'Ending Mileage', 'Round Trip?'])
+    
+    journeys = Journey.objects.filter(approved=True) 
+    for journey in journeys:
+        writer.writerow([journey.start_date, journey.end_date, journey.driver, journey.plate_number, journey.start_location,
+            journey.destinations1, journey.destinations2, journey.destinations3, journey.purpose, journey.no_of_pass,
+            journey.start_time, journey.end_time, journey.mileage_start, journey.mileage_finish, journey.round_trip])
+
+    return response
 
 def pending_data(request):
     order_by = request.GET.get('order_by', 'start_date')
