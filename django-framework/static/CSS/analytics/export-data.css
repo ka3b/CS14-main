@@ -1,0 +1,34 @@
+#export-button {
+  color: white;
+  background: rgb(60, 149, 255);
+  background: linear-gradient(
+    135deg,
+    rgba(60, 149, 255, 1) 0%,
+    rgba(55, 129, 255, 1) 32%,
+    rgba(102, 138, 255, 1) 72%,
+    rgba(214, 109, 255, 1) 100%
+  );
+  border-radius: 20px;
+  height: 400px;
+  width: 100%;
+  font-size: 32px;
+}
+
+#export-button:hover {
+  color: white;
+  background: rgb(60, 149, 255);
+  background: linear-gradient(
+    135deg,
+    rgb(50, 120, 206) 0%,
+    rgb(81, 109, 201) 72%,
+    rgb(160, 84, 190) 100%
+  );
+}
+
+#export-data-menu {
+  border-radius: 15px;
+  padding: 15px;
+  margin: 0;
+  color: #484bff;
+  background-color: #b9c4ff;
+}

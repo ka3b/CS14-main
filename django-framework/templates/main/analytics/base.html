@@ -2,9 +2,6 @@
 {% load static %}
 <html lang="en">
 <head>
-    <link rel="stylesheet"
-          href='{% static 'CSS/analytics/base.css' %}'>
-
     <meta charset="UTF-8">
     <title>
         {% block title %}{% endblock %}
@@ -22,10 +19,12 @@
     <!-- Google Icons Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Two+Tone" rel="stylesheet">
+    <link rel="stylesheet"
+          href='{% static 'CSS/analytics/base.css' %}'>
 </head>
 <body>
     <nav class="navbar navbar-light">
@@ -39,41 +38,39 @@
     <div class="container-full px-5">
         <div class="row">
             <div class="col-sm-12 col-lg-3 card" id="bootstrap-overrides">
-                <h2 id="bootstrap-overrides">
-                    Menu
-                </h2>
+                <h2 id="bootstrap-overrides">Menu</h2>
                 <hr class="solid" id="bootstrap-overrides">
-                <div class="menu-item row align-items-center" onclick="window.location.href='{% url "main:dashboard" %}'">
+                <div class="menu-item row" id="dashboard-menu" onclick="window.location.href='{% url "main:dashboard" %}'">
                     <span class="material-icons-outlined col-2" id="bootstrap-overrides">space_dashboard</span>
                     <div class="col">
                         <h5 id="bootstrap-overrides">Dashboard</h5>
                     </div>
                 </div>
-                <div class="menu-item row align-items-center" onclick="window.location.href='{% url "main:pending_data" %}'">
+                <div class="menu-item row" id="pending-actions-menu" onclick="window.location.href='{% url "main:pending_data" %}'">
                     <span class="material-icons-outlined col-2">pending_actions</span>
                     <div class="col">
                         <h5 id="bootstrap-overrides">Pending Data</h5>
                     </div>
                 </div>
-                <div class="menu-item row align-items-center" onclick="window.location.href='{% url "main:analytics" %}'">
+                <div class="menu-item row" id="pie-chart-menu" onclick="window.location.href='{% url "main:analytics" %}'">
                     <span class="material-icons-outlined col-2">pie_chart</span>
                     <div class="col">
                         <h5 id="bootstrap-overrides">Analytics</h5>
                     </div>
                 </div>
-                <div class="menu-item row align-items-center" onclick="window.location.href='{% url "main:data_table" %}'">
+                <div class="menu-item row" id="data-table-menu" onclick="window.location.href='{% url "main:data_table" %}'">
                     <span class="material-icons-outlined col-2">grid_view</span>
                     <div class="col">
                         <h5 id="bootstrap-overrides">Data Table</h5>
                     </div>
                 </div>
-                <div class="menu-item row align-items-center" onclick="window.location.href='{% url "main:export_data" %}'">
+                <div class="menu-item row" id="export-data-menu" onclick="window.location.href='{% url "main:export_data" %}'">
                     <span class="material-icons-outlined col-2">import_export</span>
                     <div class="col">
                         <h5 id="bootstrap-overrides">Export Data</h5>
                     </div>
                 </div>
-                <div class="menu-item row align-items-center" onclick="window.location.href='{% url "admin:login" %}'">
+                <div class="menu-item row" id="admin-menu" onclick="window.location.href='{% url "main:account_manager" %}'">
                     <span class="material-icons-outlined col-2">manage_accounts</span>
                     <div class="col">
                         <h5 id="bootstrap-overrides">Admin</h5>
@@ -97,7 +94,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col">
+            <div class="col content">
                 {% block contend %}
                 {% endblock %}
             </div>
