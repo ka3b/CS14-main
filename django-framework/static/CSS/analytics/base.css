@@ -14,6 +14,12 @@
   font-size: 32px;
 }
 
+#title {
+  font-weight: 700;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
 #bootstrap-overrides h1 {
   font-size: 10px;
   font-weight: 800;

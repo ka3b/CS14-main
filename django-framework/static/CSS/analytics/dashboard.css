@@ -1,0 +1,62 @@
+#dashboard-menu {
+  border-radius: 15px;
+  padding: 15px;
+  margin: 0;
+  color: #575aff;
+  background-color: #d6ddff;
+}
+
+#approvals {
+  border-radius: 18px;
+  border: solid;
+  border-width: 2px;
+  border-color: rgba(255, 115, 22, 0.863);
+  background-color: #ffe2c2;
+  color: rgba(255, 115, 22, 0.863);
+  padding: 20px 20px 10px 20px;
+}
+
+#journeys-reported {
+  border-radius: 18px;
+  border: solid;
+  border-width: 1px;
+  margin-right: 10px;
+  margin-left: 10px;
+  border-color: rgba(179, 179, 179, 0.863);
+  padding: 20px 20px 10px 20px;
+}
+
+#journeys-reported-icon {
+  font-size: 128px;
+  text-align: center;
+  background: -webkit-linear-gradient(#ffc56d, #f772ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#average-miles {
+  border-radius: 18px;
+  border: solid;
+  border-width: 1px;
+  margin-right: 10px;
+  margin-left: 10px;
+  border-color: rgba(179, 179, 179, 0.863);
+  padding: 20px 20px 10px 20px;
+}
+
+#average-miles-icon {
+  font-size: 128px;
+  text-align: center;
+  background: -webkit-linear-gradient(45deg, rgba(48,156,36,1) 0%, rgba(183,255,146,1) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#common-purpose {
+  border-radius: 18px;
+  border: solid;
+  border-width: 1px;
+  border-color: rgba(179, 179, 179, 0.863);
+  padding: 20px 20px 10px 20px;
+  margin-top: 20px;
+}
