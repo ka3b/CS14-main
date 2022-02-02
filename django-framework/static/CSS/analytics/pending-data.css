@@ -1,0 +1,16 @@
+#pending-actions-menu {
+  border-radius: 15px;
+  padding: 15px;
+  margin: 0;
+  color: #575aff;
+  background-color: #d6ddff;
+}
+
+#pending-card {
+  border-radius: 18px;
+  border: solid;
+  border-width: 1px;
+  margin-top: 20px;
+  border-color: rgba(179, 179, 179, 0.863);
+  padding: 20px 20px 10px 20px;
+}

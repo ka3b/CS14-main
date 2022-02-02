@@ -9,36 +9,37 @@
 <link rel="stylesheet" href='{% static 'CSS/analytics/pending-data.css' %}'>
 
 <div>
-    <h1>
+    <h1 id=title>
         Pending Data
     </h1>
     {% csrf_token %}
     {% if journeys %}
         {% for journey in journeys %}
-            <tr>
-              <td>{{ journey.start_date }}</td>
-              <td>{{ journey.end_date }}</td>
-              <td>{{ journey.driver }}</td>
-              <td>{{ journey.plate_number }}</td>
-              <td>{{ journey.start_location }}</td>
-              <td>{{ journey.destinations1 }}</td>
-              <td>{{ journey.destinations2 }}</td>
-              <td>{{ journey.destinations3 }}</td>
-              <td>{{ journey.purpose }}</td>
-              <td>{{ journey.no_of_pass }}</td>
-              <td>{{ journey.start_time }}</td>
-              <td>{{ journey.end_time }}</td>
-              <td>{{ journey.mileage_start }}</td>
-              <td>{{ journey.mileage_finish }}</td>
-              <td>{{ journey.round_trip }}</td>
-              <td><button type="button" id={{ journey.id }} class ="btn btn-primary approve">Approve</button></td>
-              <td><button type="button" id={{ journey.id  }} class ="btn btn-primary reject">Reject</button>  </td>
-            </tr>
-            <br>
+    <div id="pending-card">
+        <tr>
+        <td>{{ journey.start_date }}</td>
+        <td>{{ journey.end_date }}</td>
+        <td>{{ journey.driver }}</td>
+        <td>{{ journey.plate_number }}</td>
+        <td>{{ journey.start_location }}</td>
+        <td>{{ journey.destinations1 }}</td>
+        <td>{{ journey.destinations2 }}</td>
+        <td>{{ journey.destinations3 }}</td>
+        <td>{{ journey.purpose }}</td>
+        <td>{{ journey.no_of_pass }}</td>
+        <td>{{ journey.start_time }}</td>
+        <td>{{ journey.end_time }}</td>
+        <td>{{ journey.mileage_start }}</td>
+        <td>{{ journey.mileage_finish }}</td>
+        <td>{{ journey.round_trip }}</td>
+        <td><button type="button" id={{ journey.id }} class ="btn btn-primary approve">Approve</button></td>
+        <td><button type="button" id={{ journey.id  }} class ="btn btn-primary reject">Reject</button>  </td>
+        </tr>
+    </div>
         {% endfor %}
 
     {% else %}
-        <p>There are no pending journeys. </p>
+        <h3>There are no pending journeys. </h3>
     {% endif %}
 </div>
 
