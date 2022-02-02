@@ -9,6 +9,8 @@
 
 #bootstrap-overrides span {
   padding: 0;
+  margin: 0;
+  width: auto;
   font-size: 32px;
 }
 
@@ -18,27 +20,33 @@
   border-color: #d3d3d3;
 }
 
-#bootstrap-overrides.card h5 {
+#bootstrap-overrides .card h5 {
   font-size: 20px;
   font-weight: 600;
   display: inline;
 }
 
-#bootstrap-overrides.card h2 {
+#bootstrap-overrides .card h2 {
   font-size: 28px;
   font-weight: 700;
   color: #585858;
 }
 
+#NavLogo {
+  width: auto;
+  height: 30px;
+}
+
 .menu-item {
   padding: 15px;
+  margin: 0;
   color: #838383;
   transition: 100ms ease-out;
 }
 
 .menu-item:hover {
   color: #525252;
-  border-radius: 100px;
+  border-radius: 15px;
   background-color: #eeeeee;
   transition: 100ms ease-out;
 }
@@ -48,4 +56,60 @@
   border-style: solid;
   border-color: #d3d3d3;
   border-radius: 18px;
+}
+
+#signed-in-as {
+    padding: 0;
+    margin: 0;
+    margin-bottom: -4px;
+    font-size: 14px;
+    color: #5162ff;
+}
+
+#account-box {
+    margin: 0;
+    margin-top: 40px;
+}
+
+#profile-picture .profile span {
+    font-size: 20px;
+    margin-right: 20px;
+}
+
+#account-name {
+    padding: 0;
+    margin: 0;
+    font-size: 20px;
+    color: #000000;
+}
+
+@media only screen and (max-device-width: 959px) {
+  #bootstrap-overrides.card h5 {
+    font-size: 36px;
+  }
+
+  #bootstrap-overrides.card h2 {
+    font-size: 42px;
+  }
+
+  #bootstrap-overrides.card {
+    padding: 36px;
+    border-style: solid;
+    border-color: #d3d3d3;
+    border-radius: 36px;
+  }
+
+  #bootstrap-overrides span {
+    font-size: 48px;
+  }
+
+  #NavLogo {
+    width: auto;
+    height: 60px;
+    margin: 20px;
+  }
+
+  .menu-item {
+    padding: 32px 24px 32px 24px;
+  }
 }
