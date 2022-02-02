@@ -5,33 +5,63 @@
 
 
 {% block contend %}
+<script src="https://d3js.org/d3.v7.min.js"></script>
 <link rel="stylesheet" href='{% static 'CSS/analytics/analytics.css' %}'>
-<div>
+<div id="div_travel_frequency">
     <h2>
         Travel Frequency
     </h2>
+    <p>
+        <ul></ul>
+        <svg width='200' height='500'></svg>
+    </p>
 </div>
-<div>
+<div id="div_destination">
     <h2>
         Destination
     </h2>
+    <p>
+
+    </p>
 </div>
 <div>
     <h2>
         Vehicle Types
     </h2>
+    <p></p>
 </div>
 <div>
     <h2>
         Average Fuel Usage
     </h2>
+    <p></p>
 </div>
 <div>
     <h2>
         Average Miles Traveled
     </h2>
+    <p></p>
 </div>
     
 {% endblock %}
 {% block extra_js %}
+    <script>
+        var fruits = ['apple', 'mango', 'banana', 'orange'];
+        d3.select('#div_travel_frequency').select('ul')
+            .selectAll('li')
+            .data(fruits)
+            .enter()
+            .append('li')
+            .text(function(d) { return d; });
+
+        var svg = d3.select('svg');
+
+//Create rectangle element inside SVG
+svg.append('rect')
+   .attr('x', 50)
+   .attr('y', 50)
+   .attr('width', 200)
+   .attr('height', 100)
+   .attr('fill', 'green');
+    </script>
 {% endblock %}
