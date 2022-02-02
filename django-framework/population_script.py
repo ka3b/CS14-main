@@ -5,7 +5,7 @@ import django
 django.setup()
 
 import datetime
-from main.models import DataAnalyst, Journey
+from main.models import Journey
 from django.contrib.auth.models import User
 from django.core.files import File
 
@@ -33,7 +33,7 @@ def populate():
             'approved' : True,
             'round_trip' : True
         },
-        {           
+        {
             'start_date' : datetime.date.today(),
             'end_date' : datetime.date.today(),
             'driver' : "Joe",
@@ -51,7 +51,7 @@ def populate():
             'approved' : False,
             'round_trip' : True
         },
-        {           
+        {
             'start_date' : datetime.date.today(),
             'end_date' : datetime.date.today(),
             'driver' : "Danny",
@@ -69,7 +69,7 @@ def populate():
             'approved' : True,
             'round_trip' : False
         },
-        {           
+        {
             'start_date' : datetime.date.today(),
             'end_date' : datetime.date.today(),
             'driver' : "Jason",
@@ -87,7 +87,7 @@ def populate():
             'approved' : False,
             'round_trip' : False
         },
-        {           
+        {
             'start_date' : datetime.date(2022, 1, 23),
             'end_date' : datetime.date(2022, 1, 24),
             'driver' : "Bobby",
@@ -105,7 +105,7 @@ def populate():
             'approved' : False,
             'round_trip' : False
         },
-        {           
+        {
             'start_date' : datetime.date(2022, 1, 23),
             'end_date' : datetime.date(2022, 1, 25),
             'driver' : "Orange",
@@ -159,10 +159,6 @@ def populate():
     for p in journeys:
         add_journey(p["driver"], p["start_date"], p["end_date"], p["start_location"], p["destinations1"], p["destinations2"], p["destinations3"], p["purpose"], p["plate_number"], p["no_of_pass"], p["start_time"], p["end_time"], p["mileage_start"], p["mileage_finish"],p["approved"],p["round_trip"])
 
-def add_analyst(username, name):
-    analyst = DataAnalyst.objects.get_or_create(username=username, name=name)[0]
-    analyst.save()
-    return analyst
 
 def add_journey(driver, start_date, end_date, start_location, destinations1, destinations2, destinations3, purpose, plate_number, no_of_pass, start_time, end_time, mileage_start, mileage_finish, approved, round_trip):
     journey = Journey.objects.get_or_create(driver=driver, start_date=start_date, end_date=end_date, start_location=start_location, destinations1=destinations1, destinations2=destinations2, destinations3=destinations3, purpose=purpose, plate_number=plate_number, no_of_pass=no_of_pass, start_time=start_time, end_time=end_time, mileage_start=mileage_start, mileage_finish=mileage_finish, approved=approved, round_trip=round_trip)[0]
