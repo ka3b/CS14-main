@@ -8,30 +8,35 @@
     <h1>
         Dashboard
     </h1>
-    <h3>
-        There are {{ pending }} journey(s) awaiting approval
-    </h3>
-    <h3>
-        Weekly Data Summary
-    </h3>
-    <p>{{ week_ago}} - {{ cur_date }}</p>
-    <div>
+    {% if common_purpose %}
         <h3>
-            {{ reported_journeys }} journeys reported
+            There are {{ pending }} journey(s) awaiting approval
         </h3>
-    </div>
-    <div>
         <h3>
-            {{ average_miles }} miles travelled on average
+            Weekly Data Summary
         </h3>
-    </div>
-    <div>
-        <h3>
-            The most common purpose of a journey is "{{ common_purpose }}"
-        </h3>
-    </div>
-</div>
-
+        <p>{{ week_ago}} - {{ cur_date }}</p>
+        <div>
+            <h3>
+                {{ reported_journeys }} journeys reported
+            </h3>
+        </div>
+        <div>
+            <h3>
+                {{ average_miles }} miles travelled on average
+            </h3>
+        </div>
+        <div>
+            <h3>
+                The most common purpose of a journey is "{{ common_purpose }}".
+            </h3>
+        </div>
+    {% else %}
+        <p>{{ week_ago}} - {{ cur_date }}</p>
+        <p>No journeys have been reported this week.</p>
+    {% endif %}
+    
+        
 
 {% endblock %}
 {% block extra_js %}

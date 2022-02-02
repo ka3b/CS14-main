@@ -16,8 +16,8 @@ def populate():
 
     journeys = [
         {
-            'start_date' : datetime.date(2020, 8, 11),
-            'end_date' : datetime.date(2020, 8, 11),
+            'start_date' : datetime.date.today(),
+            'end_date' : datetime.date.today(),
             'driver' : "Chris",
             'start_location' : "Vet School",
             'destinations1' : "Somewhere",
@@ -34,8 +34,8 @@ def populate():
             'round_trip' : True
         },
         {           
-            'start_date' : datetime.date(2021, 2, 10),
-            'end_date' : datetime.date(2021, 2, 11),
+            'start_date' : datetime.date.today(),
+            'end_date' : datetime.date.today(),
             'driver' : "Joe",
             'start_location' : "Uni",
             'destinations1' : "Shops",
@@ -52,8 +52,8 @@ def populate():
             'round_trip' : True
         },
         {           
-            'start_date' : datetime.date(2019, 12, 12),
-            'end_date' : datetime.date(2019, 12, 12),
+            'start_date' : datetime.date.today(),
+            'end_date' : datetime.date.today(),
             'driver' : "Danny",
             'start_location' : "Vet School",
             'destinations1' : "Somewhere",
@@ -70,8 +70,8 @@ def populate():
             'round_trip' : False
         },
         {           
-            'start_date' : datetime.date(2022, 1, 24),
-            'end_date' : datetime.date(2022, 1, 25),
+            'start_date' : datetime.date.today(),
+            'end_date' : datetime.date.today(),
             'driver' : "Jason",
             'start_location' : "Tesco",
             'destinations1' : "Shops",
