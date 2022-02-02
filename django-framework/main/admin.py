@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import DataAnalyst, Journey
+from .models import DataAnalyst, Journey, Vehicle
 
 class DataAnalystAdmin(admin.ModelAdmin):
     list_display = ('user','name', 'username')
@@ -12,3 +12,9 @@ class JourneyAdmin(admin.ModelAdmin):
     list_filter = ('driver', 'start_time', 'end_time', 'start_location', 'destinations1', 'destinations2', 'destinations3', 'purpose', 'no_of_pass', 'mileage_start', 'mileage_finish')
     exclude = ()
 admin.site.register(Journey, JourneyAdmin)
+
+class VehicleAdmin(admin.ModelAdmin):
+    list_display = ('vehicle_type', 'plate_number')
+    list_filter = ('vehicle_type', 'plate_number')
+    exclude = ()
+admin.site.register(Vehicle, VehicleAdmin)
