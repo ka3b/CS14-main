@@ -10,6 +10,7 @@ from django.http import JsonResponse
 import datetime
 from django.db.models import Count
 import csv
+from django.contrib import messages
 
 
 # Create your views here.
@@ -27,22 +28,28 @@ def journey_details(request):
         # check whether it's valid:
         form = JourneyForm(data=request.POST)
         print(form.errors)
+        context_dict={}
         if form.is_valid():
             # process the data in form.cleaned_data as required
             cleaned_form = form.cleaned_data
 
-            journey = Journey.objects.get_or_create(driver=cleaned_form['driver'], start_date=cleaned_form['start_date'],
-            end_date=cleaned_form['end_date'],
-            purpose=cleaned_form['purpose'], plate_number=cleaned_form['plate_number'],
-            start_location=cleaned_form['start_location'], destinations1=cleaned_form['destinations1'],
-            destinations2=cleaned_form['destinations2'], destinations3=cleaned_form['destinations3'],
-            no_of_pass=cleaned_form['no_of_pass'],start_time=cleaned_form['start_time'],
-            end_time=cleaned_form['end_time'], mileage_start=cleaned_form['mileage_start'],
-            mileage_finish=cleaned_form['mileage_finish'], round_trip=cleaned_form['is_round_trip'])[0]
-
-            journey.save()
-            # redirect to a new URL:
-            return HttpResponse('Successfully reported your journey!')
+            if cleaned_form['end_date'] < cleaned_form['start_date']:
+                return HttpResponse('Error - End date is before start date!')
+            elif (cleaned_form['end_date'] == cleaned_form['start_date']) and (cleaned_form['end_time'] < cleaned_form['start_time']):
+                context_dict['messages'] = messages
+                return HttpResponse('Error - End time is before start time!')
+            else:
+                journey = Journey.objects.get_or_create(driver=cleaned_form['driver'], start_date=cleaned_form['start_date'],
+                end_date=cleaned_form['end_date'],
+                purpose=cleaned_form['purpose'], plate_number=cleaned_form['plate_number'],
+                start_location=cleaned_form['start_location'], destinations1=cleaned_form['destinations1'],
+                destinations2=cleaned_form['destinations2'], destinations3=cleaned_form['destinations3'],
+                no_of_pass=cleaned_form['no_of_pass'],start_time=cleaned_form['start_time'],
+                end_time=cleaned_form['end_time'], mileage_start=cleaned_form['mileage_start'],
+                mileage_finish=cleaned_form['mileage_finish'], round_trip=cleaned_form['is_round_trip'])[0]
+                journey.save()
+                # redirect to a new URL:
+                return HttpResponse('Successfully reported your journey!')
 
         # if a GET (or any other method) we'll create a blank form
     else:
