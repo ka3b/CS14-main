@@ -107,7 +107,10 @@ def analytics(request):
 #    return render(request,"main/analytics/account-manager.html")
 
 def data_table(request):
-    return render(request,"main/analytics/data-table.html")
+    journeys = Journey.objects.filter(approved=True)
+    context_dict = {}
+    context_dict['journeys'] = journeys
+    return render(request,"main/analytics/data-table.html", context=context_dict)
 
 def export_data(request):
     return render(request,"main/analytics/export-data.html")

@@ -4,7 +4,54 @@
 {% endblock %}
 {% block contend %}
 <link rel="stylesheet" href='{% static 'CSS/analytics/data-table.css' %}'>
-<div>
+<div style="width:850px;">
+	{% if journeys %}
+		<table>
+	    <thead>
+	      <tr>
+	        <th>Start Date</th>
+	  		<th>End Date</th>
+	  		<th>Driver</th>
+	  		<th>Plate Number</th>
+	  		<th>Start Location</th>
+	  		<th>First Destination</th>
+	  		<th>Second Destination</th>
+	  		<th>Third Destination</th>
+	  		<th>Purpose</th>
+	  		<th>Number of Passengers</th>
+	  		<th>Start Time</th>
+	  		<th>End Time</th>
+	  		<th>Starting Mileage</th>
+	  		<th>Ending Mileage</th>
+	  		<th>Round Trip?</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      {% for journey in journeys %}
+	        <tr>
+				  <td>{{ journey.start_date }}</td>
+	              <td>{{ journey.end_date }}</td>
+	              <td>{{ journey.driver }}</td>
+	              <td>{{ journey.plate_number }}</td>
+	              <td>{{ journey.start_location }}</td>
+	              <td>{{ journey.destinations1 }}</td>
+	              <td>{{ journey.destinations2 }}</td>
+	              <td>{{ journey.destinations3 }}</td>
+	              <td>{{ journey.purpose }}</td>
+	              <td>{{ journey.no_of_pass }}</td>
+	              <td>{{ journey.start_time }}</td>
+	              <td>{{ journey.end_time }}</td>
+	              <td>{{ journey.mileage_start }}</td>
+	              <td>{{ journey.mileage_finish }}</td>
+	              <td>{{ journey.round_trip }}</td>
+				</tr>
+	      {% endfor %}
+	    </tbody>
+	    </table>
+	{% else %}
+		<p>There are no approved journeys</p>
+	{% endif %}
+	
     
 </div>
 {% endblock %}
