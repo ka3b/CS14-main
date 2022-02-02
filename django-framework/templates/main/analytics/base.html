@@ -25,19 +25,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Two+Tone" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar navbar-light">
         <a class="navbar-brand col" href="#">
             <div class="row justify-content-center">
-                <img src="{% static "images/analytics/base/logo.png" %}" style="width: auto; height:30px" class="align-middle align-top" alt=""/>
+                <img src="{% static "images/analytics/base/logo.png" %}" class="align-middle align-top" id="NavLogo" alt=""/>
             </div>
         </a>
     </nav>
     
     <div class="container-full px-5">
         <div class="row">
-            <div class="col-2 card" id="bootstrap-overrides">
+            <div class="col-sm-12 col-lg-3 card" id="bootstrap-overrides">
                 <h2 id="bootstrap-overrides">
                     Menu
                 </h2>
@@ -78,9 +79,17 @@
                         <h5 id="bootstrap-overrides">Admin</h5>
                     </div>
                 </div>
-                <div>
-                    Profile Name
-                </div> 
+                <div class="row align-items-center" id="account-box">
+                    <span class="material-icons-two-tone col-2 profile" id="profile-picture">account_circle</span>
+                    <div class="col">
+                        <div class="row">
+                            <p id="signed-in-as">You are signed in as</p>
+                        </div>
+                        <div class="row">
+                            <p id="account-name">Account Name</p>
+                        </div>
+                    </div>
+                </div>
                 <div class="menu-item row align-items-center" onclick="window.location.href='{% url "main:logout" %}'">
                     <span class="material-icons-outlined col-2">logout</span>
                     <div class="col">
