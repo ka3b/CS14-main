@@ -12,3 +12,9 @@ class JourneyAdmin(admin.ModelAdmin):
     list_filter = ('driver', 'start_time', 'end_time', 'start_location', 'destinations1', 'destinations2', 'destinations3', 'purpose', 'no_of_pass', 'mileage_start', 'mileage_finish')
     exclude = ()
 admin.site.register(Journey, JourneyAdmin)
+
+class Vehicle(admin.ModelAdmin):
+    list_display = ('vehicle_type', 'plate_number')
+    list_filter = ('vehicle_type', 'plate_number')
+    exclude = ()
+admin.site.register(Vehicle, VehicleAdmin)
