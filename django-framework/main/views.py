@@ -59,7 +59,7 @@ def dashboard(request):
     weeks_journeys = Journey.objects.filter(start_date__range=[week_ago_date, current_date], approved=True)
     reported_journeys = weeks_journeys.count()
     average_miles=0
-    common_purpose = "not recorded until a journey for this week is reported"
+    common_purpose = None
     for journey in weeks_journeys:
         average_miles += journey.miles()
     if (reported_journeys > 0):
