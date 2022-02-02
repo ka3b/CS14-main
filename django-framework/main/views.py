@@ -51,7 +51,7 @@ def journey_details(request):
     return render(request,"main/journey/journey-details.html", {'form': form})
 
 def dashboard(request):
-    pending = Journey.objects.filter(approved=False).count() 
+    pending = Journey.objects.filter(approved=False).count()
     current_date = datetime.date.today()
     week_ago_date = current_date - datetime.timedelta(days=7)
     cur_date = current_date.strftime("%b %d")
@@ -103,8 +103,8 @@ def analysis(request):
 def analytics(request):
     return render(request,"main/analytics/analytics.html")
 
-def account_manager(request):
-    return render(request,"main/analytics/account-manager.html")
+#def account_manager(request):
+#    return render(request,"main/analytics/account-manager.html")
 
 def data_table(request):
     return render(request,"main/analytics/data-table.html")
@@ -121,8 +121,8 @@ def export_data_file(request):
     writer = csv.writer(response)
     writer.writerow(['Start Date', 'End Date', 'Driver', 'Plate Number', 'Start Location', 'First Destination', 'Second Destination',
         'Third Destination', 'Purpose', 'Number of Passengers', 'Start Time', 'End Time', 'Starting Mileage', 'Ending Mileage', 'Round Trip?'])
-    
-    journeys = Journey.objects.filter(approved=True) 
+
+    journeys = Journey.objects.filter(approved=True)
     for journey in journeys:
         writer.writerow([journey.start_date, journey.end_date, journey.driver, journey.plate_number, journey.start_location,
             journey.destinations1, journey.destinations2, journey.destinations3, journey.purpose, journey.no_of_pass,
