@@ -1,0 +1,27 @@
+# .gitlab-ci.yml
+
+image: python:latest
+
+variables:
+  # SECRET_KEY: "this-is-my-secret-key"
+    DEBUG: "True"
+    ALLOWED_HOSTS: "['*']"
+    DB_ENGINE: "django.db.backends.sqlite3"
+    DB_NAME: "test_database.sqlite3"
+    STATIC_URL: "/static/"
+
+# This folder is cached between builds
+# http://docs.gitlab.com/ee/ci/yaml/README.html#cache
+cache:
+  paths:
+- ~/.cache/pip/
+
+before_script:
+  - pip install -r requirements.txt
+
+test:
+  script:
+    - cd django-framework
+    - python3 manage.py makemigrations
+    - python3 manage.py migrate
+    - python3 manage.py test
