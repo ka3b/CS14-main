@@ -15,8 +15,6 @@ class UrlMappingTest(TestCase):
             '/main/admin-login/analysis/analytics/',
             '/main/admin-login/analysis/data-table/',
             '/main/admin-login/analysis/export-data/',
-            '/main/admin-login/analysis/account-manager/',
-            '/main/admin-login/analysis/logout/',
             '/main/admin-login/'
         ]
         test_resolvers = [
@@ -28,8 +26,6 @@ class UrlMappingTest(TestCase):
             'analytics',
             'data_table',
             'export_data',
-            'account_manager',
-            'logout',
             'admin_login'
             ]
         for url in test_urls:
