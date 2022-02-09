@@ -34,8 +34,9 @@ DEBUG = True
 ALLOWED_HOSTS = [
     "0.0.0.0",
     "localhost",
-    "127.0.0.1"
-    "heroku.com"
+    "127.0.0.1",
+    "herokuapp.com",
+    "cs14-transport-services.herokuapp.com"
 ]
 
 
