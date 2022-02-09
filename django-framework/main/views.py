@@ -1,3 +1,7 @@
+import json
+
+from django.core import serializers
+from django.forms import model_to_dict
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from .form import *
@@ -108,7 +112,12 @@ def analysis(request):
     return render(request,"main/analytics/analysis.html")
 
 def analytics(request):
-    return render(request,"main/analytics/analytics.html")
+    data = Journey.objects.filter(approved=True)
+    data = serializers.serialize('json', data)
+
+    dump = json.dumps(data)
+    box={'data':dump}
+    return render(request,"main/analytics/analytics.html", context=box)
 
 #def account_manager(request):
 #    return render(request,"main/analytics/account-manager.html")

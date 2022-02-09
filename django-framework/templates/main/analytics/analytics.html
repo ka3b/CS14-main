@@ -21,7 +21,6 @@
         Destination
     </h2>
     <p>
-
     </p>
 </div>
 <div>
@@ -46,22 +45,29 @@
 {% endblock %}
 {% block extra_js %}
     <script>
-        var fruits = ['apple', 'mango', 'banana', 'orange'];
-        d3.select('#div_travel_frequency').select('ul')
-            .selectAll('li')
-            .data(fruits)
-            .enter()
-            .append('li')
-            .text(function(d) { return d; });
+
 
         var svg = d3.select('svg');
 
 //Create rectangle element inside SVG
-svg.append('rect')
-   .attr('x', 50)
-   .attr('y', 50)
-   .attr('width', 200)
-   .attr('height', 100)
-   .attr('fill', 'green');
+    svg.append('rect')
+       .attr('x', 50)
+       .attr('y', 50)
+       .attr('width', 200)
+       .attr('height', 100)
+       .attr('fill', 'green');
+
+//json data
+    var received_data  = {{ data|safe }};
+    var obj = JSON.parse(received_data);
+    console.log(obj[1])
+
+// d3 drawing
+        d3.select('#div_travel_frequency').select('ul')
+            .selectAll('li')
+            .data(obj)
+            .enter()
+            .append('li')
+            .text(function(d) { return d; });
     </script>
 {% endblock %}
