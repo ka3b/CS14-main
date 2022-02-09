@@ -1,6 +1,6 @@
 # .gitlab-ci.yml
 
-image: python: latest
+image:python:latest
 
 variables:
   # SECRET_KEY: "this-is-my-secret-key"
