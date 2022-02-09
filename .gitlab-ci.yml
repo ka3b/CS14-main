@@ -1,6 +1,6 @@
 # .gitlab-ci.yml
 
-image:python:latest
+image: python:latest
 
 variables:
   # SECRET_KEY: "this-is-my-secret-key"
@@ -14,7 +14,7 @@ variables:
 # http://docs.gitlab.com/ee/ci/yaml/README.html#cache
 cache:
   paths:
-- ~/.cache/pip/
+    - ~/.cache/pip/
 
 before_script:
   - pip install -r requirements.txt
