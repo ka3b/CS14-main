@@ -1,10 +1,12 @@
 {% extends "main/analytics/base.html" %}
 {% load static %}
 {% block title %}
+
 {% endblock %}
 
 
 {% block contend %}
+
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <link rel="stylesheet" href='{% static 'CSS/analytics/analytics.css' %}'>
 <div id="div_travel_frequency">
@@ -15,13 +17,16 @@
         <ul></ul>
         <svg width='200' height='500'></svg>
     </p>
+
 </div>
 <div id="div_destination">
     <h2>
         Destination
     </h2>
+
     <p>
     </p>
+
 </div>
 <div>
     <h2>
@@ -47,6 +52,7 @@
     <script>
 
 
+
         var svg = d3.select('svg');
 
 //Create rectangle element inside SVG
@@ -69,5 +75,6 @@
             .enter()
             .append('li')
             .text(function(d) { return d; });
+
     </script>
 {% endblock %}

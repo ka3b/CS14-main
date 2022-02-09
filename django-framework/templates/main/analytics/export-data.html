@@ -3,17 +3,17 @@
 {% block title %}
 {% endblock %}
 {% block contend %}
-<link rel="stylesheet" href='{% static 'CSS/analytics/export-data.css' %}'>
-<h1 id="bootstrap-overrides" style="font-weight: 700;margin-top: 20px;margin-bottom: 20px;">Export Data</h1>
+<link rel="stylesheet" href='{% static ' CSS/analytics/export-data.css' %}'>
+<h1 id="title">Export Data</h1>
 <div>
     <form action="{% url 'main:export_data_file' %}" method="post">
-{% csrf_token %}
- <button type="submit" name="export" class="btn" id="export-button">
-    <span class="material-icons" id="download" style="font-size: 72px;">download</span>
-    <br>
-     Export database in CSV
-    </button>
- </form>
+        {% csrf_token %}
+        <button type="submit" name="export" class="btn" id="export-button">
+            <span class="material-icons" id="download" style="font-size: 72px;">download</span>
+            <br>
+            Export database in CSV
+        </button>
+    </form>
 </div>
 {% endblock %}
 {% block extra_js %}
