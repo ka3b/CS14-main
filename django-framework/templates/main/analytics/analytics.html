@@ -57,19 +57,29 @@
     console.log(obj[1]);
 
 // d3 drawing
+
+    obj.forEach(function(d) {
+        d.fields.start_date = new Date (d.fields.start_date);})
+
+
+    console.log(obj[2]);
+
     var svg = d3.select("svg"),
         margin = 200,
         width = svg.attr("width") - margin,
         height = svg.attr("height") - margin;
 
 
-    var xScale = d3.scaleBand().range ([0, width]).padding(0.6),
+    var xScale = d3.scaleTime().range ([0, width]),
         yScale = d3.scaleLinear().range ([height, 0]);
 
     var g = svg.append("g")
                .attr("transform", "translate(" + 100 + "," + 100 + ")");
-    xScale.domain(obj.map(function(d) { return d.fields.driver; }));
-    yScale.domain([0, d3.max(obj, function(d) { return d.fields.mileage_start; })]);
+    xScale.domain([d3.min(obj, function(d) { return d.fields.start_date; }),
+        d3.max(obj, function(d) { return d.fields.start_date; })]);
+    yScale.domain([0, 5]);
+
+
 
         g.append("g")
          .attr("transform", "translate(0," + height + ")")
@@ -77,24 +87,56 @@
 
         g.append("g")
          .call(d3.axisLeft(yScale).tickFormat(function(d){
-             return  d+"L";
-         }).ticks(10))
+             return  d+"Times";
+         }).ticks(6))
          .append("text")
          .attr("transform", "rotate(-90)")
          .attr("y", 6)
          .attr("dy", "-5.1em")
          .attr("text-anchor", "end")
          .attr("stroke", "black")
-         .text("mileageStart");
+         .text("Frequency");
 
-        g.selectAll(".bar")
-         .data(obj)
-         .enter().append("rect")
-         .attr("class", "bar")
-         .attr("x", function(d) { return xScale(d.fields.driver); })
-         .attr("y", function(d) { return yScale(d.fields.mileage_start); })
-         .attr("width", xScale.bandwidth())
-         .attr("height", function(d) { return height - yScale(d.fields.mileage_start); });
+    var tally = {};
+    obj.forEach(function (d){
+        tally[d.fields.start_date]=(tally[d.fields.start_date]||0) + 1;
+    })
+
+    var data = [];
+    for (var date in tally) {
+    if (tally.hasOwnProperty(date)) {
+        data.push({
+            date: date,
+            frequency: tally[date]
+        });
+    }}
+    console.log(data)
+
+
+
+
+    xScale.domain(data.map(function (d) {
+        return d.date;
+        }));
+    yScale.domain([0, d3.max(data, function (d) {
+        return d.frequency;
+        })]);
+
+    svg.selectAll(".bar")
+    .data(data)
+    .enter().append("rect")
+    .attr("class", "bar")
+    .attr("x", function (d) {
+    return xScale(d.date);
+})
+    .attr("width", ".35em")
+    .attr("y", function (d) {
+    return yScale(d.frequency);
+})
+    .attr("height", function (d) {
+    return d.frequency;
+});
+
 
 
 
