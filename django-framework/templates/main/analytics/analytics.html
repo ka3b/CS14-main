@@ -55,36 +55,39 @@
     var received_data  = {{ data|safe }};
     var obj = JSON.parse(received_data);
     console.log(obj[1]);
-
-// d3 drawing
-
     obj.forEach(function(d) {
         d.fields.start_date = new Date (d.fields.start_date);})
 
-
     console.log(obj[2]);
+
+    // d3 drawing
+
+    //svg which is the background picture for the graph
 
     var svg = d3.select("svg"),
         margin = 200,
         width = svg.attr("width") - margin,
         height = svg.attr("height") - margin;
-
+    //define the scale for x and y
 
     var xScale = d3.scaleTime().range ([0, width]),
         yScale = d3.scaleLinear().range ([height, 0]);
 
-    var g = svg.append("g")
-               .attr("transform", "translate(" + 100 + "," + 100 + ")");
+
+
+    //domain of x and y scale
     xScale.domain([d3.min(obj, function(d) { return d.fields.start_date; }),
         d3.max(obj, function(d) { return d.fields.start_date; })]);
     yScale.domain([0, 5]);
 
-
-
+    //grouping graph attributes
+        var g = svg.append("g")
+                   .attr("transform", "translate(" + 100 + "," + 100 + ")");
+    //define x axies detail
         g.append("g")
          .attr("transform", "translate(0," + height + ")")
          .call(d3.axisBottom(xScale));
-
+    //define y axies detail
         g.append("g")
          .call(d3.axisLeft(yScale).tickFormat(function(d){
              return  d+"Times";
@@ -92,11 +95,12 @@
          .append("text")
          .attr("transform", "rotate(-90)")
          .attr("y", 6)
-         .attr("dy", "-5.1em")
+         .attr("dy",".71em")
          .attr("text-anchor", "end")
          .attr("stroke", "black")
          .text("Frequency");
 
+    //frequency data preparation, can see console.log information to check frequency correct or not
     var tally = {};
     obj.forEach(function (d){
         tally[d.fields.start_date]=(tally[d.fields.start_date]||0) + 1;
@@ -115,13 +119,14 @@
 
 
 
-    xScale.domain(data.map(function (d) {
-        return d.date;
-        }));
-    yScale.domain([0, d3.max(data, function (d) {
-        return d.frequency;
-        })]);
+    //xScale.domain(data.map(function (d) {
+        //return d.date;
+        //}));
+    //yScale.domain([0, d3.max(data, function (d) {
+        //return d.frequency;
+        //})]);
 
+    //drawing bar in the graph
     svg.selectAll(".bar")
     .data(data)
     .enter().append("rect")
@@ -129,7 +134,7 @@
     .attr("x", function (d) {
     return xScale(d.date);
 })
-    .attr("width", ".35em")
+    .attr("width", ".71em")
     .attr("y", function (d) {
     return yScale(d.frequency);
 })
