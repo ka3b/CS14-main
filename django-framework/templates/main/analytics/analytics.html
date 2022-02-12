@@ -136,6 +136,7 @@
     svg.selectAll()
     .data(data)
     .enter().append("rect")
+    .attr("transform", "translate(" + 100 + "," + 100 + ")")
     .attr("class", "bar")
     .attr("x", function (d) {
     return xScale(d.date);
@@ -146,6 +147,7 @@
 })
     .attr("height", function (d) {
     return height-yScale(d.frequency);
+
 });
 
 
