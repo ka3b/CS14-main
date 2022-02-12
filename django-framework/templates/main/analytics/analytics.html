@@ -62,6 +62,22 @@
 
     // d3 drawing
 
+    //frequency data preparation, can see console.log information to check frequency correct or not
+    var tally = {};
+    obj.forEach(function (d){
+        tally[d.fields.start_date]=(tally[d.fields.start_date]||0) + 1;
+    })
+
+    var data = [];
+    for (var date in tally) {
+    if (tally.hasOwnProperty(date)) {
+        data.push({
+            date: date,
+            frequency: tally[date]
+        });
+    }}
+    console.log(data)
+
     //svg which is the background picture for the graph
 
     var svg = d3.select("svg"),
@@ -83,6 +99,7 @@
     //grouping graph attributes
         var g = svg.append("g")
                    .attr("transform", "translate(" + 100 + "," + 100 + ")");
+
     //define x axies detail
         g.append("g")
          .attr("transform", "translate(0," + height + ")")
@@ -94,27 +111,13 @@
          }).ticks(6))
          .append("text")
          .attr("transform", "rotate(-90)")
-         .attr("y", 6)
+         .attr("y", -100)
          .attr("dy",".71em")
          .attr("text-anchor", "end")
          .attr("stroke", "black")
          .text("Frequency");
 
-    //frequency data preparation, can see console.log information to check frequency correct or not
-    var tally = {};
-    obj.forEach(function (d){
-        tally[d.fields.start_date]=(tally[d.fields.start_date]||0) + 1;
-    })
 
-    var data = [];
-    for (var date in tally) {
-    if (tally.hasOwnProperty(date)) {
-        data.push({
-            date: date,
-            frequency: tally[date]
-        });
-    }}
-    console.log(data)
 
 
 
@@ -127,19 +130,19 @@
         //})]);
 
     //drawing bar in the graph
-    svg.selectAll(".bar")
+    svg.selectAll()
     .data(data)
     .enter().append("rect")
     .attr("class", "bar")
     .attr("x", function (d) {
     return xScale(d.date);
 })
-    .attr("width", ".71em")
+    .attr("width", width/11)
     .attr("y", function (d) {
     return yScale(d.frequency);
 })
     .attr("height", function (d) {
-    return d.frequency;
+    return height-yScale(d.frequency);
 });
 
 
