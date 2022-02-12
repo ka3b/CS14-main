@@ -14,7 +14,7 @@
         Travel Frequency
     </h2>
     <p id="tab_travel_frequency">
-    <svg width="600" height="500"></svg>
+    <svg width="900" height="750"></svg>
     </p>
 
 </div>
@@ -52,17 +52,25 @@
 
 
 //json data
+    const formatDate = d3.timeParse("%Y-%m-%d");
     var received_data  = {{ data|safe }};
     var obj = JSON.parse(received_data);
     console.log(obj[1]);
-    obj.forEach(function(d) {
-        d.fields.start_date = new Date (d.fields.start_date);})
 
-    console.log(obj[2]);
+    obj.forEach(
+        function (d){
+            d.fields.start_date=formatDate(d.fields.start_date);
+        }
+    )
+    console.log(obj[1])
+
+
 
     // d3 drawing
 
     //frequency data preparation, can see console.log information to check frequency correct or not
+
+
     var tally = {};
     obj.forEach(function (d){
         tally[d.fields.start_date]=(tally[d.fields.start_date]||0) + 1;
@@ -72,7 +80,7 @@
     for (var date in tally) {
     if (tally.hasOwnProperty(date)) {
         data.push({
-            date: date,
+            date: new Date(date),
             frequency: tally[date]
         });
     }}
@@ -92,9 +100,15 @@
 
 
     //domain of x and y scale
-    xScale.domain([d3.min(obj, function(d) { return d.fields.start_date; }),
-        d3.max(obj, function(d) { return d.fields.start_date; })]);
-    yScale.domain([0, 5]);
+    var minDate = new Date(d3.min(data, function(d) { return d.date; }));
+    minDate.setDate(minDate.getDate()-1);
+    var maxDate = new Date(d3.max(data, function(d) { return d.date; }));
+    maxDate.setDate(maxDate.getDate()+1);
+
+
+    xScale.domain([minDate, maxDate]);
+    yScale.domain([0, d3.max(data, function (d) {
+        return d.frequency;})]);
 
     //grouping graph attributes
         var g = svg.append("g")
@@ -108,26 +122,15 @@
         g.append("g")
          .call(d3.axisLeft(yScale).tickFormat(function(d){
              return  d+"Times";
-         }).ticks(6))
+         }).ticks(5))
+            //label start
          .append("text")
-         .attr("transform", "rotate(-90)")
-         .attr("y", -100)
+         .attr("y", -50)
          .attr("dy",".71em")
          .attr("text-anchor", "end")
          .attr("stroke", "black")
          .text("Frequency");
 
-
-
-
-
-
-    //xScale.domain(data.map(function (d) {
-        //return d.date;
-        //}));
-    //yScale.domain([0, d3.max(data, function (d) {
-        //return d.frequency;
-        //})]);
 
     //drawing bar in the graph
     svg.selectAll()
@@ -137,7 +140,7 @@
     .attr("x", function (d) {
     return xScale(d.date);
 })
-    .attr("width", width/11)
+    .attr("width", width/15)
     .attr("y", function (d) {
     return yScale(d.frequency);
 })
