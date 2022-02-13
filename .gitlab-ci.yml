@@ -28,6 +28,7 @@ test-job:
     - docker
 
   before_script:
+    # build and initialise the database
     - cd django-framework
     - pip install -r requirements.txt
     - python manage.py makemigrations
@@ -35,6 +36,7 @@ test-job:
     - python population_script.py
     - python manage.py collectstatic
 
+    # run the tests
   script:
     - python manage.py test
 
@@ -47,8 +49,3 @@ test-job:
   #  DB_ENGINE: "django.db.backends.sqlite3"
   #  DB_NAME: "db.sqlite3"
   #  STATIC_URL: "/static/"
-
-#cache:
-  #paths:
-    #- ~/.cache/pip/
-
