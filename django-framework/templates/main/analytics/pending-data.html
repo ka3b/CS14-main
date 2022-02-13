@@ -9,36 +9,50 @@
 <link rel="stylesheet" href='{% static 'CSS/analytics/pending-data.css' %}'>
 
 <div>
-    <h1>
+    <h1 id=title>
         Pending Data
     </h1>
     {% csrf_token %}
     {% if journeys %}
         {% for journey in journeys %}
-            <tr>
-              <td>{{ journey.start_date }}</td>
-              <td>{{ journey.end_date }}</td>
-              <td>{{ journey.driver }}</td>
-              <td>{{ journey.plate_number }}</td>
-              <td>{{ journey.start_location }}</td>
-              <td>{{ journey.destinations1 }}</td>
-              <td>{{ journey.destinations2 }}</td>
-              <td>{{ journey.destinations3 }}</td>
-              <td>{{ journey.purpose }}</td>
-              <td>{{ journey.no_of_pass }}</td>
-              <td>{{ journey.start_time }}</td>
-              <td>{{ journey.end_time }}</td>
-              <td>{{ journey.mileage_start }}</td>
-              <td>{{ journey.mileage_finish }}</td>
-              <td>{{ journey.round_trip }}</td>
-              <td><button type="button" id={{ journey.id }} class ="btn btn-primary approve">Approve</button></td>
-              <td><button type="button" id={{ journey.id  }} class ="btn btn-primary reject">Reject</button>  </td>
-            </tr>
-            <br>
+    <div id="pending-card">
+        <div class="row" id="element">
+            <span class="material-icons-outlined col-1" style="color: rgb(134, 134, 134); font-size: 32px;">badge</span>
+            <h3 id="content-text" class="col-2">{{ journey.driver }}</h2>
+            <div class="col-5"></div>
+            <button type="button" id={{ journey.id }} class="btn btn-outline-success approve col" style="background-color: rgb(230, 255, 237); margin-right: 20px;">Approve</button>
+            <button type="button" id={{ journey.id  }} class="btn btn-outline-danger reject col" style="background-color: rgb(255, 235, 235);">Reject</button>
+        </div>
+        <hr id="horizontal-line" id="element"></hr>
+        <div class="row" id="element">
+            <span class="material-icons-outlined col-1" style="color: rgb(134, 134, 134); font-size: 32px;">date_range</span>
+            <h3 id="content-text" class="col-5">{{ journey.start_date }} - {{ journey.start_date }}</h3>
+            <span class="material-icons-outlined col-1" style="color: rgb(134, 134, 134); font-size: 32px;">schedule</span>
+            <h3 id="content-text" class="col-5">{{ journey.start_time }} - {{ journey.end_time }}</h3>
+        </div>
+        <div class="row" id="element">
+            <span class="material-icons-outlined col-1" style="color: rgb(134, 134, 134); font-size: 32px;">groups</span>
+            <h3 id="content-text" class="col-5">{{ journey.no_of_pass }}</h3>
+            <span class="material-icons-outlined col-1" style="color: rgb(134, 134, 134); font-size: 32px;">autorenew</span>
+            <h3 id="content-text" class="col-5">{{ journey.round_trip }}</h3>
+        </div>
+        <div class="row" id="element">
+            <span class="material-icons-outlined col-1" style="color: rgb(134, 134, 134); font-size: 32px;">airport_shuttle</span>
+            <h3 id="content-text" class="col-5">Vehicle Type</h3>
+            <span class="material-icons-outlined col-1" style="color: rgb(134, 134, 134); font-size: 32px;">straighten</span>
+            <h3 id="content-text" class="col-5">Miles</h3>
+        </div>
+        <div class="row" id="element">
+            <span class="material-icons-outlined col-1" style="color: rgb(134, 134, 134); font-size: 32px;">place</span>
+            <h3 id="content-text" class="col-5">{{ journey.destinations1 }} {{ journey.destinations2 }} {{ journey.destinations3 }}</h3>
+            <span class="material-icons-outlined col-1" style="color: rgb(134, 134, 134); font-size: 32px;">description</span>
+            <h3 id="content-text" class="col-5">{{ journey.purpose }}</h3>
+        </div>
+    </div>
         {% endfor %}
 
     {% else %}
-        <p>There are no pending journeys. </p>
+        <h3>There are no pending journeys. </h3>
     {% endif %}
 </div>
 

@@ -3,7 +3,7 @@
 {% block title %}
 {% endblock %}
 {% block contend %}
-<link rel="stylesheet" href='{% static ' CSS/analytics/export-data.css' %}'>
+<link rel="stylesheet" href='{% static 'CSS/analytics/export-data.css' %}'>
 <h1 id="title">Export Data</h1>
 <div>
     <form action="{% url 'main:export_data_file' %}" method="post">
