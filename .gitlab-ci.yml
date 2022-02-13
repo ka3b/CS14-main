@@ -9,17 +9,8 @@ cache:
 
 # CI/CD stages
 stages:
-  # - build
   - test
-
-# build-job:
-  # stage: build
-
-  # tags:
-   # - docker
-
-  # script:
-   # - docker build --tag docker-cs14
+  - production
 
 test-job:
   stage: test
@@ -39,6 +30,16 @@ test-job:
     # run the tests
   script:
     - python manage.py test
+
+production-job:
+  stage: production
+  type: deploy
+  image: python:latest
+
+  script:
+    - dpl --provider=heroku --app=$HEROKU_APP_PRODUCTION --api-key=$HEROKU_API_KEY
+  only:
+    - master
 
 
 
