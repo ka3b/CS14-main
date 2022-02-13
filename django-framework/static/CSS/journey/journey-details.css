@@ -9,7 +9,7 @@ body {
 }
 h1 {
     font-weight: 700;
-    font-size: 35pt;
+    font-size: 32pt;
     color: #002bc7;
 }
 #div_id_is_round_trip{
@@ -25,17 +25,17 @@ h1 {
     /* border-style: solid; */
 }
 #submitButton{
-    background-color: #00017B;
+    background-color: #1d1db9;
     border: none;
     box-shadow: 0 5px 25px #0c0b4b4f;
     text-align: center;
     font-size: 1.4em;
     color: white;
-    height: 4rem;
+    height: 88px;
     width: 100%;
     margin-top: 1rem;
     margin-bottom: 1rem;
-    border-radius: 1.5rem;
+    border-radius: 28px;
     font-weight: 600;
 }
 
@@ -52,14 +52,14 @@ h1 {
 .formButton {
     background-color: #0DA73A;
     border: none;
-    box-shadow: 0 5px 25px #0c0b4b4f;
+    box-shadow: 0 5px 25px #3532ff4f;
     text-align: center;
     font-size: 1.4rem;
     color: white;
     height: 4rem;
     width: 100%;
     margin-bottom: 1rem;
-    border-radius: 1.5rem;
+    border-radius: 28px;
     font-weight: 600;
 
 }
@@ -73,19 +73,19 @@ h1 {
 }
 
 .formTextField {
-    height: 4rem;
-    width: 30rem;
-    border-radius: 1.5rem;
+    height: 88px;
+    width: 100%;
+    border-radius: 28px;
     border: none;
     background-color: #ffffff;
     color: black;
     font-weight: 600;
-    font-size: 15pt;
+    font-size: 28px;
     margin-bottom: 20px;
-    margin-top: 10px;
+    margin-top: 30px;
     padding-right: 1rem;
     padding-left: 20pt;
-    box-shadow: 0 5px 25px #b3f9ff;
+    box-shadow: 0 5px 30px rgba(0, 110, 255, 0.192);
     text-align: left;
     padding-left: 35px;
 }
@@ -101,11 +101,11 @@ color: #5e5e5e;
 .formTextField:hover{
     background-color: #FFFFFF;
     color: black;
-    box-shadow: 0 5px 20px #6de8f2;
+    box-shadow: 0 5px 20px #0051ff63;
 }
 .formTextField::placeholder {
     color: #5e5e5e;
-    font-size: 15pt;
+    font-size: 28px;
     font-weight: 600;
 
 }
@@ -124,7 +124,7 @@ label {
     border-radius: 1em;
     border: none;
     background-color: #ffffff;
-    color: #black;
+    color: black;
     font-weight: 600;
     margin-top: 20px;
     font-size: 15pt;
@@ -135,9 +135,8 @@ label {
     padding-top: 2em;
 }
 
-.tickbox {
-    color: #FFFFFF;
-    font-size: 10pt;
+#tickbox {
+    font-size: 20px;
 }
 .material-icons-outlined {
     color: black;

@@ -12,23 +12,23 @@
 
 {% block contend %}
     <div class="container-full px-5 my_fullscreen_div">
-
-        <div class='row justify-content-center'>
-            <div class="col-md-auto">
-            <span class="material-icons-outlined">fact_check</span><h1 style="display: inline">Journey Details</h1>
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-10 col-sm-12">
+                <div class='col' style="margin-top: 32px;">
+                    <div class="col-md-auto">
+                    <span class="material-icons-outlined" style="font-size: 42px; color: #3333ca; margin-right: 20px;">fact_check</span><h1 style="display: inline">Journey Details</h1>
+                    </div>
+                </div>
+        
+        
+                <link rel="stylesheet"  href='{% static 'CSS/journey/journey-details.css' %}'/>
+                <div class="col-md-auto">
+                    <form method="post">
+                        {% csrf_token %}
+                        {% crispy form %}
+                    </form>
+                </div>
             </div>
         </div>
-
-    <hr>
-
-    <link rel="stylesheet"  href='{% static 'CSS/journey/journey-details.css' %}'/>
-    <div class='row justify-content-center'>
-            <div class="col-md-auto">
-    <form method="post">
-        {% csrf_token %}
-        {% crispy form %}
-    </form>
-            </div>
-    </div>
     </div>
 {% endblock %}

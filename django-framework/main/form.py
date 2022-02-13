@@ -82,14 +82,16 @@ class JourneyForm(forms.Form):
         self.helper.layout = Layout(
 
 
-            Div(HTML('''<span class="material-icons-outlined">badge</span>
-                        <h3 style="display: inline" id="override">Driver Information</h3>'''), 'driver'),
-            Div(HTML('''<span class="material-icons-outlined">today</span>
-                <h3 style="display: inline">Date and Time</h3>'''), 'start_date', 'end_date', 'start_time', 'end_time'),
-            Div(HTML('''<span class="material-icons-outlined">directions_car</span>
-            <h3 style="display: inline">Vehicle Information</h3>'''),'plate_number', 'mileage_start', 'mileage_finish'),
-            Div(HTML('''<span class="material-icons-outlined">explore</span>
-            <h3 style="display: inline">Journey Information</h3>'''),
+            Div(HTML('''
+                    <span class="material-icons-outlined" style="font-size:32px; margin:0; margin-top:50px;">badge</span>
+                    <h3 style="display: inline; font-size:32px; margin-bottom:20px" id="override" class="col">Driver Information</h3>
+                    '''), 'driver'),
+            Div(HTML('''<span class="material-icons-outlined" style="font-size:32px; margin:0; margin-top:50px;">today</span>
+                <h3 style="display: inline; font-size:32px;" id="override" class="col">Date and Time</h3>'''), 'start_date', 'end_date', 'start_time', 'end_time'),
+            Div(HTML('''<span class="material-icons-outlined" style="font-size:32px; margin:0; margin-top:50px;">directions_car</span>
+            <h3 style="display: inline; font-size:32px;" id="override" class="col">Vehicle Information</h3>'''),'plate_number', 'mileage_start', 'mileage_finish'),
+            Div(HTML('''<span class="material-icons-outlined" style="font-size:32px; margin:0; margin-top:50px;">explore</span>
+            <h3 style="display: inline; font-size:32px;" id="override" class="col">Journey Information</h3>'''),
                 Field('is_round_trip',css_id='tickbox'), 'start_location',
                   'destinations1', 'destinations2', 'destinations3','no_of_pass','purpose'),
             Field('approved_status')
