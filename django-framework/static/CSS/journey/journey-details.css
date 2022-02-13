@@ -4,19 +4,13 @@ body {
     background-size: 130%;
     background-position-y: 30%;
     position: absolute;
-    color: #00017B;
     font-weight: 600;
 
 }
 h1 {
     font-weight: 700;
-    font-size: 35pt;
-    color: #3400A9;
-}
-h3 {
-    font-weight: 600;
-    font-size: 25pt;
-    margin-bottom: 1rem;
+    font-size: 32pt;
+    color: #002bc7;
 }
 #div_id_is_round_trip{
     font-weight: 600;
@@ -31,17 +25,17 @@ h3 {
     /* border-style: solid; */
 }
 #submitButton{
-    background-color: #00017B;
+    background-color: #1d1db9;
     border: none;
     box-shadow: 0 5px 25px #0c0b4b4f;
     text-align: center;
     font-size: 1.4em;
     color: white;
-    height: 4rem;
+    height: 88px;
     width: 100%;
     margin-top: 1rem;
     margin-bottom: 1rem;
-    border-radius: 1.5rem;
+    border-radius: 28px;
     font-weight: 600;
 }
 
@@ -50,18 +44,22 @@ h3 {
     background-color: #3333ca;
 }
 
+#tickbox{
+    background-color: black;
+    color: white;
+}
+
 .formButton {
     background-color: #0DA73A;
     border: none;
-    box-shadow: 0 5px 25px #0c0b4b4f;
+    box-shadow: 0 5px 25px #3532ff4f;
     text-align: center;
     font-size: 1.4rem;
     color: white;
     height: 4rem;
     width: 100%;
     margin-bottom: 1rem;
-    margin-bottom: 1rem;
-    border-radius: 1.5rem;
+    border-radius: 28px;
     font-weight: 600;
 
 }
@@ -75,39 +73,58 @@ h3 {
 }
 
 .formTextField {
-    height: 4rem;
-    width: 30rem;
-    border-radius: 1.5rem;
+    height: 88px;
+    width: 100%;
+    border-radius: 28px;
     border: none;
-    background-color: #D9D9E6;
-    color: #00017B;
+    background-color: #ffffff;
+    color: black;
     font-weight: 600;
-    font-size: 15pt;
+    font-size: 28px;
     margin-bottom: 20px;
+    margin-top: 30px;
     padding-right: 1rem;
     padding-left: 20pt;
-
+    box-shadow: 0 5px 30px rgba(0, 110, 255, 0.192);
+    text-align: left;
+    padding-left: 35px;
 }
-.formTextField:hover{
-    background-color: #e6e6f5;
 
+input[type=date]{
+color: #5e5e5e;
+}
+
+input[type=time]{
+color: #5e5e5e;
+}
+
+.formTextField:hover{
+    background-color: #FFFFFF;
+    color: black;
+    box-shadow: 0 5px 20px #0051ff63;
 }
 .formTextField::placeholder {
-    color: #00017B;
-    font-size: 15pt;
+    color: #5e5e5e;
+    font-size: 28px;
     font-weight: 600;
 
 }
 .formTextField:focus::placeholder {
-    color: transparent;
+    color: #5e5e5e;
+}
+
+label {
+    color: black;
+    margin-top: 10px;
+    margin-bottom: 0px;
 }
 
 .dropdown {
     /* height: 50pt; */
     border-radius: 1em;
     border: none;
-    background-color: #D9D9E6;
-    color: #00017B;
+    background-color: #ffffff;
+    color: black;
     font-weight: 600;
     margin-top: 20px;
     font-size: 15pt;
@@ -118,12 +135,18 @@ h3 {
     padding-top: 2em;
 }
 
+#tickbox {
+    font-size: 20px;
+}
+.material-icons-outlined {
+    color: black;
+}
+
 
 html,body
 {
     width: 100%;
     height: 100%;
-    margin: 0px;
     padding: 0px;
     overflow-x: hidden;
 }
