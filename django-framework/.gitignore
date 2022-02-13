@@ -1,0 +1,14 @@
+.idea/
+**/__pycache__
+*.pyc
+
+./django-framework/transport_services_server/__pycache__
+*.pyc
+./django-framework/db.sqlite3
+django-framework/main/migrations/0003_auto_20220112_1711.py
+django-framework/main/migrations/0004_alter_journey_end_date.py
+django-framework/db.sqlite3
+django-framework/main/migrations/0002_auto_20220112_1344.py
+django-framework/main/migrations/0005_alter_journey_plate_number.py
+django-framework/main/migrations/*.py
+django-framework/db.sqlite3

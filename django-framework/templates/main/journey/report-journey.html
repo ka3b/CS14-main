@@ -1,0 +1,63 @@
+{% extends "main/journey/base.html" %}
+{% load static %}
+{% block title %}
+    Report Journey
+{% endblock %}
+
+
+{% block contend %}
+<link rel="stylesheet" href='{% static 'CSS/journey/report-journey.css' %}'>
+    <style>
+        body {
+            background-image: url('{% static "images/report_journey/background.png" %}');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 200%;
+            background-position-y: -70pt;
+            position: absolute;
+        }
+        #content{
+            position: relative;
+            margin: 15px;
+            height: 100%;
+            /* border-style: solid; */
+        }
+        #logo{
+            position:relative;
+            margin-top: 250px;
+            margin-left: 10%;
+            width: 40%;
+        }
+        #linkButton {
+            background-color: #07BB00;
+            background-image: linear-gradient(to right, #07BB00 70%, #D0FF00);
+            border: none;
+            box-shadow: 0 5px 25px #00ff0480;
+            text-align: center;
+            font-size: 1.4em;
+            height: 70px;
+            width: 80%;
+            margin-top: 50%;
+            margin-left: 10%;
+            margin-right: 10%;
+            border-radius: 1.3em;
+            color: white;
+            font-weight: 600;
+        }
+        #linkButton:hover {
+            background-image: none;
+            background-color: #15a110;
+            box-shadow: 0 8px 45px #00ff0480;
+        }
+
+    </style>
+    <div id="content">
+        <img id="logo" src="{% static "images/report_journey/logo.png" %}"/>
+        <button type="button" class="btn" id="linkButton"
+                onclick="window.location.href='{% url "main:journey_details" %}'">
+            Report Your Journey
+        </button>
+    </div>
+{% endblock %}
+{% block extra_js %}
+{% endblock %}

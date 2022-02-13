@@ -1,5 +1,5 @@
 """
-ASGI config for cs14_main project.
+ASGI config for transport_services_server project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'cs14_main.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'transport_services_server.settings')
 
 application = get_asgi_application()

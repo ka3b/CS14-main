@@ -1,4 +1,4 @@
-"""cs14_main URL Configuration
+"""transport_services_server URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.2/topics/http/urls/
@@ -14,10 +14,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from main import views
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('main/', include('main.urls')),
+
     path('admin/', admin.site.urls),
+    
 ]

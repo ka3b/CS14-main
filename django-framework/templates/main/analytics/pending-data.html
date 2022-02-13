@@ -1,0 +1,48 @@
+{% extends "main/analytics/base.html" %}
+{% load static %}
+{% block title %}
+{% endblock %}
+{% block contend %}
+
+<script src=”https://code.jquery.com/jquery-3.6.0.min.js” integrity=”sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=” crossorigin=”anonymous”;></script>
+<script src="{% static 'js/pending-data.js' %}"></script>
+<link rel="stylesheet" href='{% static 'CSS/analytics/pending-data.css' %}'>
+
+<div>
+    <h1>
+        Pending Data
+    </h1>
+    {% csrf_token %}
+    {% if journeys %}
+        {% for journey in journeys %}
+            <tr>
+              <td>{{ journey.start_date }}</td>
+              <td>{{ journey.end_date }}</td>
+              <td>{{ journey.driver }}</td>
+              <td>{{ journey.plate_number }}</td>
+              <td>{{ journey.start_location }}</td>
+              <td>{{ journey.destinations1 }}</td>
+              <td>{{ journey.destinations2 }}</td>
+              <td>{{ journey.destinations3 }}</td>
+              <td>{{ journey.purpose }}</td>
+              <td>{{ journey.no_of_pass }}</td>
+              <td>{{ journey.start_time }}</td>
+              <td>{{ journey.end_time }}</td>
+              <td>{{ journey.mileage_start }}</td>
+              <td>{{ journey.mileage_finish }}</td>
+              <td>{{ journey.round_trip }}</td>
+              <td><button type="button" id={{ journey.id }} class ="btn btn-primary approve">Approve</button></td>
+              <td><button type="button" id={{ journey.id  }} class ="btn btn-primary reject">Reject</button>  </td>
+            </tr>
+            <br>
+        {% endfor %}
+
+    {% else %}
+        <p>There are no pending journeys. </p>
+    {% endif %}
+</div>
+
+
+{% endblock %}
+{% block extra_js %}
+{% endblock %}

@@ -1,47 +1,51 @@
-# Official framework image.
-image: node:latest
+# .gitlab-ci.yml
 
-# This folder is cached between builds
+image: python:latest
+
+# Foldre cached between builds
 cache:
   paths:
-    - node_modules/
+    - cs14-main/
 
-# default stages "build, test, deploy", can also have my own stages which will run in the order
-# stages:
-#   - build
-#   - test
+# CI/CD stages
+stages:
+  # - build
+  - test
 
-# the job and its name
-build-job:
-  # which stage to run it
-  stage: build
-  # specifying the runner to execute the job (in our case it is a docker which is a shared runner in GitLab, you can also configure your own)
-  tags:
-    - docker
-  # execution with env variables
-  script:
-    - echo "Hello, $GITLAB_USER_LOGIN!"
+# build-job:
+  # stage: build
 
-test-job1:
+  # tags:
+   # - docker
+
+  # script:
+   # - docker build --tag docker-cs14
+
+test-job:
   stage: test
-  tags:
-    - docker
-  script:
-    - echo "This job restaurant something"
 
-test-job2:
-  stage: test
   tags:
     - docker
-  script:
-    - echo "This job restaurant something, but takes more time than test-job1."
-    - echo "After the echo commands complete, it runs the sleep command for 20 seconds"
-    - echo "which simulates a test that runs 20 seconds longer than test-job1"
-    - sleep 20
 
-deploy-prod:
-  stage: deploy
-  tags:
-    - docker
+  before_script:
+    # build and initialise the database
+    - cd django-framework
+    - pip install -r requirements.txt
+    - python manage.py makemigrations
+    - python manage.py migrate --run-syncdb
+    - python population_script.py
+    - python manage.py collectstatic
+
+    # run the tests
   script:
-    - echo "This job deploys something from the $CI_COMMIT_BRANCH branch."
+    - python manage.py test
+
+
+
+#variables:
+  # SECRET_KEY: "this-is-my-secret-key"
+  #  DEBUG: "True"
+  #  ALLOWED_HOSTS: "['*']"
+  #  DB_ENGINE: "django.db.backends.sqlite3"
+  #  DB_NAME: "db.sqlite3"
+  #  STATIC_URL: "/static/"
