@@ -9,17 +9,17 @@ cache:
 
 # CI/CD stages
 stages:
-  - build
+  # - build
   - test
 
-build-job:
-  stage: build
+# build-job:
+  # stage: build
 
-  tags:
-    - docker
+  # tags:
+   # - docker
 
-  script:
-    - docker build --tag docker-cs14
+  # script:
+   # - docker build --tag docker-cs14
 
 test-job:
   stage: test
