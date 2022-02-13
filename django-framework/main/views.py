@@ -72,7 +72,8 @@ def dashboard(request):
     average_miles=0
     common_purpose = None
     for journey in weeks_journeys:
-        average_miles += journey.miles()
+        journey.miles()
+        average_miles += journey.total_miles
     if (reported_journeys > 0):
         average_miles = round(average_miles / reported_journeys)
         common_purpose = Journey.objects.values_list('purpose').annotate(journey_count=Count('purpose')).order_by('-journey_count')[0][0]
@@ -152,6 +153,10 @@ def export_data_file(request):
 def pending_data(request):
     order_by = request.GET.get('order_by', 'start_date')
     journeys = Journey.objects.filter(approved=False).order_by(order_by)
+    for journey in journeys:
+        journey.update_vehicle_type()
+        journey.miles()
+        journey.save()
     context_dict = {}
     context_dict['journeys'] = journeys
     return render(request,"main/analytics/pending-data.html", context=context_dict)
