@@ -36,7 +36,7 @@ production-job:
   type: deploy
   image: python:latest
   tags:
-    - shell
+    - docker
 
   script:
     - gem install dpl
