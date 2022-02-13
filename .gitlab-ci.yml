@@ -36,11 +36,12 @@ production-job:
   type: deploy
   image: python:latest
   tags:
-    - docker
+    - shell
 
   script:
-    - pip install dpl
-    - dpl --provider=heroku --app=$HEROKU_APP_PRODUCTION --api-key=$HEROKU_API_KEY
+   # - pip install dpl
+   # - dpl --provider=heroku --app=$HEROKU_APP_PRODUCTION --api-key=$HEROKU_API_KEY
+   - cat /etc/os-release
   only:
     - master
 
