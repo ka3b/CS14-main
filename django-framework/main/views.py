@@ -124,7 +124,8 @@ def analytics(request):
 #    return render(request,"main/analytics/account-manager.html")
 
 def data_table(request):
-    journeys = Journey.objects.filter(approved=True)
+    order_by = request.GET.get('order_by', '-start_date')
+    journeys = Journey.objects.filter(approved=True).order_by(order_by)
     context_dict = {}
     context_dict['journeys'] = journeys
     return render(request,"main/analytics/data-table.html", context=context_dict)

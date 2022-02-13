@@ -4,9 +4,10 @@
 {% endblock %}
 {% block contend %}
 <link rel="stylesheet" href='{% static 'CSS/analytics/data-table.css' %}'>
-<div style="width:850px;">
+<h1 id="title">Data Table</h1>
+<div class="col-8">
 	{% if journeys %}
-		<table>
+		<table class = "table table-bordered" style="width:100%;" id="data_table">
 	    <thead>
 	      <tr>
 	        <th>Start Date</th>
@@ -29,8 +30,8 @@
 	    <tbody>
 	      {% for journey in journeys %}
 	        <tr>
-				  <td>{{ journey.start_date }}</td>
-	              <td>{{ journey.end_date }}</td>
+				  <td><div style="width: 70px" >{{ journey.start_date }}</div></td>
+	              <td><div style="width: 70px" >{{ journey.end_date }}</div></td>
 	              <td>{{ journey.driver }}</td>
 	              <td>{{ journey.plate_number }}</td>
 	              <td>{{ journey.start_location }}</td>
