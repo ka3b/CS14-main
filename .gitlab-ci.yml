@@ -39,9 +39,9 @@ production-job:
     - shell
 
   script:
-   # - pip install dpl
-   # - dpl --provider=heroku --app=$HEROKU_APP_PRODUCTION --api-key=$HEROKU_API_KEY
-   - cat /etc/os-release
+    - dnf install dpl
+    - dpl --provider=heroku --app=$HEROKU_APP_PRODUCTION --api-key=$HEROKU_API_KEY
+
   only:
     - master
 
