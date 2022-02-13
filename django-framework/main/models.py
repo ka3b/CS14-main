@@ -26,12 +26,14 @@ class Journey(models.Model):
     mileage_finish = models.IntegerField(blank=False)
     approved = models.BooleanField(default=False)
     round_trip = models.BooleanField(default=False)
+    vehicle_type = models.CharField(null=True, blank=True, max_length=50)
+    total_miles = models.IntegerField(blank=True, null=True)
 
     #class Meta:
     #    unique_together = ((date_of_journey, driver), )
 
     def miles(self):
-        return self.mileage_finish - self.mileage_start
+        self.total_miles = self.mileage_finish - self.mileage_start
 
     def __str__(self):
         return self.driver+self.destinations1
@@ -39,6 +41,9 @@ class Journey(models.Model):
     def get_destinations(self):
         return destinations.split(" | ")
 
-
-
-#class Admin(models.Model):
+    def update_vehicle_type(self):
+        if not Vehicle.objects.filter(plate_number=self.plate_number).exists():
+            self.vehicle_type = "Unknown"
+        else:
+            vehicle = Vehicle.objects.get(plate_number=self.plate_number)
+            self.vehicle_type = vehicle.vehicle_type 
