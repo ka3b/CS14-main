@@ -23,7 +23,7 @@ class JourneyForm(forms.Form):
                                                       'class' : "formTextField formButton"}))
 
     plate_number=forms.CharField(label='',max_length=128, widget=forms.TextInput(attrs={
-        'type':'text1', 'class':"form-control formTextField formButton", 'placeholder':'License Plate'
+        'type':'text1', 'class':"formTextField formButton", 'placeholder':'License Plate'
     }))
 
     driver = forms.CharField(
@@ -58,11 +58,11 @@ class JourneyForm(forms.Form):
     mileage_start=forms.IntegerField(label='',min_value=0, widget=forms.NumberInput(
                                     attrs={'class':"formTextField formButton",
                                                     'label': 'Mileage Start Number',
-                                                    'placeholder':'mileage start reading'}))
+                                                    'placeholder':'Mileage Start Reading'}))
     mileage_finish = forms.IntegerField(label='',min_value=0, widget=forms.NumberInput(
                                     attrs={'class': "formTextField formButton",
                                                     'label': 'Mileage End Number',
-                                                    'placeholder':'mileage end reading',
+                                                    'placeholder':'Mileage End Reading',
                                                     }))
 
 
@@ -83,7 +83,7 @@ class JourneyForm(forms.Form):
 
 
             Div(HTML('''<span class="material-icons-outlined">badge</span>
-                        <h3 style="display: inline">Driver Information</h3>'''), 'driver'),
+                        <h3 style="display: inline" id="override">Driver Information</h3>'''), 'driver'),
             Div(HTML('''<span class="material-icons-outlined">today</span>
                 <h3 style="display: inline">Date and Time</h3>'''), 'start_date', 'end_date', 'start_time', 'end_time'),
             Div(HTML('''<span class="material-icons-outlined">directions_car</span>

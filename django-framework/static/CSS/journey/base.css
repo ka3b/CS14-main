@@ -2,3 +2,12 @@
 * {
     font-family: 'Open Sans', serif;
     }
+
+#override h3 {
+    font-weight: bold;
+    font-size: 25pt;
+    color: #000000;
+    margin-top: 30px;
+    margin-bottom: 1000px;
+    margin-top: 50px;
+}
