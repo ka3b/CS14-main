@@ -10,7 +10,27 @@
   border-radius: 18px;
   border: solid;
   border-width: 1px;
-  margin-top: 20px;
   border-color: rgba(179, 179, 179, 0.863);
-  padding: 20px 20px 10px 20px;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  padding: 16px 32px 16px 32px;
+}
+
+#content-text {
+  color: #5c5c5c;
+  font-weight: 700;
+  font-size: 24px;
+  padding-top: 3px;
+  margin: 0;
+}
+
+#horizontal-line {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-color: #d3d3d3;
+}
+
+#element {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
