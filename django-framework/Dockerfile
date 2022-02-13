@@ -1,8 +1,7 @@
 # syntax=docker/dockerfile:1
-FROM python:3
+FROM python:3.8-slim
 ENV PYTHONUNBUFFERED=1
 WORKDIR /code
 COPY requirements.txt /code/
 RUN pip3 install -r requirements.txt
 COPY . /code/
-RUN pip3 install django-simple-history
