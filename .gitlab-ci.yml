@@ -28,8 +28,8 @@ test-job:
     - docker
 
   before_script:
-    - pip install -r requirements.txt
     - cd django-framework
+    - pip install -r requirements.txt
     - python manage.py makemigrations
     - python manage.py migrate
     - python population_script.py
