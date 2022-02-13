@@ -33,6 +33,7 @@ test-job:
     - python manage.py makemigrations
     - python manage.py migrate --run-syncdb
     - python population_script.py
+    - python manage.py collectstatic
 
   script:
     - python manage.py test
