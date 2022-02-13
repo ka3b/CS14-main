@@ -2,25 +2,52 @@
 
 image: python:latest
 
-variables:
+# Foldre cached between builds
+cache:
+  paths:
+    - cs14-main/
+
+# CI/CD stages
+stages:
+  - build
+  - test
+
+build-job:
+  stage: build
+
+  tags:
+    - docker
+
+  script:
+    - docker build --tag docker-cs14
+
+test-job:
+  stage: test
+
+  tags:
+    - docker
+
+  before_script:
+    - pip install -r requirements.txt
+    - cd django-framework
+    - python manage.py makemigrations
+    - python manage.py migrate
+    - python population_script.py
+
+  script:
+    - python manage.py test
+
+
+
+#variables:
   # SECRET_KEY: "this-is-my-secret-key"
-    DEBUG: "True"
-    ALLOWED_HOSTS: "['*']"
-    DB_ENGINE: "django.db.backends.sqlite3"
-    DB_NAME: "db.sqlite3"
-    STATIC_URL: "/static/"
+  #  DEBUG: "True"
+  #  ALLOWED_HOSTS: "['*']"
+  #  DB_ENGINE: "django.db.backends.sqlite3"
+  #  DB_NAME: "db.sqlite3"
+  #  STATIC_URL: "/static/"
 
 #cache:
   #paths:
     #- ~/.cache/pip/
 
-test:
-  before_script:
-  - pip install -r requirements.txt
-  - cd django-framework
-  - python manage.py makemigrations
-  - python manage.py migrate
-  - python population_script.py
-
-  script:
-    - python manage.py test
