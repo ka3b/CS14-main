@@ -22,7 +22,7 @@ RUN adduser -u 5678 --disabled-password --gecos "" appuser && chown -R appuser /
 USER appuser
 
 RUN python manage.py makemigrations
-RUN python manage.py migrate
+RUN python manage.py migrate --run-syncdb
 RUN python ./population_script.py
 
 # During debugging, this entry point will be overridden. For more information, please refer to https://aka.ms/vscode-docker-python-debug
