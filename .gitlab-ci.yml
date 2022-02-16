@@ -34,16 +34,14 @@ test-job:
 production-job:
   stage: production
   type: deploy
-  image: python:latest
+  image: hermsi/ruby-dpl:latest
   tags:
     - docker
 
   script:
-    - pip install ruby
-    - pip install dpl
-    #- dpl --provider=heroku --app=$HEROKU_APP_PRODUCTION --api-key=$HEROKU_API_KEY
-    - pwd
-    - ls -a
+   # - pip install ruby
+   # - pip install dpl
+    - dpl --provider=heroku --app=$HEROKU_APP_PRODUCTION --api-key=$HEROKU_API_KEY
 
   only:
     - master
