@@ -16,10 +16,29 @@ from django.db.models import Count
 import csv
 from django.contrib import messages
 
+import matplotlib.pyplot as plt
+import urllib
+import base64
+import io
+
 
 # Create your views here.
 def index(request):
     return render(request, "main/index.html")
+
+
+def analytics(request):
+
+    plt.plot(range(10))
+    fig = plt.gcf()
+    buf = io.BytesIO()
+    fig.savefig(buf,format='png')
+    buf.seek(0)
+    string = base64.b64encode(buf.read())
+    uri = urllib.parse.quote(string)
+
+    return render(request,"main/analytics/analytics.html", {'data':uri})
+
 
 def report_journey(request):
     return render(request, "main/journey/report-journey.html")
@@ -112,13 +131,6 @@ def admin_login(request):
 def analysis(request):
     return render(request,"main/analytics/analysis.html")
 
-def analytics(request):
-    data = Journey.objects.filter(approved=True)
-    data = serializers.serialize('json', data)
-
-    dump = json.dumps(data)
-    box={'data':dump}
-    return render(request,"main/analytics/analytics.html", context=box)
 
 #def account_manager(request):
 #    return render(request,"main/analytics/account-manager.html")
