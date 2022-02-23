@@ -34,12 +34,13 @@ test-job:
 production-job:
   stage: production
   type: deploy
-  image: python:latest
+  image: ruby:latest
   tags:
     - cs14
 
   script:
-    - pip install ruby
+    - apt-get update -qy
+    - apt-get install -y ruby-dev
     - gem install dpl
     - dpl --provider=heroku --app=$HEROKU_APP_PRODUCTION --api-key=$HEROKU_API_KEY
 
