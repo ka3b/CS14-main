@@ -36,18 +36,38 @@ def analytics(request):
     week_ago = week_ago_date.strftime("%b %d")
     weeks_journeys = Journey.objects.filter(start_date__range=[week_ago_date, current_date], approved=True)
 
+    average_miles = 0
+    for journey in weeks_journeys:
+        journey.miles()
+        average_miles += journey.total_miles
+    if (weeks_journeys.count() > 0):
+        average_miles = round(average_miles / weeks_journeys.count())
+
 
     #Graph for frequency
-    x = []
-    y = []
+    x_freq = []
+    y_freq = []
+    x_purp = []
+    y_purp = []
     for i in range(7):
         date = week_ago_date + datetime.timedelta(days=i+1)
         current_date = date
-        x.append(current_date.strftime("%b %d"))
-        y.append(weeks_journeys.filter(start_date=date).count())
-    
-    plt.bar(x,y)
+        x_freq.append(current_date.strftime("%b %d"))
+        y_freq.append(weeks_journeys.filter(start_date=date).count())
 
+    a = Journey.objects.values_list('purpose').annotate(journey_count=Count('purpose')).order_by('-journey_count')
+    if a.count() > 0:
+        counter = 0
+        for j in a:
+            if counter < 3:
+                counter+=1;
+                x_purp.append(j[0])
+                y_purp.append(j[1])
+    
+    #Graph for frequency
+    plt.subplot(2,1,1)
+    plt.bar(x_freq,y_freq)
+    plt.ylabel('Journeys per day')
 
     fig = plt.gcf()
 
@@ -55,33 +75,29 @@ def analytics(request):
     fig.savefig(buf, format='png')
     buf.seek(0)
     string = base64.b64encode(buf.read())
-    data = urllib.parse.quote(string)
+    freq = urllib.parse.quote(string)
 
 
-    #Graph for Destinations
-    dest_x = []
-    dest_y = []
-    for i in range(7):
-        date = week_ago_date + datetime.timedelta(days=i+1)
-        current_date = date
-        dest_x.append(current_date.strftime("%b %d"))
-        dest_y.append(weeks_journeys.filter(start_date=date).count())
-    
-    plt.bar(dest_x,dest_y)
+    #Graph for purpose
+    plt.subplot(2,1,2)
+    plt.ylabel('Most common purposes')
+    plt.bar(x_purp,y_purp)
+    plt.xticks(x_purp)
 
-
-    fig = plt.gcf()
+    fig1 = plt.gcf()
 
     buf = io.BytesIO()
-    fig.savefig(buf, format='png')
+    fig1.savefig(buf, format='png')
     buf.seek(0)
     string = base64.b64encode(buf.read())
-    dates = urllib.parse.quote(string)
+    dests = urllib.parse.quote(string)
+
+
+    #
 
     context_dict = {}
-
-    context_dict['dates'] = dates
-    context_dict['data'] = data
+    context_dict['average_miles'] = average_miles
+    context_dict['graphs'] = dests
 
     return render(request,"main/analytics/analytics.html", context=context_dict)
 
