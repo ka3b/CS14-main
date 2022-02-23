@@ -133,7 +133,7 @@ def populate():
     ]
 
     if not User.objects.filter(username='Viola').exists():
-        user=User.objects.create_user('Viola', password='JohnCena420')
+        user=User.objects.create_user('Viola', password='CS14Transport')
         user.is_superuser=True
         user.is_staff=True
         user.save()

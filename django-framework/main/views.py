@@ -20,6 +20,7 @@ import matplotlib.pyplot as plt
 import urllib
 import base64
 import io
+import numpy as np
 
 
 # Create your views here.
@@ -29,15 +30,60 @@ def index(request):
 
 def analytics(request):
 
-    plt.plot(range(10))
+    current_date = datetime.date.today()
+    week_ago_date = current_date - datetime.timedelta(days=7)
+    cur_date = current_date.strftime("%b %d")
+    week_ago = week_ago_date.strftime("%b %d")
+    weeks_journeys = Journey.objects.filter(start_date__range=[week_ago_date, current_date], approved=True)
+
+
+    #Graph for frequency
+    x = []
+    y = []
+    for i in range(7):
+        date = week_ago_date + datetime.timedelta(days=i+1)
+        current_date = date
+        x.append(current_date.strftime("%b %d"))
+        y.append(weeks_journeys.filter(start_date=date).count())
+    
+    plt.bar(x,y)
+
+
     fig = plt.gcf()
+
     buf = io.BytesIO()
-    fig.savefig(buf,format='png')
+    fig.savefig(buf, format='png')
     buf.seek(0)
     string = base64.b64encode(buf.read())
-    uri = urllib.parse.quote(string)
+    data = urllib.parse.quote(string)
 
-    return render(request,"main/analytics/analytics.html", {'data':uri})
+
+    #Graph for Destinations
+    dest_x = []
+    dest_y = []
+    for i in range(7):
+        date = week_ago_date + datetime.timedelta(days=i+1)
+        current_date = date
+        dest_x.append(current_date.strftime("%b %d"))
+        dest_y.append(weeks_journeys.filter(start_date=date).count())
+    
+    plt.bar(dest_x,dest_y)
+
+
+    fig = plt.gcf()
+
+    buf = io.BytesIO()
+    fig.savefig(buf, format='png')
+    buf.seek(0)
+    string = base64.b64encode(buf.read())
+    dates = urllib.parse.quote(string)
+
+    context_dict = {}
+
+    context_dict['dates'] = dates
+    context_dict['data'] = data
+
+    return render(request,"main/analytics/analytics.html", context=context_dict)
 
 
 def report_journey(request):
