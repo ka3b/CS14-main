@@ -91,7 +91,10 @@ class JourneyForm(forms.Form):
             Div(HTML('''<span class="material-icons-outlined" style="font-size:32px; margin:0; margin-top:50px;">directions_car</span>
             <h3 style="display: inline; font-size:32px;" id="override" class="col">Vehicle Information</h3>'''),'plate_number', 'mileage_start', 'mileage_finish'),
             Div(HTML('''<span class="material-icons-outlined" style="font-size:32px; margin:0; margin-top:50px;">explore</span>
-            <h3 style="display: inline; font-size:32px;" id="override" class="col">Journey Information</h3>'''),
+            <h3 style="display: inline; font-size:32px;" id="override" class="col">Journey Information</h3>
+            <span class="material-icons-outlined" title="A round trip is a journey that starts and ends at the same location">
+            report_gmailerrorred</span>
+            '''),
                 Field('is_round_trip',css_id='tickbox'), 'start_location',
                   'destinations1', 'destinations2', 'destinations3','no_of_pass','purpose'),
             Field('approved_status')
