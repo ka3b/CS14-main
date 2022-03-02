@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Journey, Vehicle
+from .models import Journey, Vehicle, Purpose
 
 class JourneyAdmin(admin.ModelAdmin):
     list_display = ('start_date', 'end_date', 'driver', 'plate_number', 'start_location', 'destinations1', 'destinations2', 'destinations3', 'purpose', 'no_of_pass', 'start_time', 'end_time', 'mileage_start', 'mileage_finish', 'approved', 'round_trip')
@@ -12,3 +12,9 @@ class VehicleAdmin(admin.ModelAdmin):
     list_filter = ('vehicle_type', 'plate_number')
     exclude = ()
 admin.site.register(Vehicle, VehicleAdmin)
+
+class PurposeAdmin(admin.ModelAdmin):
+    list_display = ('purpose',)
+    list_filter = ('purpose',)
+    exclude = ()
+admin.site.register(Purpose, PurposeAdmin)

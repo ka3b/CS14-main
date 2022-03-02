@@ -5,3 +5,12 @@
   color: #575aff;
   background-color: #d6ddff;
 }
+#average-miles {
+  border-radius: 18px;
+  border: solid;
+  border-width: 1px;
+  margin-right: 10px;
+  margin-left: 10px;
+  border-color: rgba(179, 179, 179, 0.863);
+  padding: 20px 20px 10px 20px;
+}
