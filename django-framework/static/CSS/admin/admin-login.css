@@ -1,0 +1,109 @@
+body {
+    
+            height: 100%;
+            background: linear-gradient(90deg, #fff0cb 40%, #FFFFFF 40%);
+}
+#content{
+    position: relative;
+    margin: 15px;
+    height: 100%;
+    /* border-style: solid; */
+}
+#logo{
+    width:16%;
+    height: auto;
+    float: right;
+    position: relative;
+    display: block;
+    margin-left: 18%;
+    margin-right: 25%;
+    margin-top: 10%;
+}
+#linkButton {
+    background-color: #07BB00;
+    background-image: linear-gradient(to right, #07BB00 70%, #D0FF00);
+    border: none;
+    box-shadow: 0 5px 25px #00ff0480;
+    text-align: center;
+    font-size: 1.4em;
+    height: 70px;
+    width: 80%;
+    margin-top: 50%;
+    margin-left: 10%;
+    margin-right: 10%;
+    border-radius: 1.3em;
+    color: white;
+    font-weight: 600;
+}
+#linkButton:hover {
+    background-image: none;
+    background-color: #15a110;
+    box-shadow: 0 8px 45px #00ff0480;
+}
+#leftImage {
+    width:35%;
+    margin:0 auto;
+    text-align:center;
+    height: auto;
+    float: left;
+    position: relative;
+    display: block;
+    margin-left: 4%;
+    margin-right: 0%;
+    margin-top: 8%;
+}
+
+.formTextField {
+    position: relative;
+    height: 70px;
+    width: 30%;
+    border-radius: 12px;
+    border: none;
+    background-color: #ECECEC;
+    color: black;
+    font-weight: 600;
+    font-size: 28px;
+    margin-right: 15%;
+    margin-top: 3%;
+    float: right;
+    box-shadow: 0 5px 30px rgba(0, 110, 255, 0.192);
+    text-align: left;
+    padding-left: 35px;
+}
+
+
+.formTextField:hover{
+    background-color: #F0F0F0;
+    color: black;
+    box-shadow: 0 5px 20px #0051ff63;
+}
+.formTextField::placeholder {
+    color: #00008B;
+    opacity: 60%;
+    font-size: 28px;
+    font-weight: 800;
+
+}
+
+
+#submitButton{
+    background-color: #1d1db9;
+    border: none;
+    box-shadow: 0 5px 20px #00008B;
+    text-align: center;
+    font-size: 1.4em;
+    color: white;
+    height: 70px;
+    width: 30%;
+    margin-right: 15%;
+    margin-top: 3%;
+    border-radius: 28px;
+    font-weight: 600;
+    float: right;
+}
+
+#submitButton:hover
+{
+    background-color: #3333ca;
+
+}

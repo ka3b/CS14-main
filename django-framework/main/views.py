@@ -57,7 +57,7 @@ def index(request):
 def analytics(request):
 
     current_date = datetime.date.today()
-    week_ago_date = current_date - datetime.timedelta(days=7)
+    week_ago_date = current_date - datetime.timedelta(days=6)
     cur_date = current_date.strftime("%b %d")
     week_ago = week_ago_date.strftime("%b %d")
     weeks_journeys = Journey.objects.filter(start_date__range=[week_ago_date, current_date], approved=True)
@@ -389,5 +389,6 @@ def reject_journey(request):
 
 @login_required
 def logout(request):
+    print(1)
     auth_logout(request)
     return render(request, "main/admin/admin-login.html")
