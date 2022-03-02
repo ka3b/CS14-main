@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from .form import *
 from .models import Journey, Vehicle
-from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
+from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout, REDIRECT_FIELD_NAME
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
@@ -22,8 +22,34 @@ import base64
 import io
 import numpy as np
 
-
 # Create your views here.
+
+testMode = True
+def returnTestMode(x):
+    return testMode
+
+def my_login_required(function=None, redirect_field_name=REDIRECT_FIELD_NAME, login_url=None):
+    """
+    Decorator for views that checks that the user is logged in, redirecting
+    to the log-in page if necessary.
+    """
+    if testMode == False:
+        actual_decorator = user_passes_test(
+            lambda u: u.is_authenticated,
+            login_url=login_url,
+            redirect_field_name=redirect_field_name
+        )
+    else:
+        actual_decorator = user_passes_test(
+            returnTestMode,
+            login_url=login_url,
+            redirect_field_name=redirect_field_name)
+    if function:
+        return actual_decorator(function)
+    return actual_decorator
+
+
+
 def index(request):
     return render(request, "main/index.html")
 
