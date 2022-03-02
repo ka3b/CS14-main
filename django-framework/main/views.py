@@ -5,7 +5,7 @@ from django.forms import model_to_dict
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from .form import *
-from .models import Journey
+from .models import Journey, Vehicle
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout, REDIRECT_FIELD_NAME
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -15,6 +15,14 @@ import datetime
 from django.db.models import Count
 import csv
 from django.contrib import messages
+
+import matplotlib.pyplot as plt
+import urllib
+import base64
+import io
+import numpy as np
+
+# Create your views here.
 
 testMode = True
 def returnTestMode(x):
@@ -41,10 +49,166 @@ def my_login_required(function=None, redirect_field_name=REDIRECT_FIELD_NAME, lo
     return actual_decorator
 
 
-# Create your views here.
-@my_login_required
+
 def index(request):
     return render(request, "main/index.html")
+
+
+def analytics(request):
+
+    current_date = datetime.date.today()
+    week_ago_date = current_date - datetime.timedelta(days=7)
+    cur_date = current_date.strftime("%b %d")
+    week_ago = week_ago_date.strftime("%b %d")
+    weeks_journeys = Journey.objects.filter(start_date__range=[week_ago_date, current_date], approved=True)
+
+    average_miles = 0
+    for journey in weeks_journeys:
+        journey.miles()
+        average_miles += journey.total_miles
+    if (weeks_journeys.count() > 0):
+        average_miles = round(average_miles / weeks_journeys.count())
+
+
+    x_freq = []
+    y_freq = []
+    x_purp = []
+    y_purp = []
+    x_dest = []
+    y_dest = []
+
+    for i in range(7):
+        date = week_ago_date + datetime.timedelta(days=i+1)
+        current_date = date
+        x_freq.append(current_date.strftime("%b %d"))
+        y_freq.append(weeks_journeys.filter(start_date=date).count())
+
+    journeys_purpose = weeks_journeys.filter(approved=True).values_list('purpose').annotate(journey_count=Count('purpose')).order_by('-journey_count')
+    if journeys_purpose.count() > 0:
+        counter = 0
+        other = 0
+        for j in journeys_purpose:
+            if counter < 3:
+                counter+=1;
+                x_purp.append(j[0])
+                y_purp.append(j[1])
+            else:
+                other += j[1]
+        x_purp.append("Other")
+        y_purp.append(other)
+
+    destinations = {}
+    for journey in weeks_journeys:
+        if not journey.destinations1 in destinations and journey.destinations1 != None:
+            destinations[journey.destinations1] = 1
+        elif journey.destinations1 != None:
+            destinations[journey.destinations1] += 1
+
+        if not journey.destinations2 in destinations and journey.destinations2 != None:
+            destinations[journey.destinations2] = 1
+        elif journey.destinations2 != None:
+            destinations[journey.destinations2] += 1
+
+        if not journey.destinations3 in destinations and journey.destinations3 != None:
+            destinations[journey.destinations3] = 1
+        elif journey.destinations3 != None:
+            destinations[journey.destinations3] += 1
+
+    vehicles_reg = {}
+    vehicles = {}
+    for journey in weeks_journeys:
+        if not journey.plate_number in vehicles_reg:
+            vehicles_reg[journey.plate_number] = 1
+        else:
+            vehicles_reg[journey.plate_number] += 1
+
+    types = Vehicle.objects.all()
+    for reg in vehicles_reg.keys():
+        for type in types:
+            if type.plate_number == reg:
+                if not reg in vehicles.keys():
+                    vehicles[type.vehicle_type] = vehicles_reg[reg]
+                else:
+                    vehicles[type.vehicle_type] += vehicles_reg[reg]
+
+
+    #Graph for frequency
+    plt.figure(figsize=(8, 12))
+    plt.subplot(4,1,1)
+    plt.bar(x_freq,y_freq, color='lightgreen')
+    plt.ylabel('Journeys')
+
+    fig = plt.gcf()
+
+    buf = io.BytesIO()
+    fig.savefig(buf, format='png')
+    buf.seek(0)
+    string = base64.b64encode(buf.read())
+    freq = urllib.parse.quote(string)
+
+
+    #Graph for purpose
+    plt.subplot(4,1,2)
+    plt.ylabel('Purposes')
+    plt.bar(x_purp,y_purp, color='lightblue')
+    plt.xticks(x_purp)
+
+    fig = plt.gcf()
+
+    buf = io.BytesIO()
+    fig.savefig(buf, format='png')
+    buf.seek(0)
+    string = base64.b64encode(buf.read())
+    purps = urllib.parse.quote(string)
+    plt.subplots_adjust()
+
+
+    #Destinations
+    x_dest = destinations.keys()
+    y_dest = destinations.values()
+    plt.subplot(4,1,3)
+    plt.ylabel('Destinations')
+    plt.bar(x_dest,y_dest, color='orange', alpha=0.5)
+    
+
+    fig = plt.gcf()
+
+    buf = io.BytesIO()
+    fig.savefig(buf, format='png')
+    buf.seek(0)
+    string = base64.b64encode(buf.read())
+    dests = urllib.parse.quote(string)
+    plt.subplots_adjust()
+
+
+    #Vehicle types
+    plt.subplot(4,1,4)
+    plt.ylabel('Vehicles')
+    x_dest = vehicles.keys()
+    y_dest = vehicles.values()
+    [float(i) for i in y_dest]
+    explode = []
+    [explode.append(0.1) for i in x_dest]
+    plt.pie(y_dest, shadow=True, explode = explode)
+    plt.legend(labels = x_dest, bbox_to_anchor=(1,0), loc="lower right", 
+                          bbox_transform=plt.gcf().transFigure)
+
+    fig = plt.gcf()
+
+    buf = io.BytesIO()
+    fig.subplots_adjust(hspace=.5)
+    fig.savefig(buf, format='png')
+    buf.seek(0)
+    string = base64.b64encode(buf.read())
+    dests = urllib.parse.quote(string)
+
+
+
+    context_dict = {}
+    context_dict['average_miles'] = average_miles
+    context_dict['graphs'] = dests
+
+    return render(request,"main/analytics/analytics.html", context=context_dict)
 
 
 def report_journey(request):
@@ -111,8 +275,7 @@ def dashboard(request):
         average_miles += journey.total_miles
     if (reported_journeys > 0):
         average_miles = round(average_miles / reported_journeys)
-        common_purpose = \
-        Journey.objects.values_list('purpose').annotate(journey_count=Count('purpose')).order_by('-journey_count')[0][0]
+        common_purpose = Journey.objects.filter(approved=True).values_list('purpose').annotate(journey_count=Count('purpose')).order_by('-journey_count')[0][0]
 
     context_dict = {}
     context_dict['pending'] = pending
@@ -151,13 +314,6 @@ def analysis(request):
     return render(request, "main/analytics/analysis.html")
 
 
-def analytics(request):
-    data = Journey.objects.filter(approved=True)
-    data = serializers.serialize('json', data)
-
-    dump = json.dumps(data)
-    box = {'data': dump}
-    return render(request, "main/analytics/analytics.html", context=box)
 
 
 # def account_manager(request):
