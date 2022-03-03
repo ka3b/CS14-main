@@ -47,3 +47,9 @@ class Journey(models.Model):
         else:
             vehicle = Vehicle.objects.get(plate_number=self.plate_number)
             self.vehicle_type = vehicle.vehicle_type 
+
+class Purpose(models.Model):
+    purpose = models.CharField(max_length=20, unique=False)
+
+    def __str__(self):
+        return self.purpose

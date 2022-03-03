@@ -1,5 +1,6 @@
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, Div, Field, Submit, HTML
+from .models import Purpose
 from django import forms
 
 
@@ -32,9 +33,10 @@ class JourneyForm(forms.Form):
             attrs={'placeholder':"Driver Name", 'class':"form-control formTextField formButton", 'type':'text1',
                    "id":'driver_name'}))
 
-    CHOICES=(('Transport of goods', 'Transport of goods'),('Picking up of goods','Picking up of goods'),
-             ('Transport of people','Transport of people'),
-            ('Fieldwork','Fieldwork'), ('Canceled', 'Canceled'))
+    purposes = Purpose.objects.all()
+    CHOICES=[]
+    for i in range(purposes.count()):
+        CHOICES.append((purposes[i].purpose,purposes[i].purpose))
     purpose = forms.CharField(label='',widget=forms.Select(choices=CHOICES,
                               attrs={'class':"form-select formTextField dropdown formButton", "aria-label":'Default select example'
                                      ,'placeholder':'Journey Purpose'}))
