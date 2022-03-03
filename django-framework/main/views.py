@@ -227,13 +227,7 @@ def journey_details(request):
             # process the data in form.cleaned_data as required
             cleaned_form = form.cleaned_data
 
-            if cleaned_form['end_date'] < cleaned_form['start_date']:
-                return HttpResponse('Error - End date is before start date!')
-            elif (cleaned_form['end_date'] == cleaned_form['start_date']) and (
-                    cleaned_form['end_time'] < cleaned_form['start_time']):
-                context_dict['messages'] = messages
-                return HttpResponse('Error - End time is before start time!')
-            else:
+            if not form.errors:
                 journey = \
                 Journey.objects.get_or_create(driver=cleaned_form['driver'], start_date=cleaned_form['start_date'],
                                               end_date=cleaned_form['end_date'],

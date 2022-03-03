@@ -74,6 +74,8 @@ class JourneyForm(forms.Form):
 
     approved_status=forms.BooleanField(required=False, initial=False, widget=forms.HiddenInput())
 
+
+
     def __init__(self, *args, **kwargs):
         super(JourneyForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -101,3 +103,31 @@ class JourneyForm(forms.Form):
         )
         self.helper.add_input(Submit('submit', 'Submit', css_id='submitButton'))
         self.helper.form_method = 'POST'
+
+    def clean(self):
+        cleaned_data =super().clean()
+        end_date=cleaned_data.get('end_date')
+        start_date=cleaned_data.get('start_date')
+        start_time=cleaned_data.get('start_time')
+        end_time=cleaned_data.get('end_time')
+        if end_date<start_date:
+            msg="Start date must earlier than end date!"
+            self.add_error('end_date',msg)
+        elif start_date==end_date and end_time<start_time:
+            msg='End time is before start time!'
+            self.add_error('end_time',msg)
+
+        locationUpperT=['start_location','destinations1','destinations2','destinations3']
+        for i in locationUpperT:
+            if self.cleaned_data[i]:
+                x=len(self.cleaned_data[i])
+                self.cleaned_data[i] = (self.cleaned_data[i])[0].upper()+(self.cleaned_data[i])[1-x:].lower()
+                print(self.cleaned_data[i])
+
+        return self.cleaned_data
+
+
+
+
+
+
