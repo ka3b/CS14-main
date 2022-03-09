@@ -44,3 +44,10 @@
         </div>
     </div>
 {% endblock %}
+{% block extra_js %}
+    <script>
+    $( "#submitButton" ).click(function() {
+  alert( "The journey is uploaded successfully." );
+});
+    </script>
+{% endblock %}
