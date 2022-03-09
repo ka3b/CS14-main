@@ -5,7 +5,7 @@ from django.forms import model_to_dict
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from .form import *
-from .models import Journey, Vehicle
+from .models import Journey, Vehicle, Purpose
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout, REDIRECT_FIELD_NAME
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -76,6 +76,8 @@ def analytics(request):
     y_purp = []
     x_dest = []
     y_dest = []
+    x_mpurp = []
+    y_mpurp = []
 
     for i in range(7):
         date = week_ago_date + datetime.timedelta(days=i+1)
@@ -131,67 +133,61 @@ def analytics(request):
                 else:
                     vehicles[type.vehicle_type] += vehicles_reg[reg]
 
+    
+    miles = {}
+    for journey in weeks_journeys:
+        if not journey.purpose in miles:
+            miles[journey.purpose] = journey.total_miles
+        else:
+            miles[journey.purpose] += journey.total_miles
+
+
 
     #Graph for frequency
     plt.figure(figsize=(8, 12))
-    plt.subplot(4,1,1)
+    plt.subplot(5,1,1)
     plt.bar(x_freq,y_freq, color='lightgreen')
     plt.ylabel('Journeys')
 
-    fig = plt.gcf()
-
-    buf = io.BytesIO()
-    fig.savefig(buf, format='png')
-    buf.seek(0)
-    string = base64.b64encode(buf.read())
-    freq = urllib.parse.quote(string)
-
-
     #Graph for purpose
-    plt.subplot(4,1,2)
+    plt.subplot(5,1,2)
     plt.ylabel('Purposes')
     plt.bar(x_purp,y_purp, color='lightblue')
     plt.xticks(x_purp)
-
-    fig = plt.gcf()
-
-    buf = io.BytesIO()
-    fig.savefig(buf, format='png')
-    buf.seek(0)
-    string = base64.b64encode(buf.read())
-    purps = urllib.parse.quote(string)
-    plt.subplots_adjust()
 
 
     #Destinations
     x_dest = destinations.keys()
     y_dest = destinations.values()
-    plt.subplot(4,1,3)
+    plt.subplot(5,1,3)
     plt.ylabel('Destinations')
     plt.bar(x_dest,y_dest, color='orange', alpha=0.5)
     
 
-    fig = plt.gcf()
 
-    buf = io.BytesIO()
-    fig.savefig(buf, format='png')
-    buf.seek(0)
-    string = base64.b64encode(buf.read())
-    dests = urllib.parse.quote(string)
-    plt.subplots_adjust()
+    #Miles for purpose
+    x_mpurp = miles.keys()
+    y_mpurp = miles.values()
+    plt.subplot(5,1,4)
+    plt.ylabel('Miles Travelled Per Purpose')
+    plt.bar(x_mpurp,y_mpurp, color='purple', alpha=0.5)
 
 
     #Vehicle types
-    plt.subplot(4,1,4)
+    plt.subplot(5,1,5)
     plt.ylabel('Vehicles')
-    x_dest = vehicles.keys()
-    y_dest = vehicles.values()
+    x_type = vehicles.keys()
+    y_type = vehicles.values()
     [float(i) for i in y_dest]
     explode = []
-    [explode.append(0.1) for i in x_dest]
-    plt.pie(y_dest, shadow=True, explode = explode)
+    [explode.append(0.1) for i in x_type]
+    plt.pie(y_type, shadow=True, explode = explode)
     plt.legend(labels = x_dest, bbox_to_anchor=(1,0), loc="lower right", 
                           bbox_transform=plt.gcf().transFigure)
+
+
+
+  
 
     fig = plt.gcf()
 
@@ -201,7 +197,6 @@ def analytics(request):
     buf.seek(0)
     string = base64.b64encode(buf.read())
     dests = urllib.parse.quote(string)
-
 
 
     context_dict = {}
@@ -227,13 +222,7 @@ def journey_details(request):
             # process the data in form.cleaned_data as required
             cleaned_form = form.cleaned_data
 
-            if cleaned_form['end_date'] < cleaned_form['start_date']:
-                return HttpResponse('Error - End date is before start date!')
-            elif (cleaned_form['end_date'] == cleaned_form['start_date']) and (
-                    cleaned_form['end_time'] < cleaned_form['start_time']):
-                context_dict['messages'] = messages
-                return HttpResponse('Error - End time is before start time!')
-            else:
+            if not form.errors:
                 journey = \
                 Journey.objects.get_or_create(driver=cleaned_form['driver'], start_date=cleaned_form['start_date'],
                                               end_date=cleaned_form['end_date'],
@@ -263,7 +252,7 @@ def journey_details(request):
 def dashboard(request):
     pending = Journey.objects.filter(approved=False).count()
     current_date = datetime.date.today()
-    week_ago_date = current_date - datetime.timedelta(days=7)
+    week_ago_date = current_date - datetime.timedelta(days=6)
     cur_date = current_date.strftime("%b %d")
     week_ago = week_ago_date.strftime("%b %d")
     weeks_journeys = Journey.objects.filter(start_date__range=[week_ago_date, current_date], approved=True)
@@ -389,5 +378,6 @@ def reject_journey(request):
 
 @my_login_required
 def logout(request):
+    print(1)
     auth_logout(request)
     return render(request, "main/admin/admin-login.html")
