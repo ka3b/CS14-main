@@ -63,11 +63,12 @@ def analytics(request):
     weeks_journeys = Journey.objects.filter(start_date__range=[week_ago_date, current_date], approved=True)
 
     average_miles = 0
+    total_miles = 0
     for journey in weeks_journeys:
         journey.miles()
-        average_miles += journey.total_miles
+        total_miles += journey.total_miles
     if (weeks_journeys.count() > 0):
-        average_miles = round(average_miles / weeks_journeys.count())
+        average_miles = round(total_miles / weeks_journeys.count())
 
 
     x_freq = []
@@ -124,6 +125,7 @@ def analytics(request):
         else:
             vehicles_reg[journey.plate_number] += 1
 
+
     types = Vehicle.objects.all()
     for reg in vehicles_reg.keys():
         for type in types:
@@ -133,7 +135,12 @@ def analytics(request):
                 else:
                     vehicles[type.vehicle_type] += vehicles_reg[reg]
 
-    
+    max_value = max(vehicles.values())
+    total_v_miles = sum(vehicles.values())
+    vehs = list(vehicles.keys())[list(vehicles.values()).index(max_value)]
+    percent = round(max_value/total_v_miles, 3) * 100
+
+
     miles = {}
     for journey in weeks_journeys:
         if not journey.purpose in miles:
@@ -182,12 +189,9 @@ def analytics(request):
     explode = []
     [explode.append(0.1) for i in x_type]
     plt.pie(y_type, shadow=True, explode = explode)
-    plt.legend(labels = x_dest, bbox_to_anchor=(1,0), loc="lower right", 
+    plt.legend(labels = x_type, bbox_to_anchor=(1,0), loc="lower right", 
                           bbox_transform=plt.gcf().transFigure)
 
-
-
-  
 
     fig = plt.gcf()
 
@@ -199,8 +203,18 @@ def analytics(request):
     dests = urllib.parse.quote(string)
 
 
+    all_values = miles.values()
+    max_value = max(all_values)
+    purpose = list(miles.keys())[list(miles.values()).index(max_value)]
+
+
     context_dict = {}
     context_dict['average_miles'] = average_miles
+    context_dict['total_miles'] = total_miles
+    context_dict['purpose_miles'] = max_value
+    context_dict['purpose_purpose'] = purpose
+    context_dict['percent'] = percent
+    context_dict['vehs'] = vehs
     context_dict['graphs'] = dests
 
     return render(request,"main/analytics/analytics.html", context=context_dict)

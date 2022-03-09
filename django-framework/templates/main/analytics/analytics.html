@@ -1,37 +1,55 @@
 {% extends "main/analytics/base.html" %}
 {% load static %}
 {% block title %}
-
 {% endblock %}
-
-
 {% block contend %}
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link rel="stylesheet" href='{% static 'CSS/analytics/analytics.css' %}'>
+    <div class="row">
+        <div class="col-8">
+            <div id="div_travel_frequency">
+                <h1 id="title">Analytics</h1>
+            </div>
+            <div id="pending-card">
+            <p id="tab_destination">
+                <img src="data:image/png;base64,{{ graphs }}" alt="" style="height: auto; width: 100%;">
+            </p>
+            </div>
+        </div>
+        <div class="col-4" style="margin-top: 68px;">
+            <div id="pending-card" class="col">
+                <h3 id="average_mile" style="font-weight: 700; text-align: center;">
+                    Average Miles Traveled <span style="color:#39FF14
+                    ; font-weight: 700;">{{ average_miles }}</span>
 
-<script src="https://d3js.org/d3.v7.min.js"></script>
-<link rel="stylesheet" href='{% static 'CSS/analytics/analytics.css' %}'>
-<div id="div_travel_frequency">
-
-
-<div id="div_destination">
-    <h1 id="title">Analytics</h1>
-
-    <p id="average_mile">
-         Average Miles Traveled {{ average_miles }}
-    </p>
-
-    <p id="tab_destination">
-        <img src="data:image/png;base64,{{ graphs }}" alt="" height=1000" ,width="800">
-    </p>
-</div>
+                </h3>
+            </div>
+            <div id="pending-card" class="col">
+                <h3 id="total_mile" style="font-weight: 700; text-align: center;">
+                    Total Miles Traveled  <span style="color:#1F51FF
+                    ; font-weight: 700;">{{ total_miles }}</span>
+                </h3>
+            </div>
+            <div id="pending-card" class="col">
+                <h3 id="purpose_miles" style="font-weight: 700; text-align: center;">
+                     <span style="color:#FFA500
+                    ; font-weight: 700;">{{ purpose_miles }}</span> miles traveled for purpose  <span style="color:#FFA500
+                    ; font-weight: 700;">{{ purpose_purpose }}</span>
+                </h3>
+            </div>
+            <div id="pending-card" class="col">
+                <h3 id="vehs" style="font-weight: 700; text-align: center;">
+                     <span style="color:#A020F0
+                    ; font-weight: 700;">{{ vehs }}s</span> were accountable for <span style="color:#A020F0
+                    ; font-weight: 700;">{{ percent }}</span>% of the journeys
+                </h3>
+            </div>
+        </div>
+    </div>
     
 {% endblock %}
 {% block extra_js %}
     <script>
-
-
-
     // d3 drawing
-
     //frequency data preparation, can see console.log information to check frequency correct or not
-
 {% endblock %}
