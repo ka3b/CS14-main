@@ -57,7 +57,7 @@ body {
     position: relative;
     height: 70px;
     width: 30%;
-    border-radius: 12px;
+    border-radius: 20px;
     border: none;
     background-color: #ECECEC;
     color: black;
@@ -66,7 +66,6 @@ body {
     margin-right: 15%;
     margin-top: 3%;
     float: right;
-    box-shadow: 0 5px 30px rgba(0, 110, 255, 0.192);
     text-align: left;
     padding-left: 35px;
 }
@@ -75,7 +74,6 @@ body {
 .formTextField:hover{
     background-color: #F0F0F0;
     color: black;
-    box-shadow: 0 5px 20px #0051ff63;
 }
 .formTextField::placeholder {
     color: #00008B;
