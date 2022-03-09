@@ -24,7 +24,7 @@ import numpy as np
 
 # Create your views here.
 
-testMode = True
+testMode = False
 def returnTestMode(x):
     return testMode
 
@@ -53,7 +53,7 @@ def my_login_required(function=None, redirect_field_name=REDIRECT_FIELD_NAME, lo
 def index(request):
     return render(request, "main/index.html")
 
-
+@my_login_required
 def analytics(request):
 
     current_date = datetime.date.today()
@@ -259,7 +259,7 @@ def journey_details(request):
 
     return render(request, "main/journey/journey-details.html", {'form': form})
 
-
+@my_login_required
 def dashboard(request):
     pending = Journey.objects.filter(approved=False).count()
     current_date = datetime.date.today()
@@ -309,7 +309,7 @@ def admin_login(request):
     else:
         return render(request, 'main/admin/admin-login.html')
 
-
+@my_login_required
 def analysis(request):
     return render(request, "main/analytics/analysis.html")
 
@@ -318,7 +318,7 @@ def analysis(request):
 
 # def account_manager(request):
 #    return render(request,"main/analytics/account-manager.html")
-
+@my_login_required
 def data_table(request):
     order_by = request.GET.get('order_by', '-start_date')
     journeys = Journey.objects.filter(approved=True).order_by(order_by)
@@ -326,11 +326,11 @@ def data_table(request):
     context_dict['journeys'] = journeys
     return render(request, "main/analytics/data-table.html", context=context_dict)
 
-
+@my_login_required
 def export_data(request):
     return render(request, "main/analytics/export-data.html")
 
-
+@my_login_required
 def export_data_file(request):
     response = HttpResponse(
         content_type='text/csv',
@@ -352,7 +352,7 @@ def export_data_file(request):
 
     return response
 
-
+@my_login_required
 def pending_data(request):
     order_by = request.GET.get('order_by', 'start_date')
     journeys = Journey.objects.filter(approved=False).order_by(order_by)
@@ -364,7 +364,7 @@ def pending_data(request):
     context_dict['journeys'] = journeys
     return render(request, "main/analytics/pending-data.html", context=context_dict)
 
-
+@my_login_required
 def approve_journey(request):
     data = {'success': False}
     if request.method == 'POST':
@@ -376,7 +376,7 @@ def approve_journey(request):
 
     return JsonResponse(data)
 
-
+@my_login_required
 def reject_journey(request):
     data = {'success': False}
     if request.method == 'POST':
@@ -387,7 +387,7 @@ def reject_journey(request):
     return JsonResponse(data)
 
 
-@login_required
+@my_login_required
 def logout(request):
     auth_logout(request)
     return render(request, "main/admin/admin-login.html")
