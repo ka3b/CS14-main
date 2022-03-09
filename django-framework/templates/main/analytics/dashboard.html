@@ -8,7 +8,7 @@
     <h1 id="title">Dashboard</h1>
     {% if common_purpose %}
         <div id="approvals">
-            <h4 style="font-weight: 700;">There are {{ pending }} journey(s) awaiting approval</h3>
+            <h4 style="font-weight: 700;">There are {{ pending }} journey(s) awaiting approval</h4>
         </div>
         <h3 style="margin-top: 20px; font-weight: 700; color: rgb(80, 80, 80);">
             Weekly Data Summary
@@ -40,16 +40,19 @@
             </h3>
             <p style="font-weight: 600; color: rgb(80, 80, 80);">{{ week_ago}} - {{ cur_date }}</p>
             <div class="row">
-            <div id="common-purpose" class="col">
-                <h3 style="font-weight: 700; font-size: 40px; padding: 30px; text-align: center;">
-                    No <span style="color:#009b2e; font-weight: 700;">journeys</span> have been reported this week.
-                </h3>
+                <div id="common-purpose" class="col">
+                    <h3 style="font-weight: 700; font-size: 40px; padding: 30px; text-align: center;">
+                        No <span style="color:#009b2e; font-weight: 700;">journeys</span> have been reported this week.
+                    </h3>
+                </div>
             </div>
         </div>
+
     {% endif %}
     
-        
 
+</div>
 {% endblock %}
+
 {% block extra_js %}
 {% endblock %}
