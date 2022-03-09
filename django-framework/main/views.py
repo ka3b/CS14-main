@@ -240,7 +240,7 @@ def journey_details(request):
                                               round_trip=cleaned_form['is_round_trip'])[0]
                 journey.save()
                 # redirect to a new URL:
-                return HttpResponse('Successfully reported your journey!')
+                return redirect('main:report_journey')
 
         # if a GET (or any other method) we'll create a blank form
     else:

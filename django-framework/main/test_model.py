@@ -1,3 +1,4 @@
+from django.test.client import Client
 from django.urls import resolve
 import os
 import re
@@ -19,6 +20,9 @@ FAILURE_FOOTER = f"{os.linesep}"
 class UrlMappingTest(TestCase):
 
     def test_all_url_are_present(self):
+        self.client = Client()
+        self.user = User.objects.create_user('john', 'lennon@thebeatles.com', 'johnpassword')
+        self.client.login(username='john', password='johnpassword')
         test_urls = [
             '/main/report-journey/',
             '/main/report-journey/journey-details/',
@@ -121,6 +125,10 @@ class ProjectStructureTests(TestCase):
 
 class DashboardViewsTests(TestCase):
     def setUp(self):
+        self.client = Client()
+        self.user = User.objects.create_user('john', 'lennon@thebeatles.com', 'johnpassword')
+        self.client.login(username='john', password='johnpassword')
+
         self.main_module = importlib.import_module('main.views')
         self.main_module_listing = dir(self.main_module) 
         self.project_urls_module = importlib.import_module('transport_services_server.urls')
@@ -137,6 +145,7 @@ class DashboardViewsTests(TestCase):
         self.assertEquals(reverse('main:dashboard'), '/main/admin-login/analysis/dashboard/', f"{FAILURE_HEADER}The dashboard URL lookup failed.{FAILURE_FOOTER}")
 
     def test_response(self):
+
         self.assertEqual(self.response.status_code, 200, f"{FAILURE_HEADER}Requesting the dashboard page failed.{FAILURE_FOOTER}")
         self.assertContains(self.response, 'dashboard', msg_prefix=f"{FAILURE_HEADER}The dashboard view does not return the expected response.{FAILURE_FOOTER}")
 
