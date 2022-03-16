@@ -5,7 +5,7 @@
 {% block contend %}
 <link rel="stylesheet" href='{% static 'CSS/analytics/export-data.css' %}'>
 <h1 id="title">Export Data</h1>
-<div>
+<div class="col-8">
     <form action="{% url 'main:export_data_file' %}" method="post">
         {% csrf_token %}
         <button type="submit" name="export" class="btn" id="export-button">

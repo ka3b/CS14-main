@@ -51,23 +51,25 @@ def my_login_required(function=None, redirect_field_name=REDIRECT_FIELD_NAME, lo
 
 
 def index(request):
-    return render(request, "main/index.html")
+    return redirect('main/report-journey/journey-details')
 
 @my_login_required
 def analytics(request):
 
+
     current_date = datetime.date.today()
-    week_ago_date = current_date - datetime.timedelta(days=7)
+    week_ago_date = current_date - datetime.timedelta(days=6)
     cur_date = current_date.strftime("%b %d")
     week_ago = week_ago_date.strftime("%b %d")
     weeks_journeys = Journey.objects.filter(start_date__range=[week_ago_date, current_date], approved=True)
 
     average_miles = 0
+    total_miles = 0
     for journey in weeks_journeys:
         journey.miles()
-        average_miles += journey.total_miles
+        total_miles += journey.total_miles
     if (weeks_journeys.count() > 0):
-        average_miles = round(average_miles / weeks_journeys.count())
+        average_miles = round(total_miles / weeks_journeys.count())
 
 
     x_freq = []
@@ -116,6 +118,11 @@ def analytics(request):
         elif journey.destinations3 != None:
             destinations[journey.destinations3] += 1
 
+    larg_vals = sorted(destinations, key=destinations.get, reverse=True)[:5]
+    destination = {}
+    for val in larg_vals:
+        destination[val] = destinations.get(val)
+
     vehicles_reg = {}
     vehicles = {}
     for journey in weeks_journeys:
@@ -123,6 +130,7 @@ def analytics(request):
             vehicles_reg[journey.plate_number] = 1
         else:
             vehicles_reg[journey.plate_number] += 1
+
 
     types = Vehicle.objects.all()
     for reg in vehicles_reg.keys():
@@ -133,7 +141,16 @@ def analytics(request):
                 else:
                     vehicles[type.vehicle_type] += vehicles_reg[reg]
 
-    
+    if (len(vehicles.values()) > 0):
+        max_value = max(vehicles.values())
+        total_v_miles = sum(vehicles.values())
+        vehs = list(vehicles.keys())[list(vehicles.values()).index(max_value)]
+        percent = round(max_value/total_v_miles, 3) * 100
+    else:
+        vehs = "All vehicle"
+        percent = 0
+
+
     miles = {}
     for journey in weeks_journeys:
         if not journey.purpose in miles:
@@ -141,26 +158,30 @@ def analytics(request):
         else:
             miles[journey.purpose] += journey.total_miles
 
-
-
     #Graph for frequency
-    plt.figure(figsize=(8, 12))
+    plt.figure(figsize=(8, 32))
     plt.subplot(5,1,1)
     plt.bar(x_freq,y_freq, color='lightgreen')
-    plt.ylabel('Journeys')
+    plt.title('Journeys Per Day', fontsize=25, pad=20)
+    plt.xlabel('Date')
+    plt.ylabel('Number of visits')
 
     #Graph for purpose
     plt.subplot(5,1,2)
-    plt.ylabel('Purposes')
+    plt.title('Journeys Per Purpose', fontsize=25, pad=20)
+    plt.xlabel('Purpose')
+    plt.ylabel('Number of journeys')
     plt.bar(x_purp,y_purp, color='lightblue')
     plt.xticks(x_purp)
 
 
     #Destinations
-    x_dest = destinations.keys()
-    y_dest = destinations.values()
+    x_dest = destination.keys()
+    y_dest = destination.values()
     plt.subplot(5,1,3)
-    plt.ylabel('Destinations')
+    plt.title('Visits To Each Destination', fontsize=25, pad=20)
+    plt.xlabel('Destination')
+    plt.ylabel('Number of visits')
     plt.bar(x_dest,y_dest, color='orange', alpha=0.5)
     
 
@@ -169,20 +190,22 @@ def analytics(request):
     x_mpurp = miles.keys()
     y_mpurp = miles.values()
     plt.subplot(5,1,4)
-    plt.ylabel('Miles Travelled Per Purpose')
+    plt.title('Miles Travelled Per Purpose', fontsize=25, pad=20)
+    plt.xlabel('Purpose')
+    plt.ylabel('Miles travelled')
     plt.bar(x_mpurp,y_mpurp, color='purple', alpha=0.5)
 
 
     #Vehicle types
     plt.subplot(5,1,5)
-    plt.ylabel('Vehicles')
+    plt.title('Vehicle Usage', fontsize=25, pad=20)
     x_type = vehicles.keys()
     y_type = vehicles.values()
     [float(i) for i in y_dest]
     explode = []
     [explode.append(0.1) for i in x_type]
     plt.pie(y_type, shadow=True, explode = explode)
-    plt.legend(labels = x_dest, bbox_to_anchor=(1,0), loc="lower right", 
+    plt.legend(labels = x_type, loc="lower right", 
                           bbox_transform=plt.gcf().transFigure)
 
 
@@ -192,6 +215,7 @@ def analytics(request):
     fig = plt.gcf()
 
     buf = io.BytesIO()
+    fig.patch.set_alpha(0)
     fig.subplots_adjust(hspace=.5)
     fig.savefig(buf, format='png')
     buf.seek(0)
@@ -199,8 +223,22 @@ def analytics(request):
     dests = urllib.parse.quote(string)
 
 
+    if (len(miles.values()) > 0):
+        all_values = miles.values()
+        max_value = max(all_values)
+        purpose = list(miles.keys())[list(miles.values()).index(max_value)]
+    else:
+        max_value = 0
+        purpose = "none"
+
+
     context_dict = {}
     context_dict['average_miles'] = average_miles
+    context_dict['total_miles'] = total_miles
+    context_dict['purpose_miles'] = max_value
+    context_dict['purpose_purpose'] = purpose
+    context_dict['percent'] = percent
+    context_dict['vehs'] = vehs
     context_dict['graphs'] = dests
 
     return render(request,"main/analytics/analytics.html", context=context_dict)
