@@ -21,7 +21,7 @@ STATICFILES_DIRS = [
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
-
+LOGIN_URL = '/main/admin-login/'
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main',
     'crispy_forms',
+    'matplotlib'
 ]
 
 MIDDLEWARE = [
@@ -138,4 +139,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+import sys
+
+TESTING = len(sys.argv) > 1 and sys.argv[1] == 'test'
+
+STATICFILES_STORAGE = (
+    'django.contrib.staticfiles.storage.StaticFilesStorage'
+    if TESTING
+    else 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+)

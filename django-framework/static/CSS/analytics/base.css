@@ -12,7 +12,6 @@
   animation-fill-mode: forwards;
   background-color: white;
   pointer-events: none;
-
 }
 
 @keyframes fadeInAnimation {
@@ -30,7 +29,7 @@
   font-weight: 600;
   /* border-style: solid !important;
     border-color: red !important;
-    border-width: 1px; */
+    border-width: 1px;  */
 }
 
 #bootstrap-overrides span {
@@ -90,6 +89,7 @@
   border-radius: 15px;
   background-color: #eeeeee;
   transition: 100ms ease-out;
+  cursor: pointer;
 }
 
 #bootstrap-overrides.card {

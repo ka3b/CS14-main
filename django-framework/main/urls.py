@@ -18,6 +18,6 @@ urlpatterns = [
     path('admin-login/analysis/export-data/',views.export_data,name='export_data'),
     path('admin-login/analysis/export-data/export/',views.export_data_file,name='export_data_file'),
     #path('admin-login/analysis/account-manager/',views.account_manager,name='account_manager'),
-    path('admin-login/',views.logout,name='logout'),
+    path('logout/',views.logout,name='logout'),
 
 ]

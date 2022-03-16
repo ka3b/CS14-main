@@ -5,7 +5,7 @@ import django
 django.setup()
 
 import datetime
-from main.models import Journey
+from main.models import Journey, Vehicle
 from django.contrib.auth.models import User
 from django.core.files import File
 
@@ -124,24 +124,16 @@ def populate():
             'round_trip' : False
         }
     ]
-    """
-    data_analysts = [
+
+    vehicles = [ 
         {
-            'name' : "John Smith",
-            'username' : "JohnSmith4"
-        },
-        {
-            'name' : "Barry Pete",
-            'username' : "BigBarry"
-        },
-        {
-            'name' : "Mohammed",
-            'username' : "CoolMan123"
+            'vehicle_type' : 'minivan',
+            'plate_number' : 'AB70DHD'
         }
     ]
-    """
+
     if not User.objects.filter(username='Viola').exists():
-        user=User.objects.create_user('Viola', password='JohnCena420')
+        user=User.objects.create_user('Viola', password='CS14Transport')
         user.is_superuser=True
         user.is_staff=True
         user.save()
@@ -159,11 +151,18 @@ def populate():
     for p in journeys:
         add_journey(p["driver"], p["start_date"], p["end_date"], p["start_location"], p["destinations1"], p["destinations2"], p["destinations3"], p["purpose"], p["plate_number"], p["no_of_pass"], p["start_time"], p["end_time"], p["mileage_start"], p["mileage_finish"],p["approved"],p["round_trip"])
 
+    for v in vehicles:
+        add_vehicle(v["vehicle_type"], v["plate_number"])
 
 def add_journey(driver, start_date, end_date, start_location, destinations1, destinations2, destinations3, purpose, plate_number, no_of_pass, start_time, end_time, mileage_start, mileage_finish, approved, round_trip):
     journey = Journey.objects.get_or_create(driver=driver, start_date=start_date, end_date=end_date, start_location=start_location, destinations1=destinations1, destinations2=destinations2, destinations3=destinations3, purpose=purpose, plate_number=plate_number, no_of_pass=no_of_pass, start_time=start_time, end_time=end_time, mileage_start=mileage_start, mileage_finish=mileage_finish, approved=approved, round_trip=round_trip)[0]
     journey.save()
     return journey
+
+def add_vehicle(vehicle_type, plate_number):
+    vehicle = Vehicle.objects.get_or_create(vehicle_type=vehicle_type, plate_number=plate_number)[0]
+    vehicle.save()
+    return vehicle
 
 
 if __name__ == '__main__':

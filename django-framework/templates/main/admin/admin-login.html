@@ -6,23 +6,20 @@
 
 {% block contend %}
 <link rel="stylesheet" href='{% static 'CSS/admin/admin-login.css' %}'>
-<div>
-    <h1>
-        Transport Services Analytics
-    </h1>
-</div>
 {% if user.is_authenticated %}
     <strong> You are already logged in as {{request.user.username}}. </strong>
     <p><a href="{% url 'main:logout' %}">Sign Out</a></p>
     <p><a href="{% url 'main:dashboard' %}">Back to Dashboard</a></p>
 {% else %}
+    <img id="leftImage" src="{% static "images/analytics/login_image.png" %}"/>
+    <img id="logo" src="{% static "images/analytics/login_logo.png" %}"/>
     <form id="login" method="post" action="{% url 'main:admin_login' %}">
     {% csrf_token %}
-    <input type="text" class="form-control" name="username" value="" size="50" placeholder="Username"/>
+    <input type="text" class="formTextField" name="username" value="" size="50" placeholder="Username"/>
     <br />
-    Password: <input type="password" class="form-control" name="password" value="" size="50" placeholder="Password"/>
+    <input type="password" class="formTextField" name="password" value="" size="50" placeholder="Password"/>
     <br /> 
-    <input type="submit" value="Login" />
+    <input type="submit" value="Login" id="submitButton"/>
 {% endif %}  
 
 {% endblock %}

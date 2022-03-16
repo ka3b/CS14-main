@@ -1,0 +1,31 @@
+#data-table-menu {
+  border-radius: 15px;
+  padding: 15px;
+  margin: 0;
+  color: #575aff;
+  background-color: #d6ddff;
+}
+
+.tablelink {
+  text-decoration: none;
+  color: black;
+}
+
+.tablelink:hover {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.table > tbody > tr:nth-child(2n) > td {
+  background-color: rgba(173, 216, 230, 0.5);
+}
+
+.table > thead {
+  background-color: rgba(25, 45, 255, 0.2);
+  border: 3px solid black;
+}
+
+.table td,
+.table td a {
+  text-align: center;
+}

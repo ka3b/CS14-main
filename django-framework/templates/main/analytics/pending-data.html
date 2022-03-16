@@ -8,7 +8,7 @@
 <script src="{% static 'js/pending-data.js' %}"></script>
 <link rel="stylesheet" href='{% static 'CSS/analytics/pending-data.css' %}'>
 
-<div>
+<div class="col-8">
     <h1 id=title>
         Pending Data
     </h1>
@@ -38,13 +38,13 @@
         </div>
         <div class="row" id="element">
             <span class="material-icons-outlined col-1" style="color: rgb(134, 134, 134); font-size: 32px;">airport_shuttle</span>
-            <h3 id="content-text" class="col-5">Vehicle Type</h3>
+            <h3 id="content-text" class="col-5">{{ journey.vehicle_type }}</h3>
             <span class="material-icons-outlined col-1" style="color: rgb(134, 134, 134); font-size: 32px;">straighten</span>
-            <h3 id="content-text" class="col-5">Miles</h3>
+            <h3 id="content-text" class="col-5">{{ journey.total_miles }}</h3>
         </div>
         <div class="row" id="element">
             <span class="material-icons-outlined col-1" style="color: rgb(134, 134, 134); font-size: 32px;">place</span>
-            <h3 id="content-text" class="col-5">{{ journey.destinations1 }} {{ journey.destinations2 }} {{ journey.destinations3 }}</h3>
+            <h3 id="content-text" class="col-5">{{ journey.destinations1 }} {% if journey.destinations2 %} - {{ journey.destinations2 }} {% endif %} {% if journey.destinations3 %} - {{ journey.destinations3 }} {% endif %}</h3>
             <span class="material-icons-outlined col-1" style="color: rgb(134, 134, 134); font-size: 32px;">description</span>
             <h3 id="content-text" class="col-5">{{ journey.purpose }}</h3>
         </div>
