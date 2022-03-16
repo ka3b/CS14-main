@@ -10,7 +10,7 @@ cache:
 # CI/CD stages
 stages:
   - test
-  - production
+ # - production
 
 test-job:
   stage: test
@@ -31,21 +31,21 @@ test-job:
   script:
     - python manage.py test
 
-production-job:
-  stage: production
+#production-job:
+  #stage: production
   #type: deploy
   #image: ruby:latest
-  tags:
-    - cs14
+  #tags:
+  #  - cs14
 
-  script:
-    - apt-get update -qy
-    - apt-get install -y ruby-dev
-    - gem install dpl
-    - dpl --provider=heroku --app=$HEROKU_APP_PRODUCTION --api-key=$HEROKU_API_KEY
+  #script:
+  #  - apt-get update -qy
+  #  - apt-get install -y ruby-dev
+  #  - gem install dpl
+  #  - dpl --provider=heroku --app=$HEROKU_APP_PRODUCTION --api-key=$HEROKU_API_KEY
 
-  only:
-    - master
+  #only:
+  #  - master
 
 
 
