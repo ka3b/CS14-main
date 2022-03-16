@@ -190,7 +190,7 @@ def analytics(request):
     x_mpurp = miles.keys()
     y_mpurp = miles.values()
     plt.subplot(5,1,4)
-    plt.title('Milers Travelled Per Purpose', fontsize=25, pad=20)
+    plt.title('Miles Travelled Per Purpose', fontsize=25, pad=20)
     plt.xlabel('Purpose')
     plt.ylabel('Miles travelled')
     plt.bar(x_mpurp,y_mpurp, color='purple', alpha=0.5)
@@ -234,6 +234,11 @@ def analytics(request):
 
     context_dict = {}
     context_dict['average_miles'] = average_miles
+    context_dict['total_miles'] = total_miles
+    context_dict['purpose_miles'] = max_value
+    context_dict['purpose_purpose'] = purpose
+    context_dict['percent'] = percent
+    context_dict['vehs'] = vehs
     context_dict['graphs'] = dests
 
     return render(request,"main/analytics/analytics.html", context=context_dict)
