@@ -56,6 +56,7 @@ def index(request):
 @my_login_required
 def analytics(request):
 
+
     current_date = datetime.date.today()
     week_ago_date = current_date - datetime.timedelta(days=6)
     cur_date = current_date.strftime("%b %d")
@@ -63,11 +64,12 @@ def analytics(request):
     weeks_journeys = Journey.objects.filter(start_date__range=[week_ago_date, current_date], approved=True)
 
     average_miles = 0
+    total_miles = 0
     for journey in weeks_journeys:
         journey.miles()
-        average_miles += journey.total_miles
+        total_miles += journey.total_miles
     if (weeks_journeys.count() > 0):
-        average_miles = round(average_miles / weeks_journeys.count())
+        average_miles = round(total_miles / weeks_journeys.count())
 
 
     x_freq = []
@@ -80,7 +82,7 @@ def analytics(request):
     y_mpurp = []
 
     for i in range(7):
-        date = week_ago_date + datetime.timedelta(days=i)
+        date = week_ago_date + datetime.timedelta(days=i+1)
         current_date = date
         x_freq.append(current_date.strftime("%b %d"))
         y_freq.append(weeks_journeys.filter(start_date=date).count())
@@ -129,6 +131,7 @@ def analytics(request):
         else:
             vehicles_reg[journey.plate_number] += 1
 
+
     types = Vehicle.objects.all()
     for reg in vehicles_reg.keys():
         for type in types:
@@ -154,8 +157,6 @@ def analytics(request):
             miles[journey.purpose] = journey.total_miles
         else:
             miles[journey.purpose] += journey.total_miles
-
-
 
     #Graph for frequency
     plt.figure(figsize=(8, 32))
