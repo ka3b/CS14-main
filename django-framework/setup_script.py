@@ -19,12 +19,18 @@ def populate():
 
     if not User.objects.filter(username='Grant').exists():
         user=User.objects.create_user('Grant', password='QhR7Lu')
-        user.is_superuser=True
+        user.is_superuser=False
         user.is_staff=True
         user.save()
 
     if not User.objects.filter(username='Jennifer').exists():
         user=User.objects.create_user('Jennifer', password='j29wUg')
+        user.is_superuser=False
+        user.is_staff=True
+        user.save()
+
+    if not User.objects.filter(username='Admin').exists():
+        user=User.objects.create_user('Admin', password='A0w8eX')
         user.is_superuser=True
         user.is_staff=True
         user.save()
